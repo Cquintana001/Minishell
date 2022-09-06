@@ -11,7 +11,7 @@ OBJS				= 	$(SOURCES:.c=.o)
 
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -lreadline -o $(NAME) 
+#	$(CC) $(CFLAGS) $(OBJS) -lreadline -o $(NAME) 
 	make -C $(libft)
 	$(CC) $(CFLAGS) $(OBJS) -lreadline $(libft)/libft.a -o $(NAME) 
 

@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <stdio.h>
-
+#include "../libft/libft.h"
  #include <stdio.h>
 
 /* int main(int argc, char *argv[], char *envp[])
@@ -17,7 +17,12 @@
     while (1)
     {
         char * str = readline("Myshell $ ");
-        printf("%s", str);
+        ft_split(str, ' ');
+        while(str)
+        {
+            printf("%s\n", str);
+            str++;
+        }
         free(str);
     }
 } 
