@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "../libft/libft.h"
  #include <stdio.h>
+#include "lexer.h"
 
 /* int main(int argc, char *argv[], char *envp[])
 {
@@ -16,13 +17,18 @@
 {
     while (1)
     {
+    int x = 0;
         char * str = readline("Myshell $ ");
-        ft_split(str, ' ');
-        while(str)
-        {
-            printf("%s\n", str);
-            str++;
-        }
+        /* if(!(*str))
+            continue; */
+        x = count_words(str);
+        printf("el número de palabras es %d\n", x);
         free(str);
+        /* while(array[x])
+        {
+            printf("%s\n", array[x]);
+            x++;;
+        }
+        free(array); */
     }
 } 
