@@ -17,7 +17,7 @@ static char *find_next_quote(char *str)
 {
     static char *array;
 
-    array = str++;
+    array = ++str;
     while(*array)
     {
         if(*array == '"')
@@ -40,10 +40,11 @@ int	count_words( char *str)
         if(*str == '"' && second_quote_exists(str))
            {
              str = find_next_quote(str);
-             printf("el ultimo caracter es: %c\n", *str);
              x++;
            }
-		else if(*str != ' ' && checkw == 0)
+        if(!*str)
+            break ;
+		if(*str != ' ' && checkw == 0)
 			{
                 checkw = 1;
                 x++;
