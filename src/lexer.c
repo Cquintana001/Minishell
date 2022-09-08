@@ -36,11 +36,11 @@ static char *find_next_quote(char *str)
 {
     static char *array;
 
-    array = ++str;
+    array = (str + 1);
     while(*array)
     {
         if(*array == '"')
-            return(array);
+            return(++array);
         array++;
     }
     return(str);
@@ -50,29 +50,22 @@ static char *find_next_quote(char *str)
 int	count_words( char *str)
 {
 	int	x;
- 
 
-	x = 0;
- 
+	x = 0; 
 	while (*str)
 	{
         if(*str == '"' && second_quote_exists(str))
            {
              str = find_next_quote(str);
              x++;
-                if(!*(++str))
-                    break ;
            }
 		else if(*str == ' ')
-			{
-               str = space_trim(str);
-            }
+            str = space_trim(str);
 		else if (*str)
         {
                 x++;
                str =  word_trim(str);
-        }
-		 
+        }		 
 	}
 	return (x);
 }
