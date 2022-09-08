@@ -1,9 +1,17 @@
 
+
+static char *space_trim(char *str)
+{
+    
+    while(*str == ' ' && *str)
+        str++;
+    return(str);
+}
 static int second_quote_exists(char *str)
 {
     char *array;
 
-    array = str;
+    array = ++str;
     while(*array)
     {
         if(*array == '"')
@@ -11,6 +19,17 @@ static int second_quote_exists(char *str)
         array++;
     }
     return(0);
+}
+static char *word_trim(char *str)
+{
+    str++;
+    while(*str != ' ' && *str)
+    {
+        if(*str == '"' && second_quote_exists(str))
+            return(str);
+        str++;
+    }
+    return(str);
 }
 
 static char *find_next_quote(char *str)
@@ -21,7 +40,7 @@ static char *find_next_quote(char *str)
     while(*array)
     {
         if(*array == '"')
-            return(++array);
+            return(array);
         array++;
     }
     return(str);
@@ -31,27 +50,29 @@ static char *find_next_quote(char *str)
 int	count_words( char *str)
 {
 	int	x;
-	int	checkw;
+ 
 
 	x = 0;
-	checkw = 0;
+ 
 	while (*str)
 	{
         if(*str == '"' && second_quote_exists(str))
            {
              str = find_next_quote(str);
              x++;
+                if(!*(++str))
+                    break ;
            }
-        if(!*str)
-            break ;
-		if(*str != ' ' && checkw == 0)
+		else if(*str == ' ')
 			{
-                checkw = 1;
-                x++;
+               str = space_trim(str);
             }
-		else if (*str == ' ')
-			checkw = 0;
-		str++;
+		else if (*str)
+        {
+                x++;
+               str =  word_trim(str);
+        }
+		 
 	}
 	return (x);
 }
