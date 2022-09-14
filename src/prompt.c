@@ -18,7 +18,7 @@
     while (1)
     {
     int x = 0;
-        char * str = readline("Myshell $ ");
+        char * str = readline("Quintashell $ ");
         /* if(!(*str))
             continue; */
         x = count_words(str);

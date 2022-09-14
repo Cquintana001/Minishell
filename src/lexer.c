@@ -7,14 +7,14 @@ static char *space_trim(char *str)
         str++;
     return(str);
 }
-static int second_quote_exists(char *str)
+static int second_char_exists(char *str, char a)
 {
     char *array;
 
     array = ++str;
     while(*array)
     {
-        if(*array == '"')
+        if(*array == a)
             return(1);
         array++;
     }
@@ -25,21 +25,21 @@ static char *word_trim(char *str)
     str++;
     while(*str != ' ' && *str)
     {
-        if(*str == '"' && second_quote_exists(str))
+        if(*str == '"' && second_char_exists(str, '"'))
             return(str);
         str++;
     }
     return(str);
 }
 
-static char *find_next_quote(char *str)
+static char *find_next_char(char *str, char a)
 {
     static char *array;
 
     array = (str + 1);
     while(*array)
     {
-        if(*array == '"')
+        if(*array == a)
             return(++array);
         array++;
     }
@@ -54,11 +54,21 @@ int	count_words( char *str)
 	x = 0; 
 	while (*str)
 	{
-        if(*str == '"' && second_quote_exists(str))
+        if(*str == '"' && second_char_exists(str, '"'))
            {
-             str = find_next_quote(str);
+             str = find_next_char(str, '"');
              x++;
            }
+        else if(*str == '\'' && second_char_exists(str, '\''))
+           {
+             str = find_next_char(str, '\'');
+             x++;
+           }
+        else if(*str == '|' || *str == '<' || *str == '>')
+        {
+            str++;
+            x++;
+        }
 		else if(*str == ' ')
             str = space_trim(str);
 		else if (*str)
