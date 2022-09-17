@@ -53,7 +53,7 @@ int	count_words( char *str)
 
 	x = 0; 
 	while (*str)
-	{
+	{    
         if(*str == '"' && second_char_exists(str, '"'))
            {
              str = find_next_char(str, '"');

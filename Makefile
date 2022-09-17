@@ -7,6 +7,7 @@ CFLAGS 				= 	-Wall -Werror -Wextra -g
 SRC_DIR				=	src
 SOURCES				=	$(SRC_DIR)/prompt.c \
 						$(SRC_DIR)/lexer.c \
+						$(SRC_DIR)/lexer1.c \
 
 OBJS				= 	$(SOURCES:.c=.o)
 

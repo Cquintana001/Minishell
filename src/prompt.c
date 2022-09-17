@@ -4,7 +4,7 @@
 #include "../libft/libft.h"
  #include <stdio.h>
 #include "lexer.h"
-
+#include "lexer1.h"
 /* int main(int argc, char *argv[], char *envp[])
 {
    printf("argc= %d\n", argc);
@@ -17,12 +17,13 @@
 {
     while (1)
     {
-    int x = 0;
+    char *x ;
         char * str = readline("Quintashell $ ");
         /* if(!(*str))
             continue; */
-        x = count_words(str);
-        printf("el número de palabras es %d\n", x);
+        x = array(str);
+        printf("el array original es %s\n", str);
+        printf("el array parseado es %s\n", x);
         free(str);
         /* while(array[x])
         {
