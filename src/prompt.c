@@ -13,7 +13,7 @@
     while(*envp)
         printf("%s\n",*envp++);
 } */
- int main(void)
+int main(void)
 {
     while (1)
     {
@@ -22,7 +22,7 @@
         /* if(!(*str))
             continue; */
         x = array(str);
-        printf("el array original es %s\n", str);
+         
         printf("el array parseado es %s\n", x);
         free(str);
         /* while(array[x])
