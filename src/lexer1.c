@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 10:47:48 by caquinta          #+#    #+#             */
-/*   Updated: 2022/09/18 15:31:46 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/09/20 12:37:21 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,17 @@ static char *str_len_malloc(char *str)
 	x = 0;
 	while(str[x])
 	{
+		 
 		if(str[x] == '|' || str[x] == '<' || str[x] == '>')
 			space += 1;
 		x++;
-			
 	}
+	printf("longitud %d\n", x);
 	x = x + (space * 2); // add two spaces for every '|', '<', '>';
-	array = (char*)calloc((x +1), sizeof(char));
+	array = (char*)ft_calloc((x +1), sizeof(char));
+
 	ft_memset(array, 'a', x);
+	printf("HERE: %s\n", array);
 	return(array);
 }
 
@@ -57,18 +60,18 @@ static int find_len(char *str, char a)
 	return(x+1);
 }
 
-void copy_until_char(char **array, char **str, char a)
+void copy_until_char(char *ar, char *st, char a)
 {
 	int x;
 	int i;
 
 	i = 0;
-	x = find_len(*str, a);
+	x = find_len(st, a);
 	while(i < x)
 	{
-		**array = **str;
-		(*str) ++;
-		(*array) ++;
+		*ar = *st;
+		st ++;
+		ar ++;
 		i++;
 	}
 }
@@ -101,9 +104,9 @@ char *array(char *str)
 	while(*str)
 	{		 
 		if(*str == '"' && second_char_exists(str, '"'))
-			copy_until_char(&array, &str, *str);
+			copy_until_char(array, str, *str);
 		else if(*str == '\'' && second_char_exists(str, '\''))
-			copy_until_char(&array, &str, *str);          
+			copy_until_char(array, str, *str);          
 		if(*str == '|' || *str == '<' || *str == '>')
 			add_space(&array, &str, *str);
 		else	
