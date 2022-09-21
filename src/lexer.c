@@ -1,6 +1,6 @@
 
 
-static char *space_trim(char *str)
+/* static char *space_trim(char *str)
 {
     
     while(*str == ' ' && *str)
@@ -79,7 +79,7 @@ int	count_words( char *str)
 	}
 	return (x);
 }
-
+ */
 
 
 

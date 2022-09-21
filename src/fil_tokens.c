@@ -1,4 +1,4 @@
-#include "lexer.h"
+/* #include "lexer.h"
 #include "length.h"
 
 int copy_quotes(char *str, char *array)
@@ -42,7 +42,7 @@ char *fill_tokens(char *str, int space)
     	}
 	}	 
 
-
+ */
 
 
 }
