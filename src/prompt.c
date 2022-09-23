@@ -5,7 +5,9 @@
 #include <stdio.h>
 #include "lexer.h"
 #include "lexer1.h"
-
+#include <fcntl.h>
+#include "struct.h"
+#include "fill_array.h"
 void free_d_array(char **array)
 {   
     int x;
@@ -63,6 +65,7 @@ int main(int argc, char *argv[], char **envp)
 {
     argc = 0;
     argv = NULL;
+    t_data *args;
      
      while (1)
      {
@@ -76,18 +79,21 @@ int main(int argc, char *argv[], char **envp)
             exit (0);
         x = array(str);       
         split = ft_split(x, ' ');
+        args = set_array(split);
+
         free(x);
         char  *full_path = check_if_command(envp, split[0]);
         if(full_path)
-            printf("la ruta es: %s\n", full_path);
-        else if(split[0][0] == '>' || split[0][0] == '<')
+             args->path = full_path;
+        printf("full path es: %s\n", full_path);
+        /* else if(split[0][0] == '>' || split[0][0] == '<')
          {   
-            if(file_exists(split[1])==0)
-                printf("el archivo existe\n");
+            if(split[1])
+                open(split[1]);
             else
                  printf("el archivo no existe\n");   
              
-         }   
+         }    */
         free(str); 
     }
 }

@@ -8,7 +8,8 @@ SRC_DIR				=	src
 SOURCES				=	$(SRC_DIR)/prompt.c \
 						$(SRC_DIR)/lexer.c \
 						$(SRC_DIR)/lexer1.c \
-
+						$(SRC_DIR)/fill_array.c \
+						
 OBJS				= 	$(SOURCES:.c=.o)
 
 
