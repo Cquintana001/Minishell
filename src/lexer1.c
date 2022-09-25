@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 10:47:48 by caquinta          #+#    #+#             */
-/*   Updated: 2022/09/20 12:37:21 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/09/25 09:22:21 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char *str_len_malloc(char *str)
 	return(array);
 }
 
-static int second_char_exists(char *str, char a)
+int second_char_exists(char *str, char a)
 {
     char *array;
 

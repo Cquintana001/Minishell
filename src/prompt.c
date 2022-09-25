@@ -8,6 +8,8 @@
 #include <fcntl.h>
 #include "struct.h"
 #include "fill_array.h"
+#include "expansor.h"
+
 void free_d_array(char **array)
 {   
     int x;
@@ -60,7 +62,32 @@ int file_exists(char *str)
     file = ft_strjoin("./", str);
     return(access(file, F_OK));    
 }
+char *check_dollar(char *str)
+{
+    char *aux = str;
 
+   while(*str)
+   {
+        if(*str == '$' && *(++str))
+        {    
+
+            return(aux);
+        }
+        str++;
+   } 
+    return(0);
+}
+char  *detect_expansion(char **split)
+{
+    while(*split)
+    {
+        if(*split[0]!= '\'' && check_dollar(*split) != 0)
+          return(*split);
+        split++;
+    }
+    return(0);
+
+}
 int main(int argc, char *argv[], char **envp)
 {
     argc = 0;
@@ -79,6 +106,9 @@ int main(int argc, char *argv[], char **envp)
             exit (0);
         x = array(str);       
         split = ft_split(x, ' ');
+        printf("el str a expandir es: %s\n", detect_expansion(split));
+        if(detect_expansion(split)!= 0)
+            printf("el str a expandido es: %s\n", expansion(detect_expansion(split)));
         args = set_array(split);
 
         free(x);
@@ -86,14 +116,6 @@ int main(int argc, char *argv[], char **envp)
         if(full_path)
              args->path = full_path;
         printf("full path es: %s\n", full_path);
-        /* else if(split[0][0] == '>' || split[0][0] == '<')
-         {   
-            if(split[1])
-                open(split[1]);
-            else
-                 printf("el archivo no existe\n");   
-             
-         }    */
         free(str); 
     }
 }

@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 09:56:55 by caquinta          #+#    #+#             */
-/*   Updated: 2022/09/23 12:58:18 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/09/24 12:11:35 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_data *set_array(char **str)
 	
 		return(array);
 }
-void fill_data(t_data *data, char  **str)
+/* void fill_data(t_data *data, char  **str)
 {
 	int x;
 
@@ -50,4 +50,4 @@ t_data *fill_array(char **str)
 
 	array = set_array(str);
 	
-}
+} */
