@@ -10,6 +10,7 @@ SOURCES				=	$(SRC_DIR)/prompt.c \
 						$(SRC_DIR)/lexer1.c \
 						$(SRC_DIR)/fill_array.c \
 						$(SRC_DIR)/expansor.c \
+						$(SRC_DIR)/ft_split_shell.c \
 
 OBJS				= 	$(SOURCES:.c=.o)
 

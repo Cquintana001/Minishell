@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 10:47:48 by caquinta          #+#    #+#             */
-/*   Updated: 2022/09/25 09:22:21 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:01:48 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@ static char *str_len_malloc(char *str)
 			space += 1;
 		x++;
 	}
-	printf("longitud %d\n", x);
 	x = x + (space * 2); // add two spaces for every '|', '<', '>';
 	array = (char*)ft_calloc((x +1), sizeof(char));
 
 	ft_memset(array, 'a', x);
-	printf("HERE: %s\n", array);
 	return(array);
 }
 
@@ -50,7 +48,7 @@ int second_char_exists(char *str, char a)
     }
     return(0);
 }
-static int find_len(char *str, char a)
+  int find_len(char *str, char a)
 {
 	int x;
 

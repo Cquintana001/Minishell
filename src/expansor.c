@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 09:50:25 by caquinta          #+#    #+#             */
-/*   Updated: 2022/09/25 14:01:32 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/09/26 08:54:24 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "../libft/libft.h"
 
-/* char *check_dollar(char *str)
+char *check_dollar(char *str)
 {
     char *aux = str;
 
@@ -29,17 +29,26 @@
    } 
     return(0);
 }
-char  *detect_expansion(char **split)
+char  **detect_expansion(char **split)
 {
+	char **aux = split;
+	while(*aux)
+	{
+		printf("split: %s\n", *aux);
+		aux++;
+	}
     while(*split)
     {
         if(*split[0]!= '\'' && check_dollar(*split) != 0)
-            return(*split);
+         {   
+			printf("string a exp: %s\n",*split);
+			return(split); //devuelvo el puntero que apunta al string a expandir.
+		 }
         split++;
     }
     return(0);
 
-} */
+}
 int len(char *str)
 {
 	int x;
@@ -81,5 +90,23 @@ char *expansion(char *str)
 	fill_malloc(array, str);
 	printf("array es: %s\n", array);
 	 	
-	return(getenv(array));	
+	return(array);	
+}
+void split_expanded(char **split)
+{
+	char **str;
+	char *exp;
+	 
+	if(detect_expansion(split)!= 0)
+	{	
+		str = detect_expansion(split); //posicion del split a expandir;
+		printf("posicion: %p\n", str);
+		exp = expansion(*str); // nombre de la variable a expandir;
+		printf("variable a expandir: %s\n", exp);
+	if(getenv(exp))
+		printf("variable expandida: %s\n", getenv(exp) );
+	printf("string a expandir: %s\n", *str);
+	}
+ 
+	 
 }

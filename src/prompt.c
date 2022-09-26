@@ -9,7 +9,7 @@
 #include "struct.h"
 #include "fill_array.h"
 #include "expansor.h"
-
+#include "ft_split_shell.h"
 void free_d_array(char **array)
 {   
     int x;
@@ -62,32 +62,6 @@ int file_exists(char *str)
     file = ft_strjoin("./", str);
     return(access(file, F_OK));    
 }
-char *check_dollar(char *str)
-{
-    char *aux = str;
-
-   while(*str)
-   {
-        if(*str == '$' && *(++str))
-        {    
-
-            return(aux);
-        }
-        str++;
-   } 
-    return(0);
-}
-char  *detect_expansion(char **split)
-{
-    while(*split)
-    {
-        if(*split[0]!= '\'' && check_dollar(*split) != 0)
-          return(*split);
-        split++;
-    }
-    return(0);
-
-}
 int main(int argc, char *argv[], char **envp)
 {
     argc = 0;
@@ -104,13 +78,11 @@ int main(int argc, char *argv[], char **envp)
         add_history(str);
         if (!str)
             exit (0);
-        x = array(str);       
+        x = array(str);
+        printf("numero de tokens %d\n", ft_split_shell(x));       
         split = ft_split(x, ' ');
-        printf("el str a expandir es: %s\n", detect_expansion(split));
-        if(detect_expansion(split)!= 0)
-            printf("el str a expandido es: %s\n", expansion(detect_expansion(split)));
+        split_expanded(split);
         args = set_array(split);
-
         free(x);
         char  *full_path = check_if_command(envp, split[0]);
         if(full_path)
