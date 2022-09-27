@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 10:47:48 by caquinta          #+#    #+#             */
-/*   Updated: 2022/09/26 12:01:48 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/09/27 08:23:47 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,39 +58,40 @@ int second_char_exists(char *str, char a)
 	return(x+1);
 }
 
-void copy_until_char(char *ar, char *st, char a)
+void copy_until_char(char **ar, char **st, char a)
 {
 	int x;
 	int i;
 
 	i = 0;
-	x = find_len(st, a);
+	x = find_len(*st, a);
 	while(i < x)
 	{
-		*ar = *st;
-		st ++;
-		ar ++;
+		**ar = **st;
+		(*st) ++;
+		(*ar) ++;
 		i++;
 	}
 }
-void add_space(char **array, char **str, char a)
+void add_space(char **array,    char a)
 {
 	**array = ' ';
 	(*array)++;
-	**array = **str;
+	**array = a;
 	(*array)++;
-	(*str)++;
-	if(a != '|' && a == **str)
+	 (**array) = ' ';
+ 
+	/* if(a != '|' && a == **str)
 	{	
-		**array = **str;
-		(*array)++;
-		**array = ' ';
+		*array = *str;
+		array++;
+		*array = ' ';
 	}
-	else
+	else 
 	{	
-		(*str)--;
-		**array = ' ';
-	}
+		str--;
+		*array = ' ';
+	} */
 }
 char *array(char *str)
 {
@@ -102,11 +103,11 @@ char *array(char *str)
 	while(*str)
 	{		 
 		if(*str == '"' && second_char_exists(str, '"'))
-			copy_until_char(array, str, *str);
+			copy_until_char(&array, &str, *str);
 		else if(*str == '\'' && second_char_exists(str, '\''))
-			copy_until_char(array, str, *str);          
+			copy_until_char(&array, &str, *str);          
 		if(*str == '|' || *str == '<' || *str == '>')
-			add_space(&array, &str, *str);
+			add_space(&array,   *str);
 		else	
 			*array = *str;
 		str++;

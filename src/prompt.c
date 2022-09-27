@@ -9,7 +9,7 @@
 #include "struct.h"
 #include "fill_array.h"
 #include "expansor.h"
-#include "ft_split_shell.h"
+ 
 void free_d_array(char **array)
 {   
     int x;
@@ -79,7 +79,7 @@ int main(int argc, char *argv[], char **envp)
         if (!str)
             exit (0);
         x = array(str);
-        printf("numero de tokens %d\n", ft_split_shell(x));       
+        printf("el array tokenizado es %s\n", x);       
         split = ft_split(x, ' ');
         split_expanded(split);
         args = set_array(split);
