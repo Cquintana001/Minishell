@@ -74,7 +74,7 @@ int main(int argc, char *argv[], char **envp)
         char * str;
         char **split;
 
-        str = readline("Quintashell $ ");
+        str = readline("minishell $ ");
         add_history(str);
         if (!str)
             exit (0);

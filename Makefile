@@ -3,14 +3,14 @@ NAME				=	minishell
 libft				= 	libft
 INC_DIR				= 	./includes/
 CC 					= 	gcc
-CFLAGS 				= 	-Wall -Werror -Wextra -g  
+CFLAGS 				= 	-Wall -Werror -Wextra -g3 -fsanitize=address
 SRC_DIR				=	src
-SOURCES				=	$(SRC_DIR)/prompt.c \
-						$(SRC_DIR)/lexer.c \
-						$(SRC_DIR)/lexer1.c \
-						$(SRC_DIR)/fill_array.c \
-						$(SRC_DIR)/expansor.c \
-						 
+SOURCES				=	$(SRC_DIR)/lexer.c \
+						$(SRC_DIR)/fill_tokens.c \
+						$(SRC_DIR)/expansor2.c \
+#						$(SRC_DIR)/prompt.c 
+#						$(SRC_DIR)/lexer1.c 
+#						$(SRC_DIR)/fill_array.c 
 
 OBJS				= 	$(SOURCES:.c=.o)
 
