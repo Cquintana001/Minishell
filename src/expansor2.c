@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:00:41 by caquinta          #+#    #+#             */
-/*   Updated: 2022/09/28 16:11:51 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/09/29 13:53:01 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int len(char *str)
 	while(*str != '$')
 		str++;
 	str++;
+	if(*str == '?' || *str == '_')
+		return(1);
 	while(*str && ( (*str > 47 && *str <59) || (*str > 64 && *str <91) || (*str > 96 && *str <123)))
 	{
 		str++;
@@ -35,10 +37,11 @@ void fill_malloc(char *array, char *str)
 	{
 		str++;
 	}
+	 
 	str++;
+	//printf("char: %c\n", *str);
 	while(*array)
 	{
-		printf("where: %c\n", *array);
 		*array = *str;
 		str++;
 		array++;
@@ -66,26 +69,32 @@ char *expansor(char *str)
 	char *variable;
 	char *añadido;
 	
+	resultado = "";
+	string = "";
+	añadido = "";
 	aux = str;
-	printf("str: %s\n", str);
 	while(*str)
 	{		 
-		if(*str == '$' && expansion(str) )
+		if(*str == '$' &&  expansion(str))
 		{
+			if(!str[1])
+				return(ft_strdup("$"));
 			string = ft_substr(aux, 0, (str -aux));
 			variable = getenv( expansion(str));
-			printf("variable: %s\n", variable);
+			if(variable == NULL)
+				variable ="";
 			añadido = ft_strjoin(string, variable);
-			printf("añadido: %s\n", añadido);
+			free(string);
 			resultado = ft_strjoin(resultado, añadido);
-			str += ft_strlen(expansion(str)) +1 ;
-			aux = str;
-			printf("char: %c\n", *str);		 
+			free(añadido);
+			str += ft_strlen(expansion(str)) + 1;
+			aux = str;	 
 		}
-		str++;
+		if(*str && *str != '$')
+			str++;
 	}
 	string = ft_substr(aux, 0, (str -aux));
-	resultado = ft_strjoin(resultado, string); 
-	printf("resultado2: %s\n", resultado);	
+	resultado = ft_strjoin(resultado, string);
+	free(string);
 	return(resultado);
 }

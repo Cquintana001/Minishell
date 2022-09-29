@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/09/28 15:56:13 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/09/29 13:31:11 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int main()
 {
 
     char *str;
-    while (1)
-    {
+   /*  while (1)
+    { */
         int x;
          
         char **tokens;
@@ -109,17 +109,15 @@ int main()
         if (!str)
             exit(0);
         x = count_tokens(str);
-        printf("número de tokens: %d\n", x);
         tokens = fill_tokens(str, x);
         
         while(*tokens)
         {
-            //printf("variable: %s\n", *tokens);
-            str = expansor(*tokens);  
-            printf("variable: %s\n", str);
+            str = expansor(*tokens);
+            printf("str1 es: %s\n", str);  
             free(str);
             tokens++;
         }
-    }
+    /* } */
     return 0;
 }
