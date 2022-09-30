@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   expansor2.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 11:00:41 by caquinta          #+#    #+#             */
-/*   Updated: 2022/09/29 13:53:01 by caquinta         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -22,79 +11,68 @@ int len(char *str)
 	while(*str != '$')
 		str++;
 	str++;
-	if(*str == '?' || *str == '_')
+	if(*str == '?' || *str == '$' )
 		return(1);
-	while(*str && ( (*str > 47 && *str <59) || (*str > 64 && *str <91) || (*str > 96 && *str <123)))
+	while(*str && ( (*str >= '0' && *str <='9') || (*str >='A' && *str <= 'Z')\
+		|| (*str >= 'a' && *str <='z' ) || *str =='_'))
 	{
 		str++;
 		x++;		
 	}
+ 
 	return(x);
 }
-void fill_malloc(char *array, char *str)
-{
-	while (*str != '$')
-	{
-		str++;
-	}
-	 
-	str++;
-	//printf("char: %c\n", *str);
-	while(*array)
-	{
-		*array = *str;
-		str++;
-		array++;
-	}
-}
 
-char *expansion(char *str)
+char *dollar_variable(char *str, int x )
 {
-	char *array;
-	array = (char*)malloc((len(str) +1) * sizeof(char));
- 
-	ft_memset(array, 'a', len(str));
-	array[len(str)] = 0;
-	fill_malloc(array, str);
- 
-	 	
+    char *array;
+     int l;
+
+     l = len(str);
+	array = (char*)calloc((l  +1), sizeof(char));
+    ft_memset(array, 'a', l );
+	array[l] = 0;
+    x++;
+    l = 0;
+	while(array[l])
+    {
+        array[l] = str[x];
+    
+        l++;
+        x++;
+    } 	
+    printf("array: %s\n", array);
 	return(array);	
 }
 
 char *expansor(char *str)
 {
-	char *aux;
-	char *string;
-	char *resultado;
-	char *variable;
-	char *añadido;
-	
-	resultado = "";
-	string = "";
-	añadido = "";
-	aux = str;
-	while(*str)
-	{		 
-		if(*str == '$' &&  expansion(str))
-		{
-			if(!str[1])
-				return(ft_strdup("$"));
-			string = ft_substr(aux, 0, (str -aux));
-			variable = getenv( expansion(str));
-			if(variable == NULL)
-				variable ="";
-			añadido = ft_strjoin(string, variable);
-			free(string);
-			resultado = ft_strjoin(resultado, añadido);
-			free(añadido);
-			str += ft_strlen(expansion(str)) + 1;
-			aux = str;	 
-		}
-		if(*str && *str != '$')
-			str++;
-	}
-	string = ft_substr(aux, 0, (str -aux));
-	resultado = ft_strjoin(resultado, string);
-	free(string);
-	return(resultado);
+    int x;
+    char *var;
+    char *first_part;
+    char *second_part;
+    x = 0;
+    while(str[x])
+    {
+        if(str[x] == '$')
+        {
+           
+            var = dollar_variable(str,  x);
+            first_part = ft_substr(str, 0, x);
+            if(*var != '$')
+                second_part = ft_strjoin(first_part, getenv(var));
+            else 
+                second_part = ft_strjoin(first_part, ft_itoa(getpid()));
+            //printf("second part: %s\n", second_part);            
+            free(first_part);
+            str += x +1 + ft_strlen(var);
+            first_part = ft_strjoin(second_part, str);
+            free(second_part);
+            str = first_part;
+            free(var);
+            x = -1;
+        }
+         x++;
+    }
+    return(str);
 }

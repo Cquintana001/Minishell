@@ -19,6 +19,18 @@
 #include <fcntl.h>
 #include "expansor2.h"
 
+void free_d_array(char **array)
+{   
+    int x;
+
+    x = 0;
+    while(array[x])
+    {
+        free(array[x]);
+        x++;
+    }
+    free(array);
+}
 int second_char_exists(char *str, char a) // detecta si las comillas se cierran.
 {
     char *array;
@@ -105,19 +117,24 @@ int main()
         char **tokens;
         
         str = readline("minishell $ ");
+       // str = ft_strdup("$USER");
         add_history(str);
         if (!str)
             exit(0);
         x = count_tokens(str);
         tokens = fill_tokens(str, x);
         
-        while(*tokens)
+        x = 0;
+        while(tokens[x])
         {
-            str = expansor(*tokens);
-            printf("str1 es: %s\n", str);  
+            
             free(str);
-            tokens++;
+        str = expansor(tokens[x]);
+            printf("str1 es: %s\n", str);  
+            x++;
         }
+        free_d_array(tokens);
+        //free(str);
     /* } */
     return 0;
 }

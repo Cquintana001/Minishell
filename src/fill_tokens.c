@@ -14,6 +14,7 @@
 #include "../libft/libft.h"
 #include "lexer.h"
 
+ 
 int check_char(char *str)
 {	 
 	if(*str == *(str +1))
@@ -32,6 +33,7 @@ char **fill_tokens(char *str, int x)
 	aux = tokens;
 	if(!tokens)
 		return(NULL);
+	 
 	while (*str)
     {
         if (*str == '|' || *str == '<' || *str == '>')
@@ -50,5 +52,6 @@ char **fill_tokens(char *str, int x)
         }
         str++;
     }
+ 
 	return(aux);
 }
