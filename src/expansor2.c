@@ -51,39 +51,33 @@ char *expansor(char *str)
     char *first_part;
     char *second_part;
 	char *aux;
+
     x = 0;
     while(str[x])
     {
- 
+        printf("str entra como %s\n", str);
         if(str[x] == '$')
-        {
-            
+        {            
             var = dollar_variable(str,  x);
-            first_part = ft_substr(str, 0, x);
-            printf("first_part : %s\n", first_part);     
+            printf("VAR: %s\n", var);
+            first_part = ft_substr(str, 0, x);  
 			if(getenv(var))
             {	          
 				second_part = ft_strjoin(first_part, getenv(var));
                 free(first_part); 
 			}
 			else
-                    second_part = first_part;
-                     
-            aux = str + x +1  + ft_strlen(var);
-            
-            
-            first_part = ft_strjoin(second_part, aux);
- 
-			 
+                    second_part = first_part;                    
+            aux = str + x +1  + ft_strlen(var);           
+            first_part = ft_strjoin(second_part, aux); 
             free(second_part);
 			free(str);
             str = first_part;
-            free(var);
-		 
+            free(var); 
             x = -1;
+            printf("str sale como: %s\n", str);
         }
          x++;
     }
-            printf("str es: %s\n", str);
     return(str);
 }
