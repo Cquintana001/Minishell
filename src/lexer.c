@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/09/29 13:31:11 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/01 14:30:37 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int main()
    /*  while (1)
     { */
         int x;
-         
+         char *aux;
         char **tokens;
         
         str = readline("minishell $ ");
@@ -121,16 +121,18 @@ int main()
         add_history(str);
         if (!str)
             exit(0);
-        x = count_tokens(str);
-        tokens = fill_tokens(str, x);
-        
+        aux  = expansor(str);
+        printf("aux final es: %s\n", aux);
+        x = count_tokens(aux);
+        tokens = fill_tokens(aux, x);
+        free(aux);
         x = 0;
         while(tokens[x])
         {
             
-            free(str);
-        str = expansor(tokens[x]);
-            printf("str1 es: %s\n", str);  
+            
+            
+            printf("str1 es: %s\n", tokens[x]);  
             x++;
         }
         free_d_array(tokens);

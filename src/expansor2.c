@@ -8,10 +8,10 @@ int len(char *str)
 	int x;
 
 	x = 0;
-	while(*str != '$')
-		str++;
+	 
+	
 	str++;
-	if(*str == '?' || *str == '$' )
+	if(*str == '?' || *str == '_')
 		return(1);
 	while(*str && ( (*str >= '0' && *str <='9') || (*str >='A' && *str <= 'Z')\
 		|| (*str >= 'a' && *str <='z' ) || *str =='_'))
@@ -19,7 +19,6 @@ int len(char *str)
 		str++;
 		x++;		
 	}
- 
 	return(x);
 }
 
@@ -41,7 +40,7 @@ char *dollar_variable(char *str, int x )
         l++;
         x++;
     } 	
-    printf("array: %s\n", array);
+    //printf("array: %s\n", array);
 	return(array);	
 }
 
@@ -51,28 +50,40 @@ char *expansor(char *str)
     char *var;
     char *first_part;
     char *second_part;
+	char *aux;
     x = 0;
     while(str[x])
     {
+ 
         if(str[x] == '$')
         {
-           
+            
             var = dollar_variable(str,  x);
             first_part = ft_substr(str, 0, x);
-            if(*var != '$')
-                second_part = ft_strjoin(first_part, getenv(var));
-            else 
-                second_part = ft_strjoin(first_part, ft_itoa(getpid()));
-            //printf("second part: %s\n", second_part);            
-            free(first_part);
-            str += x +1 + ft_strlen(var);
-            first_part = ft_strjoin(second_part, str);
+            printf("first_part : %s\n", first_part);     
+			if(getenv(var))
+            {	          
+				second_part = ft_strjoin(first_part, getenv(var));
+                free(first_part); 
+			}
+			else
+                    second_part = first_part;
+                     
+            aux = str + x +1  + ft_strlen(var);
+            
+            
+            first_part = ft_strjoin(second_part, aux);
+ 
+			 
             free(second_part);
+			free(str);
             str = first_part;
             free(var);
+		 
             x = -1;
         }
          x++;
     }
+            printf("str es: %s\n", str);
     return(str);
 }
