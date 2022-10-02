@@ -4,12 +4,27 @@
 #include "../libft/libft.h"
 #include <stdio.h>
 #include "lexer.h"
-#include "lexer1.h"
 #include <fcntl.h>
 #include "struct.h"
-#include "fill_array.h"
-#include "expansor.h"
  
+int second_char_exists(char *str, char a) // detecta si las comillas se cierran.
+{
+    
+    str++;
+        
+        while (*str)  
+        {
+            if (*str == a)
+             {  
+                  printf("devuelvo 1");
+	    		return (1);
+	    	 }
+            str++;
+        }
+    printf("devuelvo 0");
+    return (0);
+}
+
 void free_d_array(char **array)
 {   
     int x;
@@ -22,6 +37,7 @@ void free_d_array(char **array)
     }
     free(array);
 }
+
 char *find_path(char **envp)
 { 
     while(*envp)
@@ -32,6 +48,7 @@ char *find_path(char **envp)
         }
     return(0);
 }
+
 char *check_if_command(char **envp, char *str)
 {
     char **path_list;
@@ -62,32 +79,5 @@ int file_exists(char *str)
     file = ft_strjoin("./", str);
     return(access(file, F_OK));    
 }
-int main(int argc, char *argv[], char **envp)
-{
-    argc = 0;
-    argv = NULL;
-    t_data *args;
-     
-     while (1)
-     {
-        char *x ;
-        char * str;
-        char **split;
-
-        str = readline("minishell $ ");
-        add_history(str);
-        if (!str)
-            exit (0);
-        x = array(str);
-        printf("el array tokenizado es %s\n", x);       
-        split = ft_split(x, ' ');
-        split_expanded(split);
-        args = set_array(split);
-        free(x);
-        char  *full_path = check_if_command(envp, split[0]);
-        if(full_path)
-             args->path = full_path;
-        printf("full path es: %s\n", full_path);
-        free(str); 
-    }
-}
+ 
+ 

@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/01 14:30:37 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/02 16:20:43 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,16 @@
 #include <stdio.h>
 #include "fill_tokens.h"
 #include <fcntl.h>
-#include "expansor2.h"
-
-void free_d_array(char **array)
-{   
-    int x;
-
-    x = 0;
-    while(array[x])
-    {
-        free(array[x]);
-        x++;
-    }
-    free(array);
-}
-int second_char_exists(char *str, char a) // detecta si las comillas se cierran.
-{
-    char *array;
-
-    array = ++str;
-    while (*array)  
-    {
-        if (*array == a)
-         {  
-			return (1);
-		 }
-        array++;
-    }
-    return (0);
-}
+#include "expansor.h"
+#include "utils.h"
+#include "utils2.h"
 
 int count_char_index(char *str, char a) // cuenta el número de caracteres hasta que se cierran las comillas
 {
     int x;
 
     str++;
-    x = 0;
+    x = 1;
     while (*str)
     {
         if (*str == a)
@@ -69,9 +43,14 @@ int count_word_index(char *str) // devuelve la posición final de la palabra
    	x = 0;
     while (*str)
     {
-
-        if ((*str == '"' || *str == '\'') && second_char_exists(str, *str))
+        if ((*str == '"' || *str == '\'') )
         {
+            printf("entra\n");
+           if(!second_char_exists(str, *str)) 
+            {
+                printf("error\n");
+                exit(0);
+            }    
             x += count_char_index(str, *str) + 1;
             str += count_char_index(str, *str) + 1;
  
@@ -115,26 +94,37 @@ int main()
         int x;
          char *aux;
         char **tokens;
+       char *i;
         
         str = readline("minishell $ ");
-       // str = ft_strdup("$USER");
         add_history(str);
         if (!str)
             exit(0);
         aux  = expansor(str);
-        printf("aux final es: %s\n", aux);
         x = count_tokens(aux);
         tokens = fill_tokens(aux, x);
         free(aux);
         x = 0;
+        
         while(tokens[x])
-        {
+        {    
+            printf("el token es %s\n", tokens[x]);   
+           i = erase_quotes(tokens[x]);
+          printf("el array es %s\n", i);
+              
             
             
-            
-            printf("str1 es: %s\n", tokens[x]);  
             x++;
         }
+        /* x = 0;
+        while(tokens[x])
+        {       
+           
+          printf("token %d es: %s\n",x, tokens[x]);
+             
+            
+            x++;
+        } */
         free_d_array(tokens);
         //free(str);
     /* } */

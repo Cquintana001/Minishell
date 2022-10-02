@@ -7,10 +7,9 @@ CFLAGS 				= 	-Wall -Werror -Wextra -g   #-fsanitize=address
 SRC_DIR				=	src
 SOURCES				=	$(SRC_DIR)/lexer.c \
 						$(SRC_DIR)/fill_tokens.c \
-						$(SRC_DIR)/expansor2.c \
-#						$(SRC_DIR)/prompt.c 
-#						$(SRC_DIR)/lexer1.c 
-#						$(SRC_DIR)/fill_array.c 
+						$(SRC_DIR)/expansor.c \
+						$(SRC_DIR)/utils.c \
+						$(SRC_DIR)/utils2.c \
 
 OBJS				= 	$(SOURCES:.c=.o)
 

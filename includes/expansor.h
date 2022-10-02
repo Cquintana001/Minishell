@@ -1,9 +1,8 @@
-#ifndef EXPANSOR_H
-# define EXPANSOR_H
+
+#ifndef EXPANSOR2_H
+# define EXPANSOR2_H
  
 
-char *expansion(char *str);
-char  **detect_expansion(char **split);
-void split_expanded(char **split);
+char *expansor(char *str);
 
 #endif
