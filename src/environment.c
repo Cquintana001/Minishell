@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:49:33 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/03 11:25:49 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/03 11:54:58 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,18 @@ char	**env_copy(char **env)
 	return (env2);
 }
 
- 
-
 char	*ft_getenv(char **env2, char *var)
 {
-		while (*env2)
+	char	*var1;
+
+	while (*env2)
 	{
 		if (ft_strnstr(*env2, var, ft_strlen(var)))
-			return (ft_strchr(*env2, '='));
+		{
+			var1 = ft_strchr(*env2, '=');
+			return (++var1);
+		}
 		env2++;
 	}
-	return (0);
+	return (NULL);
 }

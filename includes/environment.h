@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:56:10 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/03 09:57:01 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/03 11:31:38 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 
  
 char **env_copy(char **env);
+char	*ft_getenv(char **env2, char *var);
 
 #endif

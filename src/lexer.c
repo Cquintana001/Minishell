@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/03 11:26:11 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:23:47 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,19 +106,17 @@ int	main(int argc, char *argv[], char **envp)
 	env2 = env_copy(envp);
 	while (1)
 	{
-		aux = ft_strjoin(getenv("USER"), "@minishell $ ");
+		aux = ft_strjoin(ft_getenv(env2, "USER"), "@minishell $ ");
 		str = readline(aux);
 		add_history(str);
 		if (!str)
 			continue ;
-		
 		free(aux);
 		aux = expansor(str);
-		x = count_tokens(aux);
+		//x = count_tokens(aux);
 		tokens = fill_tokens(aux, x);
 		if (!x)
-			continue ;
-		
+			continue ;	
 		free(aux);
 		x = 0;
 		while (tokens[x])
@@ -130,16 +128,6 @@ int	main(int argc, char *argv[], char **envp)
 			x++;
 		}
 	}
-	/* x = 0;
-        while(tokens[x])
-        {       
-           
-          printf("token %d es: %s\n",x, tokens[x]);
-             
-            
-            x++;
-        } */
 	free_d_array(tokens);
-	//free(str);
 	return (0);
 }
