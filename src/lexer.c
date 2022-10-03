@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/03 13:23:47 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:59:00 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	main(int argc, char *argv[], char **envp)
 	int		x;
 	char	*aux;
 	char	**tokens;
-	char	*i;
+ 
 	char	**env2;
 
 	argc = 0;
@@ -113,18 +113,17 @@ int	main(int argc, char *argv[], char **envp)
 			continue ;
 		free(aux);
 		aux = expansor(str);
-		//x = count_tokens(aux);
+ 
 		tokens = fill_tokens(aux, x);
-		if (!x)
-			continue ;	
+		 	
 		free(aux);
 		x = 0;
 		while (tokens[x])
 		{
+			 
 			printf("el token es %s\n", tokens[x]);
-			i = erase_quotes(tokens[x]);
-			printf("el array es %s\n", i);
-			free(i);
+			 
+			 
 			x++;
 		}
 	}
