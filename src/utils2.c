@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 09:05:01 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/03 07:44:21 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/03 10:24:59 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,9 @@ void fill_array(char *source, char *dest)
 		return(str);
 	else  
 	{
-		array = ft_calloc(x, sizeof(char));
-		array[x] = 0;
+		printf("x es: %d\n",x);
+		array = (char*)ft_calloc(x, sizeof(char));
+		array[x-1] = '\0';
 		fill_array(str, array);
 	}	
 	return(array);	
