@@ -68,15 +68,15 @@ void fill_array2(char **tokens)
 char	**fill_tokens(char *str)
 {
 	char	**tokens;
-	int		index;
-	char	**aux;
+	 
+ 
 	int		x;
 
 	x = count_tokens(str);
-	index = 0;
+	 
 	tokens = (char **)ft_calloc((x + 1), sizeof(char *));
 	tokens[x] = 0;
-	aux = tokens;
+	 
 	if (!tokens)
 		return (NULL);	 
 	fill_array1(str, tokens);

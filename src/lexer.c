@@ -92,7 +92,7 @@ int	count_tokens(char *str)
 	return (num_token);
 }
 
-int	main(int argc, char *argv[], char **envp)
+int	main(int argc, char * argv[],  char **envp)
 {
 	char	*str;
 	int		x;
@@ -100,10 +100,14 @@ int	main(int argc, char *argv[], char **envp)
 	char	**tokens;
  
 	char	**env2;
-
-	argc = 0;
-	argv = NULL;
+     
+     if(argc || argv)
+     {
+           printf("\n");
+     }
+    
 	env2 = env_copy(envp);
+       
 	while (1)
 	{
 		aux = ft_strjoin(ft_getenv(env2, "USER"), "@minishell $ ");
@@ -118,6 +122,7 @@ int	main(int argc, char *argv[], char **envp)
 		 	
 		free(aux);
 		x = 0;
+	 
 		while (tokens[x])
 		{
 			 
