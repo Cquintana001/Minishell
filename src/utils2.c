@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 09:05:01 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/02 15:55:25 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/03 07:44:21 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int count_index(char *str)
 			aux = (str +x);
 			q = count_char_index(aux, str[x]);
 		 	i += q;
-			x +=q +2 ;
+			x +=q +1 ;
 		}
 		else
 		{

@@ -8,20 +8,14 @@
 #include "struct.h"
  
 int second_char_exists(char *str, char a) // detecta si las comillas se cierran.
-{
-    
+{    
     str++;
-        
         while (*str)  
         {
-            if (*str == a)
-             {  
-                  printf("devuelvo 1");
+            if (*str == a)  
 	    		return (1);
-	    	 }
             str++;
         }
-    printf("devuelvo 0");
     return (0);
 }
 

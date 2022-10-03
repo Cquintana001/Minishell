@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/02 16:20:43 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/03 07:47:55 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,28 @@ int count_char_index(char *str, char a) // cuenta el número de caracteres hasta
 int count_word_index(char *str) // devuelve la posición final de la palabra
 {
     int x;
-
+    int i;
+    i = 0;
    	x = 0;
     while (*str)
     {
         if ((*str == '"' || *str == '\'') )
         {
-            printf("entra\n");
            if(!second_char_exists(str, *str)) 
             {
                 printf("error\n");
-                exit(0);
-            }    
-            x += count_char_index(str, *str) + 1;
-            str += count_char_index(str, *str) + 1;
- 
+                return(-1);
+            }  
+            i =   count_char_index(str, *str);
+            x += i +1;
+            str += i +1; 
         }
         else if (*str == '|' || *str == '<' || *str == '>' || *str == ' ')
             return (x);
-        x++;
+        else
+        {x++;
         str++;
-        
+        }      
     }
     return (x);
 }
@@ -77,8 +78,9 @@ int count_tokens(char *str)
         else if (*str != ' ')
         {
             index = count_word_index(str);
+            if(index<0)
+                return(0);
             str += index  -1;
- 
             num_token++;
         }
         str++;
@@ -89,8 +91,8 @@ int main()
 {
 
     char *str;
-   /*  while (1)
-    { */
+     while (1)
+    { 
         int x;
          char *aux;
         char **tokens;
@@ -102,6 +104,11 @@ int main()
             exit(0);
         aux  = expansor(str);
         x = count_tokens(aux);
+        if(!x)
+        {
+            printf("error\n");
+            return(0);
+        }
         tokens = fill_tokens(aux, x);
         free(aux);
         x = 0;
@@ -127,6 +134,6 @@ int main()
         } */
         free_d_array(tokens);
         //free(str);
-    /* } */
+     } 
     return 0;
 }

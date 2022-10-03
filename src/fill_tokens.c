@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 07:53:14 by caquinta          #+#    #+#             */
-/*   Updated: 2022/09/28 08:42:47 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/03 07:56:04 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ char **fill_tokens(char *str, int x)
 	tokens = (char **)ft_calloc((x+1), sizeof(char*));
 	aux = tokens;
 	if(!tokens)
-		return(NULL);
-	 
+		return(NULL);	 
 	while (*str)
     {
         if (*str == '|' || *str == '<' || *str == '>')
@@ -51,7 +50,6 @@ char **fill_tokens(char *str, int x)
             tokens++;
         }
         str++;
-    }
- 
+    } 
 	return(aux);
 }
