@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/04 12:30:54 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:40:57 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	count_tokens(char *str)
 	return (num_token);
 }
 
-int	main(int argc, char *argv[], char **envp)
+int	main(int argc, char * argv[],  char **envp)
 {
 	char	*str;
 	int		x;
