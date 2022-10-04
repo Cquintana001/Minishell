@@ -6,13 +6,16 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 08:54:40 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/03 09:46:40 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/04 10:02:48 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "utils.h"
+#include "utils2.h"
+#include "lexer.h"
 
 int	len(char *str)
 {
@@ -20,7 +23,7 @@ int	len(char *str)
 
 	x = 0;
 	str++;
-	if (*str == '?' || *str == '_')
+	if (*str == '?' || *str == '_' )
 		return (1);
 	while (*str && ((*str >= '0' && *str <= '9') || (*str >= 'A' && *str <= 'Z')
 			|| (*str >= 'a' && *str <= 'z') || *str == '_'))
@@ -62,8 +65,10 @@ char	*expansor(char *str)
 
 	x = 0;
 	while (str[x])
-	{
-		if (str[x] == '$')
+	{	 
+		if (str[x] == '\'')	
+			x += count_char_index(str + x, str[x]);
+		 else if (str[x] == '$' && (str[x+1] && str[x+1] != '"'))
 		{
 			var = dollar_variable((str + x));
 			first_part = ft_substr(str, 0, x);

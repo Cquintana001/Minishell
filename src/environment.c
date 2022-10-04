@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:49:33 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/03 11:54:58 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/04 09:41:59 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ char	**env_copy(char **env)
 	int		x;
 	char	**env2;
 
-	len = ft_strlen(*env);
+	len = 0;
+	while (env[len])
+		len++;
 	env2 = (char **)ft_calloc(len + 1, sizeof(char *));
 	x = 0;
 	env2[len] = 0;

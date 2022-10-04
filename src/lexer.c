@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/03 14:59:00 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:30:54 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <readline/readline.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "struct.h"
 
 int	count_char_index(char *str, char a)
 {
@@ -98,9 +99,10 @@ int	main(int argc, char *argv[], char **envp)
 	int		x;
 	char	*aux;
 	char	**tokens;
- 
 	char	**env2;
+	t_data *list;
 
+	list = ft_lstnew1(0);
 	argc = 0;
 	argv = NULL;
 	env2 = env_copy(envp);
@@ -113,19 +115,11 @@ int	main(int argc, char *argv[], char **envp)
 			continue ;
 		free(aux);
 		aux = expansor(str);
- 
 		tokens = fill_tokens(aux, x);
-		 	
 		free(aux);
 		x = 0;
-		while (tokens[x])
-		{
-			 
-			printf("el token es %s\n", tokens[x]);
-			 
-			 
-			x++;
-		}
+		
+		 
 	}
 	free_d_array(tokens);
 	return (0);

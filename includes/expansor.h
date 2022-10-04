@@ -4,5 +4,6 @@
  
 
 char *expansor(char *str);
+ 
 
 #endif
