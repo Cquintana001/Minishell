@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.c                                           :+:      :+:    :+:   */
+/*   fill_data.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/04 12:21:55 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/04 12:23:36 by caquinta         ###   ########.fr       */
+/*   Created: 2022/10/05 13:16:26 by caquinta          #+#    #+#             */
+/*   Updated: 2022/10/05 13:27:46 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "struct.h"
 
-t_data	*ft_lstnew1(int x)
-{
-	t_data	*list;
 
-	list = (t_data*)malloc(sizeof(*list));
-	if (list == NULL)
-		return (NULL);
-	list->cmd = NULL;
-	list->redirection = NULL;
-	list->path = NULL;
-	list->input = x;
-	list->output = x;
+#ifndef FILL_DATA_H
+# define FILL_DATA_H
 
-	list->next = NULL;
-	return (list);
-}
+#include "utils.h"
+
+t_data	*cmd(char **tokens);
+
+#endif

@@ -6,14 +6,16 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/04 12:40:57 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:32:03 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "environment.h"
 #include "expansor.h"
+#include "fill_data.h"
 #include "fill_tokens.h"
+#include "struct.h"
 #include "utils.h"
 #include "utils2.h"
 #include <fcntl.h>
@@ -21,7 +23,6 @@
 #include <readline/readline.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "struct.h"
 
 int	count_char_index(char *str, char a)
 {
@@ -93,16 +94,15 @@ int	count_tokens(char *str)
 	return (num_token);
 }
 
-int	main(int argc, char * argv[],  char **envp)
+int	main(int argc, char *argv[], char **envp)
 {
 	char	*str;
 	int		x;
 	char	*aux;
 	char	**tokens;
 	char	**env2;
-	t_data *list;
+	t_data	*data;
 
-	list = ft_lstnew1(0);
 	argc = 0;
 	argv = NULL;
 	env2 = env_copy(envp);
@@ -116,10 +116,23 @@ int	main(int argc, char * argv[],  char **envp)
 		free(aux);
 		aux = expansor(str);
 		tokens = fill_tokens(aux, x);
-		free(aux);
 		x = 0;
-		
-		 
+		while (tokens[x])
+		{
+			printf("token[%d]: %s\n", x, tokens[x]);
+			x++;
+		}
+		//free(aux);
+		printf("entra\n");
+		data = cmd(tokens);
+		printf("entra2\n");
+		x = 0;
+		printf("entra %s\n", data->redirection[x]);
+		while (data->redirection[x])
+		{
+			printf("str es %s\n", data->redirection[x]);
+			x++;
+		}
 	}
 	free_d_array(tokens);
 	return (0);

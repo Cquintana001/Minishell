@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 07:53:14 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/03 15:17:39 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:30:00 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char	**fill_tokens(char *str)
 	x = count_tokens(str);
 	 
 	tokens = (char **)ft_calloc((x + 1), sizeof(char *));
+	 
 	tokens[x] = 0;
 	 
 	if (!tokens)
