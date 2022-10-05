@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/05 13:32:03 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:20:00 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,20 @@ int	main(int argc, char *argv[], char **envp)
 		printf("entra\n");
 		data = cmd(tokens);
 		printf("entra2\n");
-		x = 0;
-		printf("entra %s\n", data->redirection[x]);
-		while (data->redirection[x])
+	 int i = 0;
+		while (1)
 		{
-			printf("str es %s\n", data->redirection[x]);
-			x++;
-		}
+			x = 0;
+			while(data->redirection[x] != NULL)
+			{printf("nodo %d str es %s\n",i, data->redirection[x]);
+				x++;
+			}
+			if(data->next == NULL)
+				break;
+			data = data->next;
+			i++;
+			printf("entra9\n");
+		} 
 	}
 	free_d_array(tokens);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 09:05:01 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/03 15:03:58 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:53:21 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,48 @@
 #include "lexer.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "utils.h"
+
+t_data	*ft_lstnew2(void *content)
+{
+	t_data	*list;
+
+	list = malloc(sizeof(*list));
+	if (list == NULL)
+		return (NULL);
+	list->cmd = content;
+	list->input = 0;
+	list->output = 0;
+	list->path = content;
+	list->redirection = content;
+	list->next = NULL;
+	return (list);
+}
+
+t_data	*ft_lstlast2(t_data *lst)
+{
+	while (lst)
+	{
+		if (lst->next == NULL)
+			return (lst);
+		lst = lst->next;
+	}
+	return (lst);
+}
+
+void	ft_lstadd_back2(t_data **lst, t_data *new)
+{
+	t_data	*last;
+
+	if (!(*lst))
+		*lst = new;
+	else
+	{
+		last = ft_lstlast2(*lst);
+		last->next = new;
+	}
+}
+
 
 int	count_index(char *str)
 {
