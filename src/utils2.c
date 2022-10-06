@@ -6,15 +6,15 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 09:05:01 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/05 15:53:21 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:27:06 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "lexer.h"
+#include "utils.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "utils.h"
 
 t_data	*ft_lstnew2(void *content)
 {
@@ -53,10 +53,20 @@ void	ft_lstadd_back2(t_data **lst, t_data *new)
 	{
 		last = ft_lstlast2(*lst);
 		last->next = new;
+		printf("el puntero en funcion es: %p\n", last->next);
 	}
 }
 
-
+t_data	*put_last_node(t_data *nodes)
+{
+	while (1)
+	{
+		if (nodes->next == NULL)
+			break ;
+		nodes = nodes->next;
+	}
+	return (nodes);
+}
 int	count_index(char *str)
 {
 	int		x;
@@ -135,9 +145,8 @@ char	*erase_quotes(char *str)
 {
 	int x;
 	char *array;
-	if(check_quotes(str))
-	{	
-		 
+	if (check_quotes(str))
+	{
 		return (str);
 	}
 	x = count_index(str);
@@ -149,6 +158,6 @@ char	*erase_quotes(char *str)
 		array[x - 1] = '\0';
 		fill_array(str, array);
 	}
-	
+
 	return (array);
 }

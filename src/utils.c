@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:36:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/05 15:32:26 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:40:35 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ int	second_char_exists(char *str, char a)
 	while (*str)
 	{
 		if (*str == a)
-		{
-			printf("encuentra\n");
-				return (1);
-		}
+			return (1);
 		str++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:54:12 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/06 10:34:44 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:40:13 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	fill_redirection(char **tokens, t_data *node)
 	}
 	return (index);
 }
+
 int	fill_commands(char **tokens, t_data *node)
 {
 	int		x;
@@ -90,9 +91,7 @@ int	fill_commands(char **tokens, t_data *node)
 	while (tokens[x] && tokens[x][0] != '|')
 	{
 		if (tokens[x][0] == '<' || tokens[x][0] == '>')
-		{
 			x += 2;
-		}
 		else
 		{
 			len++;
@@ -107,17 +106,42 @@ int	fill_commands(char **tokens, t_data *node)
 		if (tokens[x][0] == '<' || tokens[x][0] == '>')
 			x += 2;
 		else if (tokens[x])
-		{	aux->cmd[i] = ft_strdup(tokens[x]);
-		i++;
-		x++;
+		{
+			aux->cmd[i] = ft_strdup(tokens[x]);
+			i++;
+			x++;
 		}
-		printf("x es: %d\n", x);
 	}
-	printf("str pos es %d\n", x);
+ 
 	if (tokens[x] && tokens[x][0] == '|')
 		return (x);
 	else
 		return (0);
+}
+
+void	check_pipe(char **tokens)
+{
+	int	x;
+
+	x = 0;
+	while (tokens[x])
+		x++;
+	if (tokens[0][0] == '|' || tokens[x - 1][0] == '|')
+	{
+		printf("error pipe al principio o final del string\n");
+		exit(0);
+	}
+}
+int	check_redirection(char **tokens, int x, t_data **nodes)
+{
+	*nodes = put_last_node(*nodes);
+	if (!fill_redirection(tokens + x, *nodes))
+		return(-1);
+	else
+		x += fill_redirection(tokens + x, *nodes);
+	ft_lstadd_back2(nodes, ft_lstnew2(NULL));
+	x++;
+	return(x);
 }
 
 t_data	*cmd(char **tokens)
@@ -128,46 +152,30 @@ t_data	*cmd(char **tokens)
 	t_data	*aux;
 
 	x = 0;
-	while (tokens[x])
-		x++;
-	len = x;
-	x = 0;
-	if (tokens[0][0] == '|' || tokens[len - 1][0] == '|')
-	{
-		printf("error pipe al principio o final del string\n");
-		exit(0);
-	}
-	len = 1;
-	while (tokens[x])
-	{
-		if (tokens[x][0] == '|')
-			len++;
-		x++;
-	}
+	check_pipe(tokens);
 	nodes = ft_lstnew2(NULL);
 	aux = nodes;
 	x = 0;
 	while (tokens[x])
 	{
-		while (1)
-		{
-			if (nodes->next == NULL)
-				break ;
-			nodes = nodes->next;
-		}
+		len = check_redirection(tokens, x, &nodes);
+		if(len<0)
+			break;
+		x += len;
+		
+		/* nodes = put_last_node(nodes);
 		if (!fill_redirection(tokens + x, nodes))
 			break ;
 		else
 			x += fill_redirection(tokens + x, nodes);
 		ft_lstadd_back2(&aux, ft_lstnew2(NULL));
-		x++;
+		x++; */
 	}
 	x = 0;
 	nodes = aux;
 	while (tokens[x])
 	{
 		len = fill_commands(tokens + x, nodes);
-		printf("len es %d y x es %d\n", len, x);
 		if (!len)
 			break ;
 		else
