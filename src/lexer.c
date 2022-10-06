@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/05 16:20:00 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/06 10:06:16 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	main(int argc, char *argv[], char **envp)
 	char	**tokens;
 	char	**env2;
 	t_data	*data;
-
+	t_data *aux3;
 	argc = 0;
 	argv = NULL;
 	env2 = env_copy(envp);
@@ -127,16 +127,32 @@ int	main(int argc, char *argv[], char **envp)
 		data = cmd(tokens);
 		printf("entra2\n");
 	 int i = 0;
+	 aux3 = data;
 		while (1)
 		{
 			x = 0;
 			while(data->redirection[x] != NULL)
-			{printf("nodo %d str es %s\n",i, data->redirection[x]);
+			{printf("redireccion %d   es %s\n",i, data->redirection[x]);
 				x++;
 			}
 			if(data->next == NULL)
 				break;
 			data = data->next;
+			i++;
+			printf("entra9\n");
+		} 
+		i = 0;
+		while (1)
+		{
+			x = 0;
+			while(aux3->cmd[x] != NULL)
+			{
+				printf("comando %d  es %s\n",i, aux3->cmd[x]);
+				x++;
+			}
+			if(aux3->next == NULL)
+				break;
+			aux3 = aux3->next;
 			i++;
 			printf("entra9\n");
 		} 

@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:54:12 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/05 16:27:34 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/06 10:34:44 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,10 @@ int	fill_redirection(char **tokens, t_data *node)
 			len++;
 		x++;
 	}
-	printf("len es %d\n", len);
 	if (tokens[x] && tokens[x][0] == '|')
 		index = x;
 	aux = (char **)malloc(((len * 2) + 1) * sizeof(char *));
 	aux1->redirection = aux;
-	printf("len %d\n", len);
 	aux1->redirection[len * 2] = NULL;
 	x = 0;
 	while (tokens[x] && tokens[x][0] != '|')
@@ -71,14 +69,55 @@ int	fill_redirection(char **tokens, t_data *node)
 		if (tokens[x][0] == '<' || tokens[x][0] == '>')
 		{
 			aux1->redirection[i] = ft_strdup(tokens[x]);
-			printf("red es: %s\n", tokens[x]);
 			aux1->redirection[++i] = ft_strdup(tokens[x + 1]);
-			printf("file es: %s\n", tokens[x + 1]);
 			i++;
 		}
 		x++;
 	}
 	return (index);
+}
+int	fill_commands(char **tokens, t_data *node)
+{
+	int		x;
+	t_data	*aux;
+	int		i;
+	int		len;
+
+	len = 0;
+	i = 0;
+	aux = node;
+	x = 0;
+	while (tokens[x] && tokens[x][0] != '|')
+	{
+		if (tokens[x][0] == '<' || tokens[x][0] == '>')
+		{
+			x += 2;
+		}
+		else
+		{
+			len++;
+			x++;
+		}
+	}
+	aux->cmd = (char **)malloc((len + 1) * sizeof(char *));
+	aux->cmd[len] = 0;
+	x = 0;
+	while (tokens[x] && tokens[x][0] != '|')
+	{
+		if (tokens[x][0] == '<' || tokens[x][0] == '>')
+			x += 2;
+		else if (tokens[x])
+		{	aux->cmd[i] = ft_strdup(tokens[x]);
+		i++;
+		x++;
+		}
+		printf("x es: %d\n", x);
+	}
+	printf("str pos es %d\n", x);
+	if (tokens[x] && tokens[x][0] == '|')
+		return (x);
+	else
+		return (0);
 }
 
 t_data	*cmd(char **tokens)
@@ -94,7 +133,10 @@ t_data	*cmd(char **tokens)
 	len = x;
 	x = 0;
 	if (tokens[0][0] == '|' || tokens[len - 1][0] == '|')
+	{
+		printf("error pipe al principio o final del string\n");
 		exit(0);
+	}
 	len = 1;
 	while (tokens[x])
 	{
@@ -107,21 +149,30 @@ t_data	*cmd(char **tokens)
 	x = 0;
 	while (tokens[x])
 	{
-		printf("x %d\n", x);
 		while (1)
 		{
 			if (nodes->next == NULL)
 				break ;
 			nodes = nodes->next;
 		}
-		x = fill_redirection(tokens + x, nodes);
-		printf("x es %d\n", x);
-		if (x == 0)
+		if (!fill_redirection(tokens + x, nodes))
 			break ;
 		else
-			ft_lstadd_back2(&aux, ft_lstnew2(NULL));
+			x += fill_redirection(tokens + x, nodes);
+		ft_lstadd_back2(&aux, ft_lstnew2(NULL));
 		x++;
 	}
 	x = 0;
+	nodes = aux;
+	while (tokens[x])
+	{
+		len = fill_commands(tokens + x, nodes);
+		printf("len es %d y x es %d\n", len, x);
+		if (!len)
+			break ;
+		else
+			nodes = nodes->next;
+		x += len + 1;
+	}
 	return (aux);
 }

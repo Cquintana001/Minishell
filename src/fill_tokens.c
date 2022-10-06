@@ -6,13 +6,13 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 07:53:14 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/05 13:30:00 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/06 08:55:24 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../includes/lexer.h"
 #include "../includes/utils2.h"
+#include "../libft/libft.h"
 
 int	check_char(char *str)
 {
@@ -21,10 +21,10 @@ int	check_char(char *str)
 	return (1);
 }
 
-void fill_array1(char *str, char **tokens)
-{	
-	int x;
-	int index;
+void	fill_array1(char *str, char **tokens)
+{
+	int	x;
+	int	index;
 
 	index = 0;
 	x = 0;
@@ -47,19 +47,17 @@ void fill_array1(char *str, char **tokens)
 		x++;
 	}
 }
-void fill_array2(char **tokens)
+void	fill_array2(char **tokens)
 {
-	char *aux;
-	int x;
+	char	*aux;
+	int		x;
 
 	x = 0;
 	aux = NULL;
-	while(tokens[x])
+	while (tokens[x])
 	{
 		aux = tokens[x];
 		tokens[x] = ft_strdup(erase_quotes(tokens[x]));
- 
-		 
 		free(aux);
 		x++;
 	}
@@ -67,19 +65,18 @@ void fill_array2(char **tokens)
 
 char	**fill_tokens(char *str)
 {
-	char	**tokens;
-	 
- 
-	int		x;
+	char **tokens;
+
+	int x;
 
 	x = count_tokens(str);
-	 
+
 	tokens = (char **)ft_calloc((x + 1), sizeof(char *));
-	 
+
 	tokens[x] = 0;
-	 
+
 	if (!tokens)
-		return (NULL);	 
+		return (NULL);
 	fill_array1(str, tokens);
 	fill_array2(tokens);
 	return (tokens);
