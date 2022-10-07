@@ -16,7 +16,7 @@
 #include "fill_data.h"
 #include "fill_tokens.h"
 #include "redirections.h"
-#include "struct.h"
+ 
 #include "utils.h"
 #include "utils2.h"
 #include <fcntl.h>
@@ -43,15 +43,13 @@ int	count_char_index(char *str, char a)
 
 int	count_index2(char *str)
 {
-	int	i;
-
-	i = 0;
+	 
 	if (!second_char_exists(str, *str))
 	{
 		printf("error\n");
 		exit(0);
 	}
-	return (count_char_index(str, *str) + 1);
+	return (count_char_index(str, *str) );
 }
 
 int	count_word_index(char *str)
@@ -114,7 +112,8 @@ int	main(int argc, char *argv[], char **envp)
 	t_data	*data;
 	t_data	*aux3;
 	int		i;
-
+	if(!argc || !argv)
+		exit(0);
 	argc = 0;
 	argv = NULL;
 	env2 = env_copy(envp);

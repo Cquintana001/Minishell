@@ -14,7 +14,7 @@
 #include "environment.h"
 #include "expansor.h"
 #include "fill_tokens.h"
-#include "struct.h"
+ 
 #include "utils.h"
 #include "utils2.h"
 #include <fcntl.h>
