@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:36:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/06 14:40:35 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/07 11:02:37 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 #include <readline/readline.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-
-
 
 int	second_char_exists(char *str, char a)
 {

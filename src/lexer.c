@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/06 15:04:26 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/07 15:15:08 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "expansor.h"
 #include "fill_data.h"
 #include "fill_tokens.h"
+#include "redirections.h"
 #include "struct.h"
 #include "utils.h"
 #include "utils2.h"
@@ -39,6 +40,20 @@ int	count_char_index(char *str, char a)
 	}
 	return (-1);
 }
+
+int	count_index2(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!second_char_exists(str, *str))
+	{
+		printf("error\n");
+		exit(0);
+	}
+	return (count_char_index(str, *str) + 1);
+}
+
 int	count_word_index(char *str)
 {
 	int	x;
@@ -50,12 +65,7 @@ int	count_word_index(char *str)
 	{
 		if ((*str == '"' || *str == '\''))
 		{
-			if (!second_char_exists(str, *str))
-			{
-				printf("error\n");
-				return (-1);
-			}
-			i = count_char_index(str, *str);
+			i = count_index2(str);
 			x += i + 1;
 			str += i + 1;
 		}
@@ -125,7 +135,7 @@ int	main(int argc, char *argv[], char **envp)
 			x++;
 		}
 		//free(aux);
-		data = cmd(tokens);
+		data = commands(tokens, redirection(tokens));
 		i = 0;
 		aux3 = data;
 		while (1)

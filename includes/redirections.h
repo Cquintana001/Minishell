@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_data.h                                        :+:      :+:    :+:   */
+/*   redirections.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 13:16:26 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/07 13:44:28 by caquinta         ###   ########.fr       */
+/*   Created: 2022/10/07 10:35:14 by caquinta          #+#    #+#             */
+/*   Updated: 2022/10/07 10:42:36 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-#ifndef FILL_DATA_H
-# define FILL_DATA_H
-
+#ifndef REDIRECTIONS_H
+# define REDIRECTIONS_H
 #include "utils.h"
 
-//t_data	*redirection(char **tokens);
-t_data	*commands(char **tokens, t_data *aux);
+t_data	*redirection(char **tokens);
 
 #endif

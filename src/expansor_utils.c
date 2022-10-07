@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_data.h                                        :+:      :+:    :+:   */
+/*   expansor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 13:16:26 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/07 13:44:28 by caquinta         ###   ########.fr       */
+/*   Created: 2022/10/07 13:47:19 by caquinta          #+#    #+#             */
+/*   Updated: 2022/10/07 13:47:34 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+int	len(char *str)
+{
+	int	x;
 
-
-#ifndef FILL_DATA_H
-# define FILL_DATA_H
-
-#include "utils.h"
-
-//t_data	*redirection(char **tokens);
-t_data	*commands(char **tokens, t_data *aux);
-
-#endif
+	x = 0;
+	str++;
+	if (*str == '?' || *str == '_')
+		return (1);
+	while (*str && ((*str >= '0' && *str <= '9') || (*str >= 'A' && *str <= 'Z')
+			|| (*str >= 'a' && *str <= 'z') || *str == '_'))
+	{
+		str++;
+		x++;
+	}
+	return (x);
+}

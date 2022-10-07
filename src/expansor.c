@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 08:54:40 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/05 09:29:16 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/07 14:20:55 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,35 @@ int	find_pos(char *str, int x)
 	return (-1);
 }
 
-char	*expansor(char *str)
+int	expansor_variable(char **str, int x)
 {
-	int		x;
 	char	*var;
 	char	*first_part;
 	char	*second_part;
 	char	*aux;
-	int		i;
+
+	var = dollar_variable((*str + x));
+	first_part = ft_substr(*str, 0, x);
+	if (getenv(var))
+	{
+		second_part = ft_strjoin(first_part, getenv(var));
+		free(first_part);
+	}
+	else
+		second_part = first_part;
+	aux = *str + x + 1 + ft_strlen(var);
+	first_part = ft_strjoin(second_part, aux);
+	free(second_part);
+	free(*str);
+	*str = first_part;
+	free(var);
+	return (-1);
+}
+
+char	*expansor(char *str)
+{
+	int	x;
+	int	i;
 
 	i = -1;
 	x = 0;
@@ -87,24 +108,7 @@ char	*expansor(char *str)
 		if (str[x] == '\'' && second_char_exists(str + x, str[x]) && x >= i)
 			x += count_char_index(str + x, str[x]);
 		if (str[x] == '$' && (str[x + 1] && str[x + 1] != '"'))
-		{
-			var = dollar_variable((str + x));
-			first_part = ft_substr(str, 0, x);
-			if (getenv(var))
-			{
-				second_part = ft_strjoin(first_part, getenv(var));
-				free(first_part);
-			}
-			else
-				second_part = first_part;
-			aux = str + x + 1 + ft_strlen(var);
-			first_part = ft_strjoin(second_part, aux);
-			free(second_part);
-			free(str);
-			str = first_part;
-			free(var);
-			x = -1;
-		}
+			x = expansor_variable(&str, x);
 		x++;
 	}
 	return (str);

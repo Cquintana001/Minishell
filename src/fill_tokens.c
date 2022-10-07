@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 07:53:14 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/06 08:55:24 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/07 13:34:25 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	fill_array1(char *str, char **tokens)
 		x++;
 	}
 }
+
 void	fill_array2(char **tokens)
 {
 	char	*aux;
@@ -65,16 +66,12 @@ void	fill_array2(char **tokens)
 
 char	**fill_tokens(char *str)
 {
-	char **tokens;
-
-	int x;
+	char	**tokens;
+	int		x;
 
 	x = count_tokens(str);
-
 	tokens = (char **)ft_calloc((x + 1), sizeof(char *));
-
 	tokens[x] = 0;
-
 	if (!tokens)
 		return (NULL);
 	fill_array1(str, tokens);

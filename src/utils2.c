@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 09:05:01 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/06 14:27:06 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/07 13:36:46 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,57 +16,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-t_data	*ft_lstnew2(void *content)
-{
-	t_data	*list;
-
-	list = malloc(sizeof(*list));
-	if (list == NULL)
-		return (NULL);
-	list->cmd = content;
-	list->input = 0;
-	list->output = 0;
-	list->path = content;
-	list->redirection = content;
-	list->next = NULL;
-	return (list);
-}
-
-t_data	*ft_lstlast2(t_data *lst)
-{
-	while (lst)
-	{
-		if (lst->next == NULL)
-			return (lst);
-		lst = lst->next;
-	}
-	return (lst);
-}
-
-void	ft_lstadd_back2(t_data **lst, t_data *new)
-{
-	t_data	*last;
-
-	if (!(*lst))
-		*lst = new;
-	else
-	{
-		last = ft_lstlast2(*lst);
-		last->next = new;
-		printf("el puntero en funcion es: %p\n", last->next);
-	}
-}
-
-t_data	*put_last_node(t_data *nodes)
-{
-	while (1)
-	{
-		if (nodes->next == NULL)
-			break ;
-		nodes = nodes->next;
-	}
-	return (nodes);
-}
 int	count_index(char *str)
 {
 	int		x;
@@ -94,6 +43,31 @@ int	count_index(char *str)
 	}
 	return (i);
 }
+
+int	check_size(char *source)
+{
+	int	x;
+	int	check;
+
+	check = 0;
+	if ((*source == '\'' || *source == '"'))
+	{
+		if (check == 0)
+		{
+			x = count_char_index(source, *source) - 1;
+			check = 1;
+		}
+		else
+		{
+			check = 0;
+			x = 0;
+		}
+	}
+	else
+		x = 1;
+	return (x);
+}
+
 void	fill_array(char *source, char *dest)
 {
 	int	x;
@@ -102,22 +76,8 @@ void	fill_array(char *source, char *dest)
 	check = 0;
 	while (*source)
 	{
-		x = 1;
-		if ((*source == '\'' || *source == '"'))
-		{
-			if (check == 0)
-			{
-				x = count_char_index(source, *source) - 1;
-				source++;
-				check = 1;
-			}
-			else
-			{
-				source++;
-				check = 0;
-				x = 0;
-			}
-		}
+		x = check_size(source);
+		source++;
 		while (x)
 		{
 			*dest = *source;
@@ -127,6 +87,7 @@ void	fill_array(char *source, char *dest)
 		}
 	}
 }
+
 int	check_quotes(char *str)
 {
 	int	x;
@@ -143,8 +104,9 @@ int	check_quotes(char *str)
 
 char	*erase_quotes(char *str)
 {
-	int x;
-	char *array;
+	int		x;
+	char	*array;
+
 	if (check_quotes(str))
 	{
 		return (str);
@@ -158,6 +120,22 @@ char	*erase_quotes(char *str)
 		array[x - 1] = '\0';
 		fill_array(str, array);
 	}
-
 	return (array);
 }
+
+/* x = 1;
+		if ((*source == '\'' || *source == '"'))
+		{
+			if (check == 0)
+			{
+				x = count_char_index(source, *source) - 1;
+				source++;
+				check = 1;
+			}
+			else
+			{
+				source++;
+				check = 0;
+				x = 0;
+			}
+		} */

@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_data.h                                        :+:      :+:    :+:   */
+/*   redirections_utils.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 13:16:26 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/07 13:44:28 by caquinta         ###   ########.fr       */
+/*   Created: 2022/10/07 10:48:10 by caquinta          #+#    #+#             */
+/*   Updated: 2022/10/07 10:55:01 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef REDIRECTIONS_UTILS_H
+# define REDIRECTIONS_UTILS_H
+# include "utils.h"
 
-
-#ifndef FILL_DATA_H
-# define FILL_DATA_H
-
-#include "utils.h"
-
-//t_data	*redirection(char **tokens);
-t_data	*commands(char **tokens, t_data *aux);
+t_data	*ft_lstnew2(void *content);
+t_data	*ft_lstlast2(t_data *lst);
+void	ft_lstadd_back2(t_data **lst, t_data *new);
+t_data	*put_last_node(t_data *nodes);
+void	check_pipe(char **tokens);
 
 #endif
