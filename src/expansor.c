@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 08:54:40 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/08 10:00:32 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/08 10:22:16 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,15 @@ char	*expansor(char *str)
 	{
 		if (str[x] == '"' && second_char_exists(str + x, str[x]) && x > i)
 			i = find_pos(str, x);
-		if (str[x] == '\'' && second_char_exists(str + x, str[x]) && x >= i)
+		else if (str[x] == '\'' && second_char_exists(str + x, str[x]) \
+				&& x >= i)
 			x += count_char_index(str + x, str[x]);
 		if (str[x] == '$' && (str[x + 1] && str[x + 1] != '"'))
+		{
 			x = expansor_variable(&str, x);
+			i = -1;
+		}
 		x++;
 	}
- 
 	return (str);
 }
