@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/07 15:15:08 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/08 08:06:06 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,15 @@ int	main(int argc, char *argv[], char **envp)
 			continue ;
 		free(aux);
 		aux = expansor(str);
+	 	x = 0;
+		while(aux[x])
+			x++;
+		if(x==0)
+			continue;
+	 
 		tokens = fill_tokens(aux, x);
 		x = 0;
+		 
 		while (tokens[x])
 		{
 			printf("token[%d]: %s\n", x, tokens[x]);

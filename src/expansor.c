@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 08:54:40 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/07 14:20:55 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/08 10:00:32 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ char	*expansor(char *str)
 			x = expansor_variable(&str, x);
 		x++;
 	}
+ 
 	return (str);
 }

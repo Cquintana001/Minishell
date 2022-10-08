@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:54:12 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/07 13:44:11 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/08 08:34:02 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "environment.h"
 #include "expansor.h"
 #include "fill_tokens.h"
- 
 #include "utils.h"
 #include "utils2.h"
 #include <fcntl.h>

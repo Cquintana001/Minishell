@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:43:44 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/07 11:01:12 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/08 08:33:29 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	check_pipe(char **tokens)
 	x = 0;
 	while (tokens[x])
 		x++;
-	if (tokens[0][0] == '|' || tokens[x - 1][0] == '|')
+	if (x > 0 && (tokens[0][0] == '|' || tokens[x - 1][0] == '|'))
 	{
 		printf("error pipe al principio o final del string\n");
 		exit(0);

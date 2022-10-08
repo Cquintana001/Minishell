@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 09:05:01 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/07 13:36:46 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/08 08:31:53 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,16 @@ int	count_index(char *str)
 		x = 1;
 	return (x);
 }*/
+void	copy_string(char **source, char **dest, int x)
+{
+	while (x)
+	{
+		**dest = **source;
+		x--;
+		(*source)++;
+		(*dest)++;
+	}
+}
 
 void	fill_array(char *source, char *dest)
 {
@@ -92,15 +102,8 @@ void	fill_array(char *source, char *dest)
 				check = 0;
 				x = 0;
 			}
-		} 
-		 
-		while (x)
-		{
-			*dest = *source;
-			x--;
-			source++;
-			dest++;
 		}
+		copy_string(&source, &dest, x);
 	}
 }
 
@@ -139,7 +142,7 @@ char	*erase_quotes(char *str)
 	return (array);
 }
 
-/* x = 1;
+	/* x = 1;
 		if ((*source == '\'' || *source == '"'))
 		{
 			if (check == 0)
