@@ -14,6 +14,7 @@ SOURCES				=	 $(SRC_DIR)/lexer.c \
 						$(SRC_DIR)/fill_data.c \
 						$(SRC_DIR)/redirections.c \
 						$(SRC_DIR)/redirections_utils.c \
+						$(SRC_DIR)/get_cmd_path.c \
 
 OBJS				= 	$(SOURCES:.c=.o)
 

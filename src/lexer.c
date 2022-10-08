@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/08 08:06:06 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/08 10:53:07 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "fill_data.h"
 #include "fill_tokens.h"
 #include "redirections.h"
- 
 #include "utils.h"
 #include "utils2.h"
 #include <fcntl.h>
@@ -24,6 +23,7 @@
 #include <readline/readline.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "get_cmd_path.h"
 
 int	count_char_index(char *str, char a)
 {
@@ -144,6 +144,23 @@ int	main(int argc, char *argv[], char **envp)
 		data = commands(tokens, redirection(tokens));
 		i = 0;
 		aux3 = data;
+		fill_cmd_path(aux3, env2);
+		while(1)
+		{
+				 
+			 
+				printf("path %d es %s\n",i, data->path);
+				 
+			 
+			if (data->next == NULL)
+				break ;
+			data = data->next;
+			i++;
+
+			
+		}
+		i = 0;
+		data = aux3;
 		while (1)
 		{
 			x = 0;
