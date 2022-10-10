@@ -57,9 +57,11 @@ void	fill_array2(char **tokens)
 	aux = NULL;
 	while (tokens[x])
 	{
+		
 		aux = tokens[x];
 		tokens[x] = ft_strdup(erase_quotes(tokens[x]));
 		free(aux);
+	 
 		x++;
 	}
 }
