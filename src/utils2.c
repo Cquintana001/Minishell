@@ -43,32 +43,7 @@ int	count_index(char *str)
 	}
 	return (i);
 }
-
-/*int	check_size(char *source)
-{
-	int	x;
-	int	check;
-
-	check = 0;
-	x = 1;
-		if ((*source == '\'' || *source == '"'))
-		{
-			if (check == 0)
-			{
-				x = count_char_index(source, *source) - 1;
-				source++;
-				check = 1;
-			}
-			else
-			{
-				source++;
-				check = 0;
-				x = 0;
-			}
-		} 
-		x = 1;
-	return (x);
-}*/
+ 
 void	copy_string(char **source, char **dest, int x)
 {
 	while (x>0)
@@ -144,20 +119,4 @@ char	*erase_quotes(char *str)
 	}
 	return (array);
 }
-
-	/* x = 1;
-		if ((*source == '\'' || *source == '"'))
-		{
-			if (check == 0)
-			{
-				x = count_char_index(source, *source) - 1;
-				source++;
-				check = 1;
-			}
-			else
-			{
-				source++;
-				check = 0;
-				x = 0;
-			}
-		} */
+ 
