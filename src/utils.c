@@ -69,6 +69,8 @@ char	*check_if_command(char **envp, char *str)
 		full_cmd_path = ft_strjoin(path_list[x], cmd);
 		if (access(full_cmd_path, F_OK) == 0)
 			return (full_cmd_path);
+		else if(access(str, F_OK) == 0)
+		 	return(str);
 		free(full_cmd_path);
 		x++;
 	}

@@ -121,6 +121,8 @@ int	main(int argc, char *argv[], char **envp)
 	{
 		aux = ft_strjoin(ft_getenv(env2, "USER"), "@minishell $ ");
 		str = readline(aux);
+		if (!str || *str == '\t' || *str == ' ')
+			continue ;
 		add_history(str);
 		if (!str)
 			continue ;

@@ -72,6 +72,9 @@ char	**fill_tokens(char *str)
 	int		x;
 
 	x = count_tokens(str);
+	printf("x es %d\n",x);
+	if(x == 0)
+		return(0);
 	tokens = (char **)ft_calloc((x + 1), sizeof(char *));
 	tokens[x] = 0;
 	if (!tokens)
