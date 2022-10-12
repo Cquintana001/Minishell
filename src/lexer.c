@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/12 09:39:12 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/12 12:45:23 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include <stdlib.h>
 #include "get_cmd_path.h"
 #include "double_red.h"
+#include "general_function.h"
 
 int	count_char_index(char *str, char a)
 {
@@ -113,12 +114,15 @@ int	main(int argc, char *argv[], char **envp)
 	t_data	*data;
 	t_data	*aux3;
 	int		i;
+
+	tokens = NULL;
 	if(!argc || !argv)
 		exit(0);
 	argc = 0;
 	argv = NULL;
 	env2 = env_copy(envp);
-	while (1)
+	i = 1;
+	while (i--)
 	{
 		aux = ft_strjoin(ft_getenv(env2, "USER"), "@minishell $ ");
 		str = readline(aux);
@@ -128,42 +132,26 @@ int	main(int argc, char *argv[], char **envp)
 		if (!str)
 			continue ;
 		free(aux);
-		aux = expansor(str);
-	 	x = 0;
-		while(aux[x])
-			x++;
-		if(x==0)
-			continue;
-	 
-		tokens = fill_tokens(aux, x);
-		x = 0;
 		 
-		while (tokens[x])
-		{
-			printf("token[%d]: %s\n", x, tokens[x]);
-			x++;
-		}
-		//free(aux);
-		data = commands(tokens, redirection(tokens));
-		i = 0;
+		general_function(str, &data, env2);
 		aux3 = data;
-		fill_cmd_path(aux3, env2);
+		i = 0;
 		while(1)
 		{
 				 
 			 
-				printf("path %d es %s\n",i, data->path);
+				printf("path %d es %s\n",i, aux3->path);
 				 
 			 
-			if (data->next == NULL)
+			if (aux3->next == NULL)
 				break ;
-			data = data->next;
+			aux3 = aux3->next;
 			i++;
 
 			
 		}
 		i = 0;
-		data = aux3;
+		aux3 = data;
 		while (1)
 		{
 			x = 0;
@@ -178,6 +166,7 @@ int	main(int argc, char *argv[], char **envp)
 			i++;
 		}
 		i = 0;
+		data = aux3;
 		while (1)
 		{
 			x = 0;
@@ -192,8 +181,11 @@ int	main(int argc, char *argv[], char **envp)
 			i++;
 		}
 		double_redirection("hola");
+		
 	}
-	
-	free_d_array(tokens);
+	free_d_array(env2);
+	ft_lstclear1(&data);
+	if (tokens)
+		free_d_array(tokens);
 	return (0);
 }

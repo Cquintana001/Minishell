@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:07:06 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/12 10:28:52 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/12 11:03:42 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char *double_redirection(char *key)
         free(str);
     }
     free(str);
-    printf("%s\n", aux);
+    if(aux)
+        printf("%s\n", aux);
     return(aux);  
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 07:53:14 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/07 13:34:25 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/12 12:01:56 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ char	**fill_tokens(char *str)
 {
 	char	**tokens;
 	int		x;
-
+	 
+	
 	x = count_tokens(str);
 	printf("x es %d\n",x);
 	if(x == 0)
@@ -79,7 +80,9 @@ char	**fill_tokens(char *str)
 	tokens[x] = 0;
 	if (!tokens)
 		return (NULL);
+	 
 	fill_array1(str, tokens);
+	 
 	fill_array2(tokens);
 	return (tokens);
 }

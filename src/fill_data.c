@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:54:12 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/08 08:34:02 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/12 12:49:02 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ int	fill_commands(char **tokens, t_data *node)
 		else if (tokens[x])
 		{
 			aux->cmd[i] = ft_strdup(tokens[x]);
+			 
 			i++;
 			x++;
 		}
