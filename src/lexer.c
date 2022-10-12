@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/08 10:53:07 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/12 09:39:12 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "get_cmd_path.h"
+#include "double_red.h"
 
 int	count_char_index(char *str, char a)
 {
@@ -190,7 +191,9 @@ int	main(int argc, char *argv[], char **envp)
 			aux3 = aux3->next;
 			i++;
 		}
+		double_redirection("hola");
 	}
+	
 	free_d_array(tokens);
 	return (0);
 }
