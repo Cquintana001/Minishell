@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/12 12:45:23 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:06:29 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ int	main(int argc, char *argv[], char **envp)
 		}
 		i = 0;
 		aux3 = data;
-		while (1)
+		 while (1)
 		{
 			x = 0;
 			while (data->redirection[x] != NULL)
@@ -164,7 +164,7 @@ int	main(int argc, char *argv[], char **envp)
 				break ;
 			data = data->next;
 			i++;
-		}
+		} 
 		i = 0;
 		data = aux3;
 		while (1)
@@ -180,12 +180,14 @@ int	main(int argc, char *argv[], char **envp)
 			aux3 = aux3->next;
 			i++;
 		}
-		double_redirection("hola");
-		
+		//double_redirection("hola");
+		 
+		  
+		ft_lstclear1(&data);
+		if (tokens)
+			free_d_array(tokens);
+		i = 0;
 	}
 	free_d_array(env2);
-	ft_lstclear1(&data);
-	if (tokens)
-		free_d_array(tokens);
 	return (0);
 }

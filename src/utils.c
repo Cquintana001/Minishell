@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:36:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/07 11:02:37 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:05:10 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,21 @@ char	*check_if_command(char **envp, char *str)
 	while (path_list[x])
 	{
 		full_cmd_path = ft_strjoin(path_list[x], cmd);
+		 
+		 
 		if (access(full_cmd_path, F_OK) == 0)
+		{	
+			free(cmd);
+			free_d_array(path_list);
 			return (full_cmd_path);
+		}
 		else if(access(str, F_OK) == 0)
-		 	return(str);
+		 {
+			free(cmd);
+			free(full_cmd_path);
+			free_d_array(path_list);
+				return(str);
+		 }
 		free(full_cmd_path);
 		x++;
 	}

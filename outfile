@@ -1,0 +1,13 @@
+total 160
+drwxrwxr-x 7 caquinta caquinta   4096 oct 12 14:29 .
+drwxr-xr-x 9 caquinta caquinta   4096 oct 12 09:09 ..
+drwxrwxr-x 8 caquinta caquinta   4096 oct 12 13:57 .git
+-rw-rw-r-- 1 caquinta caquinta     59 oct 12 08:59 .gitignore
+drwxrwxr-x 2 caquinta caquinta   4096 oct 12 11:16 includes
+-rw-rw-r-- 1 caquinta caquinta      0 oct 12 14:29 infile
+drwxrwxr-x 2 caquinta caquinta   4096 oct 12 14:03 libft
+-rw-rw-r-- 1 caquinta caquinta    922 oct 12 11:49 Makefile
+-rwxrwxr-x 1 caquinta caquinta 123824 oct 12 14:28 minishell
+-rw-rw-r-- 1 caquinta caquinta      0 oct 12 14:29 outfile
+drwxrwxr-x 3 caquinta caquinta   4096 oct 12 14:28 src
+drwxrwxr-x 2 caquinta caquinta   4096 oct 12 09:00 .vscode
