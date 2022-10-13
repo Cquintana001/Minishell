@@ -6,26 +6,23 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:26:16 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/12 15:03:19 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/13 07:45:27 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "redirections.h" 
 #include "../libft/libft.h"
-#include <stdlib.h>
-#include "utils.h"
+#include "redirections.h"
 #include "redirections_utils.h"
+#include "utils.h"
+#include <stdlib.h>
 
 int	malloc_redirection(char **tokens, t_data **node)
 {
-	int		index;
-	int		x;
-	 
-	int		len;
-	 
+	int	index;
+	int	x;
+	int	len;
 
 	len = 0;
-	 
 	x = 0;
 	index = 0;
 	while (tokens[x] && tokens[x][0] != '|')
@@ -36,15 +33,12 @@ int	malloc_redirection(char **tokens, t_data **node)
 	}
 	if (tokens[x] && tokens[x][0] == '|')
 		index = x;
-	 if(len>0)
+	if (len > 0)
 	{
-		(*node)->redirection = (char **)malloc(((len * 2) + 1) * sizeof(char *));
-		(*node)->redirection[len*2] = '\0';
-		 
+		(*node)->redirection = (char **)malloc(((len * 2) + 1)
+				* sizeof(char *));
+		(*node)->redirection[len * 2] = '\0';
 	}
-	 
-	 
-	 
 	return (index);
 }
 
@@ -96,8 +90,8 @@ t_data	*redirection(char **tokens)
 	while (tokens[x])
 	{
 		nodes = put_last_node(nodes);
-		if (!fill_redirection(tokens + x, nodes))		 
-			break ;			
+		if (!fill_redirection(tokens + x, nodes))
+			break ;
 		else
 			x += fill_redirection(tokens + x, nodes);
 		ft_lstadd_back2(&aux, ft_lstnew2(NULL));

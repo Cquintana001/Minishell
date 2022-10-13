@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/12 15:06:29 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/13 07:41:19 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	count_tokens(char *str)
 int	main(int argc, char *argv[], char **envp)
 {
 	char	*str;
-	int		x;
+	//int		x;
 	char	*aux;
 	char	**tokens;
 	char	**env2;
@@ -152,7 +152,7 @@ int	main(int argc, char *argv[], char **envp)
 		}
 		i = 0;
 		aux3 = data;
-		 while (1)
+		 /* while (1)
 		{
 			x = 0;
 			while (data->redirection[x] != NULL)
@@ -164,10 +164,10 @@ int	main(int argc, char *argv[], char **envp)
 				break ;
 			data = data->next;
 			i++;
-		} 
+		}  */
 		i = 0;
 		data = aux3;
-		while (1)
+		/* while (1)
 		{
 			x = 0;
 			while (aux3->cmd[x] != NULL)
@@ -179,7 +179,7 @@ int	main(int argc, char *argv[], char **envp)
 				break ;
 			aux3 = aux3->next;
 			i++;
-		}
+		} */
 		//double_redirection("hola");
 		 
 		  
@@ -188,6 +188,7 @@ int	main(int argc, char *argv[], char **envp)
 			free_d_array(tokens);
 		i = 0;
 	}
+	//double_redirection("hola");
 	free_d_array(env2);
 	return (0);
 }

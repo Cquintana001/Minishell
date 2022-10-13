@@ -6,15 +6,17 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/12 14:26:10 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/13 07:47:49 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include "double_red.h"
 #include "environment.h"
 #include "expansor.h"
 #include "fill_data.h"
 #include "fill_tokens.h"
+#include "get_cmd_path.h"
 #include "redirections.h"
 #include "utils.h"
 #include "utils2.h"
@@ -23,11 +25,7 @@
 #include <readline/readline.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "get_cmd_path.h"
-#include "double_red.h"
 
- ;
- 
 void	ft_lstclear1(t_data **lst)
 {
 	t_data	*aux;
@@ -35,28 +33,26 @@ void	ft_lstclear1(t_data **lst)
 	while (*lst)
 	{
 		aux = (*lst)->next;
-		if((*lst)->cmd !=NULL)
-            free_d_array((*lst)->cmd);
-         if((*lst)->path !=NULL)
-            free((*lst)->path);
-        if((*lst)->redirection !=NULL)
-            free_d_array((*lst)->redirection);
+		if ((*lst)->cmd != NULL)
+			free_d_array((*lst)->cmd);
+		if ((*lst)->path != NULL)
+			free((*lst)->path);
+		if ((*lst)->redirection != NULL)
+			free_d_array((*lst)->redirection);
 		free(*lst);
 		*lst = aux;
 	}
 }
 
-void general_function(char *str, t_data **data, char **env2)
+void	general_function(char *str, t_data **data, char **env2)
 {
-    char *aux;
-    char **tokens;
-    //t_data *red;
-    
-    aux = expansor(str);
-    tokens = fill_tokens(str, ft_strlen(aux));
-    *data= redirection(tokens);
-    *data = commands(tokens,*data);
-    //ft_lstclear1(red);
-    free_d_array(tokens);
-    fill_cmd_path(*data, env2);  
+	char	*aux;
+	char	**tokens;
+
+	aux = expansor(str);
+	tokens = fill_tokens(str, ft_strlen(aux));
+	*data = redirection(tokens);
+	*data = commands(tokens, *data);
+	free_d_array(tokens);
+	fill_cmd_path(*data, env2);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 09:05:01 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/08 08:31:53 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/13 07:44:48 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	count_index(char *str)
 	}
 	return (i);
 }
- 
+
 void	copy_string(char **source, char **dest, int x)
 {
-	while (x>0)
+	while (x > 0)
 	{
 		**dest = **source;
 		x--;
@@ -62,22 +62,22 @@ void	fill_array(char *source, char *dest)
 
 	check = 0;
 	while (*source)
-	{	
-		x =1;
+	{
+		x = 1;
 		if ((*source == '\'' || *source == '"'))
 		{
 			if (check == 0)
-			{				
+			{
 				x = count_char_index(source, *source) - 1;
 				check = 1;
 			}
 			else
-			{				 
+			{
 				check = 0;
 				x = 0;
 			}
 			source++;
-		}		 
+		}
 		copy_string(&source, &dest, x);
 	}
 }
@@ -110,13 +110,9 @@ char	*erase_quotes(char *str)
 		return (str);
 	else
 	{
-		
 		array = (char *)ft_calloc(x, sizeof(char));
 		array[x - 1] = '\0';
-		
 		fill_array(str, array);
-		
 	}
 	return (array);
 }
- 
