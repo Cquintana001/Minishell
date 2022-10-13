@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:54:12 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/13 07:48:52 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/13 08:47:49 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	fill_commands(char **tokens, t_data *node)
 		else if (tokens[x])
 		{
 			aux->cmd[i] = ft_strdup(tokens[x]);
+			printf("cmd es %s\n", aux->cmd[i]);
 			i++;
 			x++;
 		}

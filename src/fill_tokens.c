@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 07:53:14 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/13 07:48:08 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/13 08:06:26 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char	**fill_tokens(char *str)
 	int		x;
 
 	x = count_tokens(str);
-	printf("x es %d\n", x);
 	if (x == 0)
 		return (0);
 	tokens = (char **)ft_calloc((x + 1), sizeof(char *));

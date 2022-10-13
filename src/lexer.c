@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/13 07:41:19 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/13 11:38:05 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 #include "get_cmd_path.h"
 #include "double_red.h"
 #include "general_function.h"
+#include "fd_stuff.h"
+#include "executor.h"
 
 int	count_char_index(char *str, char a)
 {
@@ -112,8 +114,7 @@ int	main(int argc, char *argv[], char **envp)
 	char	**tokens;
 	char	**env2;
 	t_data	*data;
-	t_data	*aux3;
-	int		i;
+ 
 
 	tokens = NULL;
 	if(!argc || !argv)
@@ -121,73 +122,23 @@ int	main(int argc, char *argv[], char **envp)
 	argc = 0;
 	argv = NULL;
 	env2 = env_copy(envp);
-	i = 1;
-	while (i--)
+	while (1)
 	{
 		aux = ft_strjoin(ft_getenv(env2, "USER"), "@minishell $ ");
 		str = readline(aux);
-		if (!str || *str == '\t' || *str == ' ')
-			continue ;
+		 
+		if (*str!='\0' && *str != '\t' && *str != ' ')
+		{
 		add_history(str);
-		if (!str)
-			continue ;
-		free(aux);
-		 
-		general_function(str, &data, env2);
-		aux3 = data;
-		i = 0;
-		while(1)
-		{
-				 
-			 
-				printf("path %d es %s\n",i, aux3->path);
-				 
-			 
-			if (aux3->next == NULL)
-				break ;
-			aux3 = aux3->next;
-			i++;
-
-			
-		}
-		i = 0;
-		aux3 = data;
-		 /* while (1)
-		{
-			x = 0;
-			while (data->redirection[x] != NULL)
-			{
-				printf("redireccion %d   es %s\n", i, data->redirection[x]);
-				x++;
-			}
-			if (data->next == NULL)
-				break ;
-			data = data->next;
-			i++;
-		}  */
-		i = 0;
-		data = aux3;
-		/* while (1)
-		{
-			x = 0;
-			while (aux3->cmd[x] != NULL)
-			{
-				printf("comando %d  es %s\n", i, aux3->cmd[x]);
-				x++;
-			}
-			if (aux3->next == NULL)
-				break ;
-			aux3 = aux3->next;
-			i++;
-		} */
-		//double_redirection("hola");
-		 
-		  
+		free(aux);	 
+		general_function(str, &data, env2);		  
+		ft_exec(data, env2);
 		ft_lstclear1(&data);
 		if (tokens)
 			free_d_array(tokens);
-		i = 0;
+		}
 	}
+	
 	//double_redirection("hola");
 	free_d_array(env2);
 	return (0);

@@ -17,6 +17,8 @@ SOURCES				=	 $(SRC_DIR)/lexer.c \
 						$(SRC_DIR)/get_cmd_path.c \
 						$(SRC_DIR)/double_red.c \
 						$(SRC_DIR)/general_function.c \
+						$(SRC_DIR)/fd_stuff.c \
+						$(SRC_DIR)/executor.c \
 
 OBJS				= 	$(SOURCES:.c=.o)
 
