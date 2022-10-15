@@ -61,27 +61,37 @@ static void	ft_child(t_data *node, char **envp, t_fd *fd)
 {
 	int fd1[2];
 	pid_t pid;
+	char *str;
+
+	str = NULL;
+	
 	ft_dup_work(fd);
 	if(fd->here_doc == 1)
 	{
-		 
+ 
 		pipe(fd1);
 		pid = fork();
 		if(pid == 0)
-		{	close(fd1[0]);
+		{	
+			close(fd1[0]);
+			str = double_redirection(fd->key);
 			dup2(fd1[1], STDOUT_FILENO);
 			close(fd1[1]);
-			double_redirection(fd->key);
+			write(STDOUT_FILENO, str, ft_strlen(str));
+			exit(0);
 		}
-		else if(pid>0)
-		{
-			 
+		else
+		{	
 			close(fd1[1]);
 			dup2(fd1[0], STDIN_FILENO);
 			close(fd1[0]);
+			dup2(STDOUT_FILENO, fd->out);
+			wait(NULL);
+			fd->here_doc = 0;
 		}
+		
 	}
-	
+
 	if (execve(node->path, node->cmd, envp) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
@@ -89,6 +99,7 @@ static void	ft_child(t_data *node, char **envp, t_fd *fd)
 		ft_putendl_fd("bash: command not found", 2);
 		exit(0);
 	}
+	 
 }
 
 //Creates a pipe and makes a fork.
@@ -105,10 +116,13 @@ static void	ft_pipex(t_data *node, char **envp, t_fd *fd)
 		perror("Error");
 	if (pid == 0)
 	{
+	 	 
 		close(fd->pipe[0]);
 		dup2(fd->pipe[1], STDOUT_FILENO);
 		close (fd->pipe[1]);
+		 
 		ft_child(node, envp, fd);
+	 
 	}
 	else
 	{
@@ -155,6 +169,7 @@ void	ft_exec(t_data *node, char **envp)
 	{
 		while (--node_nb)
 		{
+			
 			ft_pipex(node, envp, &fd);
 			node = node->next;
 		}

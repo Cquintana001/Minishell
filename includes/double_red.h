@@ -14,6 +14,6 @@
 # define DOUBLE_RED_H
 
  
-void double_redirection(char *key);
+char *double_redirection(char *key);
 
 #endif
