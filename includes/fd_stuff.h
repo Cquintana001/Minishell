@@ -20,6 +20,8 @@ typedef struct s_fd
 	int	fdin;
 	int	fdout;
 	int	pipe[2];
+	int here_doc;
+	char *key;
 }			t_fd;
 
 //Closes an fd only if it is used

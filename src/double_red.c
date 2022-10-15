@@ -12,6 +12,8 @@
 
 #include "../libft/libft.h"
 #include <readline/readline.h>
+#include <sys/wait.h>
+#include <stdlib.h>
 
 char	*add_line_break(char *aux, char *str)
 {
@@ -26,7 +28,7 @@ char	*add_line_break(char *aux, char *str)
 	return (aux);
 }
 
-char	*double_redirection(char *key)
+void double_redirection(char *key)
 {
 	char	*aux;
 	char	*str;
@@ -44,7 +46,8 @@ char	*double_redirection(char *key)
 		free(str);
 	}
 	free(str);
-	if (aux)
-		printf("%s\n", aux);
-	return (aux);
+	write(1,aux, ft_strlen(aux));
+	write(1, "\n",1);
+	 free(aux);
+	  exit(0);
 }

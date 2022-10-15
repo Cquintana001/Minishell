@@ -16,6 +16,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "double_red.h"
 
 //Makes required redirections before executing the command
 static void	ft_dup_work(t_fd *fd)
@@ -49,7 +50,7 @@ static void	ft_dups(char **redir, t_fd *fd)
 			else if (ft_strncmp(redir[i], ">>", ft_strlen(redir[i])) == 0)
 				ft_get_fd(redir[i + 1], 2, fd);
 			else if (ft_strncmp(redir[i], "<<", ft_strlen(redir[i])) == 0)
-				printf(" '<<' Coming soon\n"); // double_red (CARLOS)
+				ft_get_fd(redir[i + 1], 3, fd);
 			i++;
 		}
 	}
@@ -58,7 +59,29 @@ static void	ft_dups(char **redir, t_fd *fd)
 //Makes the required dups and executes the command
 static void	ft_child(t_data *node, char **envp, t_fd *fd)
 {
+	int fd1[2];
+	pid_t pid;
 	ft_dup_work(fd);
+	if(fd->here_doc == 1)
+	{
+		 
+		pipe(fd1);
+		pid = fork();
+		if(pid == 0)
+		{	close(fd1[0]);
+			dup2(fd1[1], STDOUT_FILENO);
+			close(fd1[1]);
+			double_redirection(fd->key);
+		}
+		else if(pid>0)
+		{
+			 
+			close(fd1[1]);
+			dup2(fd1[0], STDIN_FILENO);
+			close(fd1[0]);
+		}
+	}
+	
 	if (execve(node->path, node->cmd, envp) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);

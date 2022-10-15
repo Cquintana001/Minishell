@@ -43,6 +43,12 @@ void	ft_get_fd(char *file, int mode, t_fd *fd)
 		ft_close(fd->fdout);
 		fd->fdout = open(file, O_CREAT | O_RDWR | O_APPEND, 0644);
 	}
+	else if (mode == 3)
+	{
+		fd->here_doc = 1;
+		fd->key = file;
+
+	}
 }
 
 void	ft_init_fd(t_fd *fd)
@@ -53,6 +59,8 @@ void	ft_init_fd(t_fd *fd)
 	fd->fdout = -1;
 	fd->pipe[0] = -1;
 	fd->pipe[1] = -1;
+	fd->here_doc = 0;
+	fd->key = NULL;
 }
 
 void	ft_close_all(t_fd *fd)

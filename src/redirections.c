@@ -37,7 +37,7 @@ int	malloc_redirection(char **tokens, t_data **node)
 	{
 		(*node)->redirection = (char **)malloc(((len * 2) + 1)
 				* sizeof(char *));
-		(*node)->redirection[len * 2] = '\0';
+		(*node)->redirection[len * 2] = 0;
 	}
 	return (index);
 }
