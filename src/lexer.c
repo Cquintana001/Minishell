@@ -11,10 +11,15 @@
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include "double_red.h"
 #include "environment.h"
+#include "executor.h"
 #include "expansor.h"
+#include "fd_stuff.h"
 #include "fill_data.h"
 #include "fill_tokens.h"
+#include "general_function.h"
+#include "get_cmd_path.h"
 #include "redirections.h"
 #include "utils.h"
 #include "utils2.h"
@@ -23,11 +28,6 @@
 #include <readline/readline.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "get_cmd_path.h"
-#include "double_red.h"
-#include "general_function.h"
-#include "fd_stuff.h"
-#include "executor.h"
 
 int	count_char_index(char *str, char a)
 {
@@ -47,13 +47,12 @@ int	count_char_index(char *str, char a)
 
 int	count_index2(char *str)
 {
-	 
 	if (!second_char_exists(str, *str))
 	{
 		printf("error\n");
 		exit(0);
 	}
-	return (count_char_index(str, *str) );
+	return (count_char_index(str, *str));
 }
 
 int	count_word_index(char *str)
@@ -106,40 +105,48 @@ int	count_tokens(char *str)
 	return (num_token);
 }
 
+char *get_str(char **env)
+{
+	char *aux;
+	char *str;
+		aux = ft_strjoin(ft_getenv(env, "USER"), "@minishell $ ");
+		str = readline(aux);
+		free(aux);
+		aux = ft_strtrim(str, " ");
+		free(str);
+	return(aux);
+}
+
 int	main(int argc, char *argv[], char **envp)
 {
 	char	*str;
-	//int		x;
-	char	*aux;
 	char	**tokens;
 	char	**env2;
 	t_data	*data;
- 
 
 	tokens = NULL;
-	if(!argc || !argv)
+	if (!argc || !argv)
 		exit(0);
 	argc = 0;
 	argv = NULL;
 	env2 = env_copy(envp);
 	while (1)
 	{
-		aux = ft_strjoin(ft_getenv(env2, "USER"), "@minishell $ ");
-		str = readline(aux);
-		 
-		if (*str!='\0'  )
+		str = get_str(envp);
+		if (str && *str != '\0')
 		{
-		add_history(str);
-		free(aux);	 
-		general_function(str, &data, env2);		  
-		ft_exec(data, env2);
-		ft_lstclear1(&data);
-		if (tokens)
-			free_d_array(tokens);
+			add_history(str);
+			general_function(str, &data, env2);
+			//free(str);
+			ft_exec(data, env2);
+			ft_lstclear1(&data);
+			if (tokens)
+				free_d_array(tokens);
 		}
+		else 
+			free(str);
 	}
-	
-	//double_redirection("hola");
 	free_d_array(env2);
 	return (0);
 }
+

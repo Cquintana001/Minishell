@@ -52,14 +52,17 @@ void	fill_array2(char **tokens)
 {
 	char	*aux;
 	int		x;
+	char	*aux1;
 
 	x = 0;
 	aux = NULL;
 	while (tokens[x])
 	{
 		aux = tokens[x];
-		tokens[x] = ft_strdup(erase_quotes(tokens[x]));
-		free(aux);
+		aux1 = erase_quotes(tokens[x]);
+		//free(aux);
+		tokens[x] = ft_strdup(aux1);
+		free(aux1);
 		x++;
 	}
 }

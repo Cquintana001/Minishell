@@ -33,7 +33,7 @@ void	ft_lstclear1(t_data **lst)
 	while (*lst)
 	{
 		aux = (*lst)->next;
-		if ((*lst)->cmd != NULL)			 
+		if ((*lst)->cmd != NULL)
 			free_d_array((*lst)->cmd);
 		if ((*lst)->path != NULL)
 			free((*lst)->path);
@@ -51,7 +51,7 @@ void	general_function(char *str, t_data **data, char **env2)
 
 	aux = expansor(str);
 	tokens = fill_tokens(aux, ft_strlen(aux));
-	printf("%s\n", tokens[0]);
+	free(aux);
 	*data = redirection(tokens);
 	*data = commands(tokens, *data);
 	free_d_array(tokens);

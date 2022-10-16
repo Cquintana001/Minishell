@@ -38,6 +38,7 @@ int	malloc_redirection(char **tokens, t_data **node)
 		(*node)->redirection = (char **)malloc(((len * 2) + 1)
 				* sizeof(char *));
 		(*node)->redirection[len * 2] = 0;
+		 
 	}
 	return (index);
 }
@@ -81,7 +82,9 @@ t_data	*redirection(char **tokens)
 	int		x;
 	t_data	*nodes;
 	t_data	*aux;
+	int		i;
 
+	i= -1;
 	x = 0;
 	check_pipe(tokens);
 	nodes = ft_lstnew2(NULL);
@@ -90,10 +93,11 @@ t_data	*redirection(char **tokens)
 	while (tokens[x])
 	{
 		nodes = put_last_node(nodes);
-		if (!fill_redirection(tokens + x, nodes))
-			break ;
+		i = fill_redirection(tokens + x, nodes);
+		if (i == 0)
+			break;
 		else
-			x += fill_redirection(tokens + x, nodes);
+			x += i;
 		ft_lstadd_back2(&aux, ft_lstnew2(NULL));
 		x++;
 	}

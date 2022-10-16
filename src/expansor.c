@@ -105,8 +105,8 @@ char	*expansor(char *str)
 	{
 		if (str[x] == '"' && second_char_exists(str + x, str[x]) && x > i)
 			i = find_pos(str, x);
-		else if (str[x] == '\'' && second_char_exists(str + x, str[x]) \
-				&& x >= i)
+		else if (str[x] == '\'' && second_char_exists(str + x, str[x])
+			&& x >= i)
 			x += count_char_index(str + x, str[x]);
 		if (str[x] == '$' && (str[x + 1] && str[x + 1] != '"'))
 		{

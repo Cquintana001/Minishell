@@ -11,12 +11,12 @@
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include "double_red.h"
 #include "fd_stuff.h"
 #include "utils.h"
+#include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include <stdlib.h>
-#include "double_red.h"
 
 //Makes required redirections before executing the command
 static void	ft_dup_work(t_fd *fd)
@@ -24,12 +24,12 @@ static void	ft_dup_work(t_fd *fd)
 	if (fd->fdin != -1)
 	{
 		dup2(fd->fdin, STDIN_FILENO);
-		close (fd->fdin);
+		close(fd->fdin);
 	}
 	if (fd->fdout != -1)
 	{
 		dup2(fd->fdout, STDOUT_FILENO);
-		close (fd->fdout);
+		close(fd->fdout);
 	}
 }
 
@@ -58,45 +58,16 @@ static void	ft_dups(char **redir, t_fd *fd)
 
 //Makes the required dups and executes the command
 static void	ft_child(t_data *node, char **envp, t_fd *fd)
-{/* 
-	int fd1[2];
-	pid_t pid;
-	char *str;
-
-	str = NULL; */
-	
+{
 	ft_dup_work(fd);
-	/* if(fd->here_doc == 1)
-	{
- 
-		pipe(fd1);
-		pid = fork();
-		if(pid == 0)
-		{	
-			close(fd1[0]);
-			str = double_redirection(fd->key);
-			dup2(fd1[1], STDOUT_FILENO);
-			close(fd1[1]);
-			write(STDOUT_FILENO, str, ft_strlen(str));
-			exit(0);
-		}
-		else
-		{	
-			close(fd1[1]);
-			dup2(fd1[0], STDIN_FILENO);
-			close(fd1[0]);
-			dup2(STDOUT_FILENO, fd->out);
-			wait(NULL);
-			fd->here_doc = 0;
-		}
-		
-	} */
-
+	 
 	if (execve(node->path, node->cmd, envp) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(node->cmd[0], 2);
 		ft_putendl_fd("bash: command not found", 2);
+		free(node->path);
+		free_d_array(node->cmd);
 		exit(0);
 	}
 	 
@@ -116,19 +87,16 @@ static void	ft_pipex(t_data *node, char **envp, t_fd *fd)
 		perror("Error");
 	if (pid == 0)
 	{
-	 	 
 		close(fd->pipe[0]);
 		dup2(fd->pipe[1], STDOUT_FILENO);
-		close (fd->pipe[1]);
-		 
+		close(fd->pipe[1]);
 		ft_child(node, envp, fd);
-	 
 	}
 	else
 	{
 		close(fd->pipe[1]);
 		dup2(fd->pipe[0], STDIN_FILENO);
-		close (fd->pipe[0]);
+		close(fd->pipe[0]);
 		ft_close(fd->fdin);
 		fd->fdin = -1;
 		ft_close(fd->fdout);
@@ -140,7 +108,7 @@ static void	ft_pipex(t_data *node, char **envp, t_fd *fd)
 //Returns the number of nodes of a linked list
 static int	ft_count_nodes(t_data *node)
 {
-	int		node_nb;
+	int	node_nb;
 
 	node_nb = 1;
 	while (node->next)
@@ -169,7 +137,6 @@ void	ft_exec(t_data *node, char **envp)
 	{
 		while (--node_nb)
 		{
-			
 			ft_pipex(node, envp, &fd);
 			node = node->next;
 		}
