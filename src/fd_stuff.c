@@ -13,6 +13,7 @@
 #include "../libft/libft.h"
 #include "fd_stuff.h"
 #include <fcntl.h>
+#include "double_red.h"
 
 void	ft_close(int fd)
 {
@@ -22,6 +23,10 @@ void	ft_close(int fd)
 
 void	ft_get_fd(char *file, int mode, t_fd *fd)
 {
+	pid_t pid;
+	int fd1[2];
+	char *str;
+
 	if (mode == 0)
 	{
 		ft_close(fd->fdin);
@@ -45,9 +50,24 @@ void	ft_get_fd(char *file, int mode, t_fd *fd)
 	}
 	else if (mode == 3)
 	{
-		fd->here_doc = 1;
 		fd->key = file;
-
+		pipe(fd1);
+		pid = fork();
+		if(pid == 0)
+		{	
+			close(fd1[0]);
+			str = double_redirection(fd->key);
+			write(fd1[1], str, ft_strlen(str));
+			close(fd1[1]);
+			exit(0);
+		}
+		else
+		{	
+			close(fd1[1]);
+			wait(NULL);
+			fd->fdin = dup(fd1[0]);
+			close(fd1[0]);
+		}
 	}
 }
 

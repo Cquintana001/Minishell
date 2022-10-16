@@ -58,15 +58,15 @@ static void	ft_dups(char **redir, t_fd *fd)
 
 //Makes the required dups and executes the command
 static void	ft_child(t_data *node, char **envp, t_fd *fd)
-{
+{/* 
 	int fd1[2];
 	pid_t pid;
 	char *str;
 
-	str = NULL;
+	str = NULL; */
 	
 	ft_dup_work(fd);
-	if(fd->here_doc == 1)
+	/* if(fd->here_doc == 1)
 	{
  
 		pipe(fd1);
@@ -90,7 +90,7 @@ static void	ft_child(t_data *node, char **envp, t_fd *fd)
 			fd->here_doc = 0;
 		}
 		
-	}
+	} */
 
 	if (execve(node->path, node->cmd, envp) == -1)
 	{
