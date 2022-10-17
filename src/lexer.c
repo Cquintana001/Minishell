@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/13 11:38:05 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:33:41 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ int	main(int argc, char *argv[], char **envp)
 		{
 			add_history(str);
 			general_function(str, &data, env2);
-			//free(str);
 			ft_exec(data, env2);
 			ft_lstclear1(&data);
 			if (tokens)

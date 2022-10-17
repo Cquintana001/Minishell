@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:36:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/13 07:45:05 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:25:26 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ char	*check_if_command(char **envp, char *str)
 	int		x;
 
 	x = 0;
-	if (!str)
-		return (0);
+	
+	 if (!str )
+		return (0); 
 	cmd = ft_strjoin("/", str);
 	path_list = ft_split(find_path(envp), ':');
 	while (path_list[x])

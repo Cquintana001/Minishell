@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:26:16 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/13 07:45:27 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/17 12:52:46 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ int	malloc_redirection(char **tokens, t_data **node)
 	len = 0;
 	x = 0;
 	index = 0;
+	printf("index es %d\n", index);
 	while (tokens[x] && tokens[x][0] != '|')
 	{
-		if (tokens[x][0] == '<' || tokens[x][0] == '>')
+		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x+1][0] == '0')
 			len++;
-		x++;
+		x+=2;
 	}
 	if (tokens[x] && tokens[x][0] == '|')
 		index = x;
@@ -54,13 +55,13 @@ int	fill_redirection(char **tokens, t_data *node)
 	i = 0;
 	while (tokens[x] && tokens[x][0] != '|')
 	{
-		if (tokens[x][0] == '<' || tokens[x][0] == '>')
+		if ((tokens[x][0] == '<' || tokens[x][0] == '>')  && tokens[x+1][0] == '0')
 		{
 			node->redirection[i] = ft_strdup(tokens[x]);
-			node->redirection[++i] = ft_strdup(tokens[x + 1]);
+			node->redirection[++i] = ft_strdup(tokens[x + 2]);
 			i++;
 		}
-		x++;
+		x+=2;
 	}
 	return (index);
 }
@@ -99,7 +100,7 @@ t_data	*redirection(char **tokens)
 		else
 			x += i;
 		ft_lstadd_back2(&aux, ft_lstnew2(NULL));
-		x++;
+		x+=2;
 	}
 	return (aux);
 }
