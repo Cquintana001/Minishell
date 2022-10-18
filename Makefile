@@ -3,7 +3,7 @@ NAME				=	minishell
 libft				= 	libft
 INC_DIR				= 	./includes/
 CC 					= 	gcc
-CFLAGS 				= 	-Wall -Werror -Wextra -g3   #-fsanitize=address
+CFLAGS 				= 	-Wall -Werror -Wextra -g3   -fsanitize=address
 SRC_DIR				=	src
 SOURCES				=	 $(SRC_DIR)/lexer.c \
 						$(SRC_DIR)/fill_tokens.c \
@@ -19,6 +19,10 @@ SOURCES				=	 $(SRC_DIR)/lexer.c \
 						$(SRC_DIR)/general_function.c \
 						$(SRC_DIR)/fd_stuff.c \
 						$(SRC_DIR)/executor.c \
+						$(SRC_DIR)/exec_utils.c \
+						$(SRC_DIR)/builtin1.c		\
+						$(SRC_DIR)/builtin2.c		\
+						$(SRC_DIR)/signals.c
 
 OBJS				= 	$(SOURCES:.c=.o)
 

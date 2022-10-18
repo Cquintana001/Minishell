@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/18 10:13:40 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/18 12:09:55 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ void	general_function(char *str, t_data **data, char **env2)
 	*data = redirection(tokens);
 	*data = commands(tokens, *data);
 	free_d_array(tokens);
+ 
 	fill_cmd_path(*data, env2);
 }

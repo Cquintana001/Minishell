@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:54:12 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/18 10:14:09 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/18 12:04:58 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ void	malloc_commands(char **tokens, t_data **node)
 	aux = *node;
 	len = 0;
 	x = 0;
-	while (tokens[x] && tokens[x][0] != '|')
+	while (tokens[x])
 	{
+		if(tokens[x][0] == '|' && tokens[x+1][0] == '0')
+			break;
 		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x + 2]
 			&& tokens[x + 1][0] == '0')
 			x += 4;
@@ -56,8 +58,10 @@ int	fill_commands(char **tokens, t_data *node)
 	x = 0;
 	aux = node;
 	malloc_commands(tokens, &node);
-	while (tokens[x] && tokens[x][0] != '|')
+	while (tokens[x] )
 	{
+		if(tokens[x][0] == '|' && tokens[x+1][0] == '0')
+			break;
 		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x
 			+ 1][0] == '0')
 		{
@@ -74,7 +78,7 @@ int	fill_commands(char **tokens, t_data *node)
 			x += 2;
 		}
 	}
-	if (tokens[x] && tokens[x][0] == '|')
+	if (tokens[x] && tokens[x][0] == '|' && tokens[x +1][0] == '0')
 		return (x);
 	else
 		return (0);
@@ -93,6 +97,7 @@ t_data	*commands(char **tokens, t_data *aux)
 	{
 		printf("entra %d : %s\n", x, tokens[x]);
 		len = fill_commands(tokens + x, nodes);
+		printf("len es %d\n", len);
 		if (!len)
 			break ;
 		else

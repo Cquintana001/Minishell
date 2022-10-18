@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/18 10:13:20 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/18 11:39:41 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 #include <readline/readline.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "signals.h"
 
 int	count_char_index(char *str, char a)
 {
@@ -133,12 +134,13 @@ int	main(int argc, char *argv[], char **envp)
 	env2 = env_copy(envp);
 	while (1)
 	{
+		ft_signals();
 		str = get_str(envp);
 		if (str && *str != '\0')
 		{
 			add_history(str);
 			general_function(str, &data, env2);
-			ft_exec(data, env2);
+			ft_exec(data, &env2);
 			ft_lstclear1(&data);
 			if (tokens)
 				free_d_array(tokens);
