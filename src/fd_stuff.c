@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:13:27 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/17 07:49:24 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/18 10:14:34 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	here_doc(char *key, t_fd *fd)
 		wait(NULL);
 		fd->fdin = dup(fd1[0]);
 		close(fd1[0]);
-	}	
+	}
 }
 
 void	ft_get_fd(char *file, int mode, t_fd *fd)

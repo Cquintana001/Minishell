@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:26:16 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/17 12:52:46 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/18 10:11:06 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ int	malloc_redirection(char **tokens, t_data **node)
 	printf("index es %d\n", index);
 	while (tokens[x] && tokens[x][0] != '|')
 	{
-		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x+1][0] == '0')
+		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x
+			+ 1][0] == '0')
 			len++;
-		x+=2;
+		x += 2;
 	}
 	if (tokens[x] && tokens[x][0] == '|')
 		index = x;
@@ -39,7 +40,6 @@ int	malloc_redirection(char **tokens, t_data **node)
 		(*node)->redirection = (char **)malloc(((len * 2) + 1)
 				* sizeof(char *));
 		(*node)->redirection[len * 2] = 0;
-		 
 	}
 	return (index);
 }
@@ -55,13 +55,14 @@ int	fill_redirection(char **tokens, t_data *node)
 	i = 0;
 	while (tokens[x] && tokens[x][0] != '|')
 	{
-		if ((tokens[x][0] == '<' || tokens[x][0] == '>')  && tokens[x+1][0] == '0')
+		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x
+			+ 1][0] == '0')
 		{
 			node->redirection[i] = ft_strdup(tokens[x]);
 			node->redirection[++i] = ft_strdup(tokens[x + 2]);
 			i++;
 		}
-		x+=2;
+		x += 2;
 	}
 	return (index);
 }
@@ -85,7 +86,7 @@ t_data	*redirection(char **tokens)
 	t_data	*aux;
 	int		i;
 
-	i= -1;
+	i = -1;
 	x = 0;
 	check_pipe(tokens);
 	nodes = ft_lstnew2(NULL);
@@ -96,11 +97,11 @@ t_data	*redirection(char **tokens)
 		nodes = put_last_node(nodes);
 		i = fill_redirection(tokens + x, nodes);
 		if (i == 0)
-			break;
+			break ;
 		else
 			x += i;
 		ft_lstadd_back2(&aux, ft_lstnew2(NULL));
-		x+=2;
+		x += 2;
 	}
 	return (aux);
 }

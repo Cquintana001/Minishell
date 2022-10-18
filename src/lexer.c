@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/17 16:33:41 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/18 10:13:20 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,16 +105,17 @@ int	count_tokens(char *str)
 	return (num_token);
 }
 
-char *get_str(char **env)
+char	*get_str(char **env)
 {
-	char *aux;
-	char *str;
-		aux = ft_strjoin(ft_getenv(env, "USER"), "@minishell $ ");
-		str = readline(aux);
-		free(aux);
-		aux = ft_strtrim(str, " ");
-		free(str);
-	return(aux);
+	char	*aux;
+	char	*str;
+
+	aux = ft_strjoin(ft_getenv(env, "USER"), "@minishell $ ");
+	str = readline(aux);
+	free(aux);
+	aux = ft_strtrim(str, " ");
+	free(str);
+	return (aux);
 }
 
 int	main(int argc, char *argv[], char **envp)
@@ -142,10 +143,9 @@ int	main(int argc, char *argv[], char **envp)
 			if (tokens)
 				free_d_array(tokens);
 		}
-		else 
+		else
 			free(str);
 	}
 	free_d_array(env2);
 	return (0);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/12 18:26:04 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/18 10:11:28 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static void	ft_dups(char **redir, t_fd *fd)
 static void	ft_child(t_data *node, char **envp, t_fd *fd)
 {
 	ft_dup_work(fd);
-	 
 	if (execve(node->path, node->cmd, envp) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
@@ -70,7 +69,6 @@ static void	ft_child(t_data *node, char **envp, t_fd *fd)
 		free_d_array(node->cmd);
 		exit(0);
 	}
-	 
 }
 
 //Creates a pipe and makes a fork.

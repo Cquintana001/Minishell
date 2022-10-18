@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:27:09 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/17 16:33:52 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/18 10:10:42 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	fill_cmd_path(t_data *list, char **envp)
 {
 	char	*path1;
-	 
+
 	while (1)
 	{
 		path1 = check_if_command(envp, list->cmd[0]);
@@ -27,5 +27,4 @@ void	fill_cmd_path(t_data *list, char **envp)
 			break ;
 		list = list->next;
 	}
-	 
 }
