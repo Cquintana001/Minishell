@@ -46,7 +46,11 @@ void	ft_call_builtin(char **cmd, char ***envp)
 	char	*var;
 
 	var = NULL;
+<<<<<<< HEAD
 	if (ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0 && cmd[1])
+=======
+	if (ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0)
+>>>>>>> 020ccd11ad0e9ee8e4c0a10f4469ae42e91fa874
 	{
 		var = ft_subst_var(cmd[1]);
 		if (var)

@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/21 16:14:41 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:24:25 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ void	general_function(char *str, t_data **data, char **env2)
 	x = 0;
 	aux = expansor(str);
 	tokens = fill_tokens(aux, ft_strlen(aux));
+	while (tokens[x])
+	{
+		printf("%s\n", tokens[x]);
+		x++;
+	}
 	free(aux);
 	*data = redirection(tokens);
 	*data = commands(tokens, *data);

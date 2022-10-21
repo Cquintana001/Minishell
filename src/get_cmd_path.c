@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:27:09 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/20 17:36:32 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:24:31 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	fill_cmd_path(t_data *list, char **envp)
 			list->path = path1;
 		if (list->next == NULL)
 			break ;
+		printf("entra en path1\n");
 		list = list->next;
 	}
 }
