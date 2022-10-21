@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd_path.h                                     :+:      :+:    :+:   */
+/*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/08 10:32:53 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/17 16:32:45 by caquinta         ###   ########.fr       */
+/*   Created: 2022/10/06 10:31:39 by amarzana          #+#    #+#             */
+/*   Updated: 2022/10/18 17:22:37 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_CMD_PATH_H
-# define GET_CMD_PATH_H
-#include "utils.h"
+#ifndef SIGNALS_H
+# define SIGNALS_H
 
-void fill_cmd_path(t_data *list, char **envp);
+# include "utils.h"
+
+void	ft_signals_in_cat(void);
+void	ft_signals(void);
+void	ft_check_rl(char *str, t_data **data);
 
 #endif

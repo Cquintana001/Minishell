@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:54:12 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/13 08:47:49 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/20 17:29:34 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,24 @@ void	malloc_commands(char **tokens, t_data **node)
 	aux = *node;
 	len = 0;
 	x = 0;
-	while (tokens[x] && tokens[x][0] != '|')
+	while (tokens[x])
 	{
-		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x + 1])
-			x += 2;
+		if(tokens[x][0] == '|' && tokens[x+1][0] == '0')
+			break;
+		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x + 2]
+			&& tokens[x + 1][0] == '0')
+			x += 4;
 		else
 		{
 			len++;
-			x++;
+			x += 2;
 		}
 	}
-	aux->cmd = (char **)malloc((len + 1) * sizeof(char *));
-	aux->cmd[len] = 0;
+	if(len > 0)
+	{
+		aux->cmd = (char **)ft_calloc((len + 1), sizeof(char *));
+		aux->cmd[len] = 0;
+	}
 }
 
 int	fill_commands(char **tokens, t_data *node)
@@ -55,19 +61,27 @@ int	fill_commands(char **tokens, t_data *node)
 	x = 0;
 	aux = node;
 	malloc_commands(tokens, &node);
-	while (tokens[x] && tokens[x][0] != '|')
+	while (tokens[x] )
 	{
-		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x + 1])
-			x += 2;
+		if(tokens[x][0] == '|' && tokens[x+1][0] == '0')
+			break;
+		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x
+			+ 1][0] == '0')
+		{
+			if (tokens[x + 2])
+				x += 4;
+			else
+				x += 2;
+		}
 		else if (tokens[x])
 		{
 			aux->cmd[i] = ft_strdup(tokens[x]);
 			printf("cmd es %s\n", aux->cmd[i]);
 			i++;
-			x++;
+			x += 2;
 		}
 	}
-	if (tokens[x] && tokens[x][0] == '|')
+	if (tokens[x] && tokens[x][0] == '|' && tokens[x +1][0] == '0')
 		return (x);
 	else
 		return (0);
@@ -84,12 +98,14 @@ t_data	*commands(char **tokens, t_data *aux)
 	nodes = aux;
 	while (tokens[x])
 	{
+		printf("entra %d : %s\n", x, tokens[x]);
 		len = fill_commands(tokens + x, nodes);
+		printf("len es %d\n", len);
 		if (!len)
 			break ;
 		else
 			nodes = nodes->next;
-		x += len + 1;
+		x += len + 2;
 	}
 	return (aux);
 }

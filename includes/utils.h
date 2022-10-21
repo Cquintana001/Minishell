@@ -21,6 +21,7 @@ typedef struct s_data
 	char	*path;
 	int		input;
 	int		output;
+	char 	**tokens;
 	struct s_data	*next;
 
 }			t_data;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:43:44 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/12 14:19:34 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/20 17:27:29 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 #include <stdlib.h>
 #include "utils.h"
 
-t_data	*ft_lstnew2(void *content)
+t_data	*ft_lstnew2(void)
 {
 	t_data	*list;
 
-	list = malloc(sizeof(*list));
+	list = ft_calloc(1, sizeof(*list));
 	if (list == NULL)
 		return (NULL);
-	list->cmd = content;
+	list->cmd = NULL;
 	list->input = 0;
 	list->output = 0;
-	list->path = content;
-	list->redirection = content;
+	list->path = NULL;
+	list->redirection = NULL;
 	list->next = NULL;
 	return (list);
 }

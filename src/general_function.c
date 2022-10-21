@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/13 11:37:29 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:14:41 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,23 @@
 void	ft_lstclear1(t_data **lst)
 {
 	t_data	*aux;
+	int check;
 
+	check = 0;
 	while (*lst)
 	{
 		aux = (*lst)->next;
 		if ((*lst)->cmd != NULL)
+		{	
+			 if(&(*lst)->cmd[0] !=&(*lst)->path  )
+			 	check =1;
 			free_d_array((*lst)->cmd);
-		if ((*lst)->path != NULL)
+		}
+		if ((*lst)->path != NULL && check == 0 )
+		{	
+			printf("path p es %p\n",(*lst)->path );
 			free((*lst)->path);
+		}
 		if ((*lst)->redirection != NULL)
 			free_d_array((*lst)->redirection);
 		free(*lst);
@@ -48,12 +57,15 @@ void	general_function(char *str, t_data **data, char **env2)
 {
 	char	*aux;
 	char	**tokens;
+	int		x;
 
+	x = 0;
 	aux = expansor(str);
 	tokens = fill_tokens(aux, ft_strlen(aux));
 	free(aux);
 	*data = redirection(tokens);
 	*data = commands(tokens, *data);
 	free_d_array(tokens);
+ 
 	fill_cmd_path(*data, env2);
 }

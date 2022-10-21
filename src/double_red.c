@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   double_red.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:07:06 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/13 07:42:55 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:30:52 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include "signals.h"
 #include <readline/readline.h>
 #include <stdlib.h>
 #include <sys/wait.h>
@@ -36,7 +37,14 @@ char	*double_redirection(char *key)
 	aux = 0;
 	while (1)
 	{
+		ft_signals_in_cat();
 		str = readline("heredoc> ");
+		if (!str)
+		{
+			printf("exit\n");
+			printf("ft_exit con frees etc\n");
+			break ;
+		}
 		if (!ft_strncmp(str, key, __INT_MAX__))
 			break ;
 		if (!aux)
@@ -45,6 +53,7 @@ char	*double_redirection(char *key)
 			aux = add_line_break(aux, str);
 		free(str);
 	}
-	free(str);
+	if (str)
+		free(str);
 	return (aux);
 }

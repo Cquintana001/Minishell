@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:26:16 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/13 07:45:27 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/20 17:22:52 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,22 @@ int	malloc_redirection(char **tokens, t_data **node)
 	len = 0;
 	x = 0;
 	index = 0;
-	while (tokens[x] && tokens[x][0] != '|')
+	while (tokens[x])
 	{
-		if (tokens[x][0] == '<' || tokens[x][0] == '>')
+		if (tokens[x] && tokens[x][0] == '|' && tokens[x +1][0] == '0')
+			break;
+		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x
+			+ 1][0] == '0')
 			len++;
-		x++;
+		x += 2;
 	}
-	if (tokens[x] && tokens[x][0] == '|')
+	if (tokens[x] && tokens[x][0] == '|'&& tokens[x +1][0] == '0')
 		index = x;
 	if (len > 0)
 	{
 		(*node)->redirection = (char **)malloc(((len * 2) + 1)
 				* sizeof(char *));
 		(*node)->redirection[len * 2] = 0;
-		 
 	}
 	return (index);
 }
@@ -52,15 +54,18 @@ int	fill_redirection(char **tokens, t_data *node)
 	index = malloc_redirection(tokens, &node);
 	x = 0;
 	i = 0;
-	while (tokens[x] && tokens[x][0] != '|')
-	{
-		if (tokens[x][0] == '<' || tokens[x][0] == '>')
+	while (tokens[x])
+	{	
+		if (tokens[x] && tokens[x][0] == '|' && tokens[x +1][0] == '0')
+			break;
+		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x
+			+ 1][0] == '0')
 		{
 			node->redirection[i] = ft_strdup(tokens[x]);
-			node->redirection[++i] = ft_strdup(tokens[x + 1]);
+			node->redirection[++i] = ft_strdup(tokens[x + 2]);
 			i++;
 		}
-		x++;
+		x += 2;
 	}
 	return (index);
 }
@@ -72,7 +77,7 @@ int	check_redirection(char **tokens, int x, t_data **nodes)
 		return (-1);
 	else
 		x += fill_redirection(tokens + x, *nodes);
-	ft_lstadd_back2(nodes, ft_lstnew2(NULL));
+	ft_lstadd_back2(nodes, ft_lstnew2());
 	x++;
 	return (x);
 }
@@ -84,10 +89,10 @@ t_data	*redirection(char **tokens)
 	t_data	*aux;
 	int		i;
 
-	i= -1;
+	i = -1;
 	x = 0;
 	check_pipe(tokens);
-	nodes = ft_lstnew2(NULL);
+	nodes = ft_lstnew2();
 	aux = nodes;
 	x = 0;
 	while (tokens[x])
@@ -95,11 +100,11 @@ t_data	*redirection(char **tokens)
 		nodes = put_last_node(nodes);
 		i = fill_redirection(tokens + x, nodes);
 		if (i == 0)
-			break;
+			break ;
 		else
 			x += i;
-		ft_lstadd_back2(&aux, ft_lstnew2(NULL));
-		x++;
+		ft_lstadd_back2(&aux, ft_lstnew2());
+		x += 2;
 	}
 	return (aux);
 }
