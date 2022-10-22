@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 09:45:14 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/21 16:25:17 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/22 11:04:34 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ void	signal_handler_in_cat(int num)
 {
 	if (num == SIGINT)
 	{
-		printf("\n");
-		printf ("ft_exit con frees etc\n");
+		/* printf("\n");
+		printf ("ft_exit con frees etc\n"); */
 		exit (0);
 	}
 	if (num == SIGQUIT)
 	{
-		printf("^\\Quit: 3\n");
-		printf ("ft_exit con frees etc\n");
+		/* printf("^\\Quit: 3\n");
+		printf ("ft_exit con frees etc\n"); */
 		exit (0);
 	}
 }
@@ -65,9 +65,9 @@ void	ft_check_rl(char *str, t_data **data)
 {
 	if (str == NULL)
 	{
-		printf("exit\n");
+		/* printf("exit\n");
 		printf("/////CTRL + D\n");
-		printf ("/////------>ft_exit <------\n");
+		printf ("/////------>ft_exit <------\n"); */
 		(void) data;
 		exit(-1);
 	}

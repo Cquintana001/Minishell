@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/21 16:24:02 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/22 10:11:42 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	ft_child(t_data *node, char **envp, t_fd *fd)
 	ft_dup_work(fd);
 	if (node->cmd)
 	{
-		printf("CMD %s", node->cmd[0]);
+		//printf("CMD %s", node->cmd[0]);
 		if (ft_is_builtin(node->cmd))
 			ft_call_builtin(node->cmd, &envp);
 		else if (execve(node->path, node->cmd, envp) == -1)

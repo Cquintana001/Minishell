@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:54:12 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/21 16:24:20 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/22 09:16:35 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	fill_commands(char **tokens, t_data *node)
 		else if (tokens[x])
 		{
 			aux->cmd[i] = ft_strdup(tokens[x]);
-			printf("cmd es %s\n", aux->cmd[i]);
+			//printf("cmd es %s\n", aux->cmd[i]);
 			i++;
 			x += 2;
 		}
@@ -98,9 +98,9 @@ t_data	*commands(char **tokens, t_data *aux)
 	nodes = aux;
 	while (tokens[x])
 	{
-		printf("entra %d : %s\n", x, tokens[x]);
+		//printf("entra %d : %s\n", x, tokens[x]);
 		len = fill_commands(tokens + x, nodes);
-		printf("len es %d\n", len);
+		//printf("len es %d\n", len);
 		if (!len)
 			break ;
 		else

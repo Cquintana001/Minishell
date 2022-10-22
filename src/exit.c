@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 07:51:39 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/21 16:24:08 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/22 08:53:05 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int ft_exit(char *str)
 {
    if(ft_strncmp(str, "exit", 4)==0)
     {
-        free(str);
-        
+        free(str);    
         exit(0);
     }
 
