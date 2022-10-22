@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/21 16:26:49 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/22 12:55:09 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 #include <stdlib.h>
 #include "signals.h"
 #include "exit.h"
+
+
+int global;
+
 
 int	count_char_index(char *str, char a)
 {
@@ -142,8 +146,9 @@ int	main(int argc, char *argv[], char **envp)
 		if (str && *str != '\0')
 		{
 			add_history(str);
-			general_function(str, &data, env2);
-			ft_exec(data, &env2);
+			global = general_function(str, &data, env2);
+			if(!global)
+				ft_exec(data, &env2);
 			ft_lstclear1(&data);
 			if (tokens)
 				free_d_array(tokens);
