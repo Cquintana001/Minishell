@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/23 10:20:48 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/23 10:42:36 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,25 +56,18 @@ void	ft_lstclear1(t_data **lst)
 int check_redirection1(char **red)
 {
 	int x;
-	int l;
 
 	x=0;
-	while(red != NULL && red[x])
-		x++;
-	l = x;
-	x = 0;
+	
 	while(red != NULL && red[x])
 	{
-		if((red[x][0] == '<' ||red[x][0] == '>')) 
+		if((red[x][0] == '<' ||red[x][0] == '>') && red[x+1] && (red[x+1][0] == '<' ||red[x+1][0] == '>'))
 		{	
-			if(l == 1 || (red[x+1] && (red[x+1][0] == '<' ||red[x+1][0] == '>')))
-			{	
+			x++;
+			while(red[x] && (red[x][0] == '<' ||red[x][0] == '>'))
 				x++;
-				while(red[x] && (red[x][0] == '<' ||red[x][0] == '>'))
-				x++;
-				printf("bash: syntax error near unexpected token `%s'\n", red[x-1]);
-				return(1);
-			}
+			printf("bash: syntax error near unexpected token %s\n", red[x-1]);
+			return(1);
 		}
 		x++;
 	}
@@ -98,6 +91,7 @@ int	general_function(char *str, t_data **data, char **env2)
 		free_d_array(tokens);	
 			return(1);
 	}
+	free_d_array(tokens);
 	fill_cmd_path(*data, env2);
 	return(0);
 }

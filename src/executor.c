@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/22 10:11:42 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/23 08:16:14 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "double_red.h"
-#include "fd_stuff.h"
+#include "fd_utils.h"
 #include "utils.h"
 #include "executor.h"
 #include "builtins.h"
@@ -65,7 +65,6 @@ static void	ft_child(t_data *node, char **envp, t_fd *fd)
 	ft_dup_work(fd);
 	if (node->cmd)
 	{
-		//printf("CMD %s", node->cmd[0]);
 		if (ft_is_builtin(node->cmd))
 			ft_call_builtin(node->cmd, &envp);
 		else if (execve(node->path, node->cmd, envp) == -1)

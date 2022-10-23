@@ -1,54 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fd_stuff.c                                         :+:      :+:    :+:   */
+/*   fd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:13:27 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/21 16:24:14 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/23 09:28:58 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "double_red.h"
-#include "fd_stuff.h"
+#include "fd_utils.h"
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
 #include "signals.h"
-
-void	ft_close(int fd)
-{
-	if (fd != -1)
-		close(fd);
-}
-void	here_doc(char *key, t_fd *fd)
-{
-	int		fd1[2];
-	pid_t	pid;
-	char	*str;
-
-	pipe(fd1);
-	pid = fork();
-	if (pid == 0)
-	{
-		close(fd1[0]);
-		str = double_redirection(key);
-		write(fd1[1], str, ft_strlen(str));
-		write(fd1[1], "\n", 1);
-		close(fd1[1]);
-		exit(0);
-	}
-	else
-	{
-		close(fd1[1]);
-		wait(NULL);
-		fd->fdin = dup(fd1[0]);
-		close(fd1[0]);
-	}
-}
 
 void	ft_get_fd(char *file, int mode, t_fd *fd)
 {
@@ -59,7 +28,9 @@ void	ft_get_fd(char *file, int mode, t_fd *fd)
 		if (fd->fdin < 0)
 		{
 			close(fd->fdin);
-			ft_putstr_fd("Invalid or missing input file\n", 2);
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(file, 2);
+			ft_putstr_fd(": No such file or directory\n", 2);
 			exit(0); //FT_EXIT CON FREES ETC
 		}
 	}
@@ -78,12 +49,14 @@ void	ft_get_fd(char *file, int mode, t_fd *fd)
 		if (!file)
 			printf("Aquí iria un error\n");
 		else
-		{
-			signal(SIGINT, SIG_IGN);
 			here_doc(file, fd);
-			ft_signals();
-		}
 	}
+}
+
+void	ft_close(int fd)
+{
+	if (fd != -1)
+		close(fd);
 }
 
 void	ft_init_fd(t_fd *fd)

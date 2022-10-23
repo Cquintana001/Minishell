@@ -6,13 +6,14 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:34:32 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/17 17:15:38 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/23 08:09:53 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/builtins.h"
 #include "../libft/libft.h"
 #include "../includes/utils.h"
+#include "../includes/executor.h"
 
 static char	**ft_rm_var(char *var, char **env)
 {
@@ -29,7 +30,8 @@ static char	**ft_rm_var(char *var, char **env)
 	j = 0;
 	while (i < (len - 1))
 	{
-		if (ft_strnstr(env[j], var, ft_strlen(var)))
+		if (ft_strnstr(env[j], var, ft_strlen(var)) \
+			&& env[j][ft_strlen(var)] == '=')
 			j++;
 		new_env[i] = ft_strdup(env[j]);
 		i++;
@@ -85,7 +87,7 @@ static char	**ft_add_var(char *var, char *value, char **env)
 	return (new_env);
 }
 
-void	ft_export(char *var, char *value, char ***env)
+void	ft_export_job(char *var, char *value, char ***env)
 {
 	char	**env2;
 	char	**aux;
@@ -112,3 +114,26 @@ void	ft_export(char *var, char *value, char ***env)
 	}
 }
 
+void	ft_export(char **cmd, char ***env)
+{
+	char	*var;
+	int		i;
+
+	var = NULL;
+	i = 1;
+	if (!cmd[i])
+		ft_env(*env);
+	while (cmd[i])
+	{
+		var = ft_subst_var(cmd[i]);
+		if (var)
+			if (ft_check_var(var, cmd[0]))
+				ft_export_job(var, (ft_strchr(cmd[i], '=') + 1), env);
+		if (var)
+		{
+			free(var);
+			var = NULL;
+		}
+		i++;
+	}
+}

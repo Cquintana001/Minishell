@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/23 10:16:05 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/23 09:24:22 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 #include "environment.h"
 #include "executor.h"
 #include "expansor.h"
-#include "fd_stuff.h"
+#include "fd_utils.h"
 #include "fill_data.h"
 #include "fill_tokens.h"
 #include "general_function.h"
 #include "get_cmd_path.h"
 #include "redirections.h"
-#include "redirections_utils.h"
 #include "utils.h"
 #include "utils2.h"
 #include <fcntl.h>
@@ -32,9 +31,7 @@
 #include "signals.h"
 #include "exit.h"
 
-
 int global;
-
 
 int	count_char_index(char *str, char a)
 {

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/21 14:20:53 by amarzana          #+#    #+#             */
+/*   Updated: 2022/10/23 08:14:00 by amarzana         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdlib.h>
 #include "../libft/libft.h"
@@ -9,10 +21,13 @@ char	*ft_subst_var(char *var)
 	size_t		len;
 
 	len = 0;
-	while (var[len] && var[len] != '=')
-		len++;
-	if (len < ft_strlen(var))
-		return (ft_substr(var, 0, len + 1));
+	if (var)
+	{
+		while (var[len] && var[len] != '=')
+			len++;
+		if (len < ft_strlen(var))
+			return (ft_substr(var, 0, len + 1));
+	}
 	return (0);
 }
 
@@ -43,21 +58,15 @@ int	ft_check_var(char *var, char *cmd)
 
 void	ft_call_builtin(char **cmd, char ***envp)
 {
-	char	*var;
+	int	i;
 
-	var = NULL;
-	if (ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0 && cmd[1])
-	{
-		var = ft_subst_var(cmd[1]);
-		if (var)
-			if (ft_check_var(var, cmd[0]))
-				ft_export(var, (ft_strchr(cmd[1], '=') + 1), envp);
-	}
+	i = 0;
+	if (ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0)
+		ft_export(cmd, envp);
 	if (ft_strncmp(cmd[0], "unset", ft_strlen(cmd[0])) == 0)
-	{
-		if (ft_check_var(cmd[1], cmd[0]))
-			ft_unset(cmd[1], envp);
-	}
+		while (cmd[++i])
+			if (ft_check_var(cmd[i], cmd[0]))
+				ft_unset(cmd[i], envp);
 	if (ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])) == 0)
 		ft_chdir(cmd[1], envp);
 	if (ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])) == 0)
@@ -65,9 +74,7 @@ void	ft_call_builtin(char **cmd, char ***envp)
 	if (ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0)
 		ft_pwd();
 	if (ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])) == 0)
-		ft_echo(&cmd[1]);
-	if (var)
-		free(var);
+		ft_echo(&cmd[1], *envp);
 }
 
 int	ft_is_builtin(char **cmd)

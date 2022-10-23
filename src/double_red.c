@@ -6,12 +6,13 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:07:06 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/19 17:30:52 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/23 08:11:16 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "signals.h"
+#include "fd_utils.h"
 #include <readline/readline.h>
 #include <stdlib.h>
 #include <sys/wait.h>
@@ -41,7 +42,7 @@ char	*double_redirection(char *key)
 		str = readline("heredoc> ");
 		if (!str)
 		{
-			printf("exit\n");
+			printf("bash: warning: here-document delimited by end-of-file (wanted `end')\n");
 			printf("ft_exit con frees etc\n");
 			break ;
 		}
@@ -56,4 +57,30 @@ char	*double_redirection(char *key)
 	if (str)
 		free(str);
 	return (aux);
+}
+
+void	here_doc(char *key, t_fd *fd)
+{
+	int		fd1[2];
+	pid_t	pid;
+	char	*str;
+
+	pipe(fd1);
+	pid = fork();
+	if (pid == 0)
+	{
+		close(fd1[0]);
+		str = double_redirection(key);
+		if (str)
+			ft_putendl_fd(str, 1);
+		close(fd1[1]);
+		exit(0); //ft_exit
+	}
+	else
+	{
+		close(fd1[1]);
+		wait(NULL);
+		fd->fdin = dup(fd1[0]);
+		close(fd1[0]);
+	}
 }
