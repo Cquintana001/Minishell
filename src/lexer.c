@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/22 12:55:09 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/23 10:16:05 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "general_function.h"
 #include "get_cmd_path.h"
 #include "redirections.h"
+#include "redirections_utils.h"
 #include "utils.h"
 #include "utils2.h"
 #include <fcntl.h>

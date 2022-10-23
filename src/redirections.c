@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:26:16 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/21 16:25:08 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/23 10:08:39 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_data	*redirection(char **tokens)
 
 	i = -1;
 	x = 0;
-	check_pipe(tokens);
+	//check_pipe(tokens);
 	nodes = ft_lstnew2();
 	aux = nodes;
 	x = 0;
