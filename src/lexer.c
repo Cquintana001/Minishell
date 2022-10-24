@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/23 09:24:22 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/24 10:51:09 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,8 @@ int	main(int argc, char *argv[], char **envp)
 	char	**tokens;
 	char	**env2;
 	t_data	*data;
-
+	
+	data =NULL;
 	tokens = NULL;
 	if (!argc || !argv)
 		exit(0);
@@ -147,7 +148,8 @@ int	main(int argc, char *argv[], char **envp)
 			global = general_function(str, &data, env2);
 			if(!global)
 				ft_exec(data, &env2);
-			ft_lstclear1(&data);
+			if(data)
+				ft_lstclear1(&data);
 			if (tokens)
 				free_d_array(tokens);
 		}

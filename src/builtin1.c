@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 11:35:02 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/23 08:09:07 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/24 09:53:08 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,32 @@ void	ft_echo(char **cmd, char **env)
 		write(1, "\n", 1);
 }
 
-void	ft_env(char **env)
+void	ft_env(char **env, int mode)
 {
-	while (*env)
+	char	*var;
+
+	var = NULL;
+	if (mode == 0)
 	{
-		ft_putendl_fd(*env, 1);
-		env++;
+		while (*env)
+		{
+			var = ft_subst_var(*env);
+			if (var)
+			{
+				ft_putendl_fd(*env, 1);
+				free (var);
+			}
+			env++;
+		}
+	}
+	else
+	{
+		while (*env)
+		{
+			ft_putstr_fd("declare -x ", 1);
+			ft_putendl_fd(*env, 1);
+			env++;
+		}
 	}
 }
 

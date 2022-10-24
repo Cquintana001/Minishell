@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:34:32 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/23 08:09:53 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/23 14:19:22 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ static char	**ft_rm_var(char *var, char **env)
 	j = 0;
 	while (i < (len - 1))
 	{
-		if (ft_strnstr(env[j], var, ft_strlen(var)) \
-			&& env[j][ft_strlen(var)] == '=')
+		if ((ft_strnstr(env[j], var, ft_strlen(var)) \
+			&& env[j][ft_strlen(var)] == '=' ) || \
+			(ft_strnstr(env[j], var, ft_strlen(var)) \
+			&& !env[j][ft_strlen(var)]))
 			j++;
 		new_env[i] = ft_strdup(env[j]);
 		i++;
@@ -54,7 +56,7 @@ void	ft_unset(char *var, char ***env)
 	while (env2[i])
 	{
 		if (var && ft_strnstr(env2[i], var, ft_strlen(var)))
-			if (env2[i][ft_strlen(var)] == '=')
+			if (env2[i][ft_strlen(var)] == '=' || !env2[i][ft_strlen(var)])
 				coin++;
 		i++;
 	}
@@ -82,7 +84,10 @@ static char	**ft_add_var(char *var, char *value, char **env)
 		new_env[i] = ft_strdup(env[i]);
 		i++;
 	}
-	new_env[i] = ft_strjoin(var, value);
+	if (value)
+		new_env[i] = ft_strjoin(var, value);
+	else
+		new_env[i] = ft_substr(var, 0, ft_strlen(var));
 	new_env[++i] = 0;
 	return (new_env);
 }
@@ -101,9 +106,28 @@ void	ft_export_job(char *var, char *value, char ***env)
 	{
 		if (var && ft_strnstr(env2[i], var, ft_strlen(var)))
 		{
-			free (env2[i]);
-			env2[i] = ft_strjoin(var, value);
-			coin++;
+			if (value)
+			{
+				free (env2[i]);
+				env2[i] = ft_strjoin(var, value);
+				coin++;
+			}
+			else if (!env2[i][ft_strlen(var)] || env2[i][ft_strlen(var)] == '=')
+			{
+				free (env2[i]);
+				env2[i] = ft_substr(var, 0, ft_strlen(var));
+				coin++;
+			}
+		}
+		if (var && (ft_strlen(var) - 1) == ft_strlen(env2[i]) && \
+		var[ft_strlen(var) - 1] == '=')
+		{
+			if (ft_strnstr(var, env2[i], ft_strlen(env2[i])))
+			{
+				free (env2[i]);
+				env2[i] = ft_strjoin(var, value);
+				coin++;
+			}
 		}
 	}
 	if (var && coin == 0)
@@ -122,17 +146,21 @@ void	ft_export(char **cmd, char ***env)
 	var = NULL;
 	i = 1;
 	if (!cmd[i])
-		ft_env(*env);
+		ft_env(*env, 1);
 	while (cmd[i])
 	{
 		var = ft_subst_var(cmd[i]);
 		if (var)
+		{
 			if (ft_check_var(var, cmd[0]))
 				ft_export_job(var, (ft_strchr(cmd[i], '=') + 1), env);
-		if (var)
-		{
 			free(var);
 			var = NULL;
+		}
+		else
+		{
+			if (ft_check_var(cmd[i], cmd[0]))
+				ft_export_job(cmd[i], NULL, env);
 		}
 		i++;
 	}

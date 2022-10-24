@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 12:13:36 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/23 09:31:42 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/23 09:55:31 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_export(char **cmd, char ***env);
 void	ft_export_job(char *var, char *value, char ***env);
 
 //Prints the env
-void	ft_env(char **env);
+void	ft_env(char **env, int mode);
 
 //Removes variable from environment
 //Si no coincide no hace nada

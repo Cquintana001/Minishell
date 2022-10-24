@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:43:44 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/23 10:44:46 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/24 10:58:15 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,18 @@ int	check_pipe(char **tokens)
 	x = 0;
 	while (tokens[x])
 		x++;
-	if (x > 0 && (tokens[0][0] == '|' || tokens[x - 1][0] == '|'))
+ 
+	if (x > 0 && (tokens[0][0] == '|' ))
 	{
 		printf("syntax error near unexpected token `%s'\n",(tokens[0]));
 		return(1);
 	}
-	else if(x > 0 && tokens[x - 1][0] == '|' )
+	else if(x > 0 && tokens[x - 2][0] == '|' )
 	{
-		printf("syntax error near unexpected token `%s'\n",(tokens[x-1]));
+		printf("syntax error near unexpected token `%s'\n",(tokens[x-2]));
 		return(1);
 		
 	}
 	return(0);
 }
+

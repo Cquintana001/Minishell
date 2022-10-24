@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:20:53 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/23 08:14:00 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/23 14:08:00 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,21 @@ int	ft_check_var(char *var, char *cmd)
 	int	i;
 
 	len = ft_strlen(var);
-	if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0)
-		len--;
 	i = 0;
 	while (var[i] && i < len)
 	{
 		if (!ft_isalnum(var[i]))
 		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(cmd, 2);
-			ft_putstr_fd(": `", 2);
-			ft_putstr_fd(var, 2);
-			ft_putendl_fd("': not a valid identifier", 2);
-			return (0);
+			if (!(ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0 \
+			&& var[i] == '=' && !var[i + 1]))
+			{
+				ft_putstr_fd("minishell: ", 2);
+				ft_putstr_fd(cmd, 2);
+				ft_putstr_fd(": `", 2);
+				ft_putstr_fd(var, 2);
+				ft_putendl_fd("': not a valid identifier", 2);
+				return (0);
+			}
 		}
 		i++;
 	}
@@ -70,7 +72,7 @@ void	ft_call_builtin(char **cmd, char ***envp)
 	if (ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])) == 0)
 		ft_chdir(cmd[1], envp);
 	if (ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])) == 0)
-		ft_env(*envp);
+		ft_env(*envp, 0);
 	if (ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0)
 		ft_pwd();
 	if (ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])) == 0)

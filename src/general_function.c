@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/23 10:42:36 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/24 11:09:29 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_lstclear1(t_data **lst)
 	}
 }
 
-int check_redirection1(char **red)
+int	check_redirection1(char **red)
 {
 	int x;
 
@@ -61,38 +61,40 @@ int check_redirection1(char **red)
 	
 	while(red != NULL && red[x])
 	{
-		if((red[x][0] == '<' ||red[x][0] == '>') && red[x+1] && (red[x+1][0] == '<' ||red[x+1][0] == '>'))
+		if((red[x][0] == '<' ||red[x][0] == '>') && red[x+2] && (red[x+2][0] == '<' ||red[x+2][0] == '>'))
 		{	
-			x++;
+			x+=2;
 			while(red[x] && (red[x][0] == '<' ||red[x][0] == '>'))
-				x++;
-			printf("bash: syntax error near unexpected token %s\n", red[x-1]);
+				x+=2;
+			printf("bash: syntax error near unexpected token `%s'\n", red[x-2]);
 			return(1);
 		}
-		x++;
+		if((red[x][0] == '<' ||red[x][0] == '>') && !red[x+2])
+		{	printf("bash: syntax error near unexpected token `%s'\n", red[x]);
+			return(1);
+		}
+		x+=2;
 	}
 	return(0);	
 }
+
+ 
 
 int	general_function(char *str, t_data **data, char **env2)
 {
 	char	*aux;
 	char	**tokens;
-	int		x;
 
-	x = 0;
 	aux = expansor(str);
 	tokens = fill_tokens(aux, ft_strlen(aux));
+	if(check_pipe(tokens))
+		return(1);
 	free(aux);
 	*data = redirection(tokens);
 	*data = commands(tokens, *data);
-	if(check_redirection1((*data)->redirection) || check_pipe(tokens))
-	{
-		free_d_array(tokens);	
-			return(1);
-	}
+	if(check_redirection1((*data)->redirection))
+		return(1);
 	free_d_array(tokens);
 	fill_cmd_path(*data, env2);
 	return(0);
 }
-
