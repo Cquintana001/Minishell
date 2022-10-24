@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:26:16 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/24 10:47:05 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/24 15:50:00 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "redirections_utils.h"
 #include "utils.h"
 #include <stdlib.h>
+#include "general_function.h"
 
 int	malloc_redirection(char **tokens, t_data **node)
 {

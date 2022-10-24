@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/24 10:51:09 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/24 16:32:01 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,11 @@ char	*get_str(char **env)
 
 	aux = ft_strjoin(ft_getenv(env, "USER"), "@minishell $ ");
 	str = readline(aux);
+	if(*str==0)
+	{
+		free(aux);
+		return(NULL);
+	}
 	free(aux);
 	aux = ft_strtrim(str, " ");
 	free(str);
@@ -139,19 +144,17 @@ int	main(int argc, char *argv[], char **envp)
 	while (1)
 	{
 		ft_signals();
-		str = get_str(envp);
-		ft_check_rl(str, &data);
-		ft_exit(str);
-		if (str && *str != '\0')
+		str = get_str(envp); 
+		if (str && *str != '\0'&& ft_check_rl(str, &data)!=-1)
 		{
 			add_history(str);
 			global = general_function(str, &data, env2);
+			if (tokens)
+				free_d_array(tokens);
 			if(!global)
 				ft_exec(data, &env2);
 			if(data)
 				ft_lstclear1(&data);
-			if (tokens)
-				free_d_array(tokens);
 		}
 		else if(str)
 			free(str);
