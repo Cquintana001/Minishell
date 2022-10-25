@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 08:54:40 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/08 10:22:16 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:55:18 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "utils2.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "exit.h"
 
 int	len(char *str)
 {
@@ -52,6 +53,8 @@ char	*dollar_variable(char *str)
 		l++;
 		x++;
 	}
+	 
+	 
 	return (array);
 }
 
@@ -78,9 +81,9 @@ int	expansor_variable(char **str, int x)
 
 	var = dollar_variable((*str + x));
 	first_part = ft_substr(*str, 0, x);
-	if (getenv(var))
+	if (ft_getenv2(var))
 	{
-		second_part = ft_strjoin(first_part, getenv(var));
+		second_part = ft_strjoin(first_part, ft_getenv2(var));
 		free(first_part);
 	}
 	else

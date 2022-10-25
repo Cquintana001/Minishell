@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:26:16 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/24 15:50:00 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:33:14 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_data	*redirection(char **tokens)
 	nodes = ft_lstnew2();
 	aux = nodes;
 	x = 0;
-	while (tokens[x])
+	while (tokens && tokens[x])
 	{
 		nodes = put_last_node(nodes);
 		i = fill_redirection(tokens + x, nodes);

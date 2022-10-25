@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:20:53 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/23 14:08:00 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/25 11:45:32 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,19 @@ void	ft_call_builtin(char **cmd, char ***envp)
 	int	i;
 
 	i = 0;
-	if (ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0)
+	if (ft_strncmp(cmd[0], "export", 6) == 0)
 		ft_export(cmd, envp);
-	if (ft_strncmp(cmd[0], "unset", ft_strlen(cmd[0])) == 0)
+	if (ft_strncmp(cmd[0], "unset", 5) == 0)
 		while (cmd[++i])
 			if (ft_check_var(cmd[i], cmd[0]))
 				ft_unset(cmd[i], envp);
-	if (ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])) == 0)
+	if (ft_strncmp(cmd[0], "cd", 2) == 0)
 		ft_chdir(cmd[1], envp);
-	if (ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])) == 0)
+	if (ft_strncmp(cmd[0], "env", 3) == 0)
 		ft_env(*envp, 0);
-	if (ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0)
+	if (ft_strncmp(cmd[0], "pwd", 3) == 0)
 		ft_pwd();
-	if (ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])) == 0)
+	if (ft_strncmp(cmd[0], "echo", 4) == 0)
 		ft_echo(&cmd[1], *envp);
 }
 

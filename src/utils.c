@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:36:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/22 10:35:00 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:34:23 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	free_d_array(char **array)
 	int	x;
 
 	x = 0;
-	while (array[x])
+	while (array && array[x])
 	{
 		free(array[x]);
 		x++;

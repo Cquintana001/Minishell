@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:43:44 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/24 10:58:15 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:32:44 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	check_pipe(char **tokens)
 	int	x;
 
 	x = 0;
-	while (tokens[x])
+	while (tokens && tokens[x])
 		x++;
  
 	if (x > 0 && (tokens[0][0] == '|' ))

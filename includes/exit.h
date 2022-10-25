@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:40:33 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/21 13:41:23 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:54:17 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 
  
 int ft_exit(char *str);
+char  *ft_getenv2(char *s);
 
 #endif

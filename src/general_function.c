@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/24 11:09:29 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/25 11:17:54 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ int	check_redirection1(char **red)
 			x+=2;
 			while(red[x] && (red[x][0] == '<' ||red[x][0] == '>'))
 				x+=2;
-			printf("bash: syntax error near unexpected token `%s'\n", red[x-2]);
+			printf("bash: syntax error near unexpected token1 `%s'\n", red[x-2]);
 			return(1);
 		}
-		if((red[x][0] == '<' ||red[x][0] == '>') && !red[x+2])
-		{	printf("bash: syntax error near unexpected token `%s'\n", red[x]);
+		else if((red[x][0] == '<' ||red[x][0] == '>') && red[x+2]!= NULL)
+		{	printf("bash: syntax error near unexpected token2 `%s'\n", red[x+2]);
 			return(1);
 		}
 		x+=2;
