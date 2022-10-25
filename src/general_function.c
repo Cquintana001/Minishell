@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/25 11:17:54 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/25 12:07:45 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	check_redirection1(char **red)
 			printf("bash: syntax error near unexpected token1 `%s'\n", red[x-2]);
 			return(1);
 		}
-		else if((red[x][0] == '<' ||red[x][0] == '>') && red[x+2]!= NULL)
+		else if((red[x][0] == '<' ||red[x][0] == '>') && red[x+2]== NULL)
 		{	printf("bash: syntax error near unexpected token2 `%s'\n", red[x+2]);
 			return(1);
 		}
@@ -93,7 +93,10 @@ int	general_function(char *str, t_data **data, char **env2)
 	*data = redirection(tokens);
 	*data = commands(tokens, *data);
 	if(check_redirection1((*data)->redirection))
-		return(1);
+		{
+			free_d_array(tokens);
+			return(1);
+		}
 	free_d_array(tokens);
 	fill_cmd_path(*data, env2);
 	return(0);
