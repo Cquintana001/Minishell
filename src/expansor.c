@@ -6,22 +6,21 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 08:54:40 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/25 10:55:18 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/26 10:38:44 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "lexer.h"
 #include "utils.h"
 #include "utils2.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "exit.h"
+#include "../libft/libft.h"
 
 int	len(char *str)
 {
 	int	x;
-
 	x = 0;
 	str++;
 	if (*str == '?' || *str == '_')
@@ -34,13 +33,11 @@ int	len(char *str)
 	}
 	return (x);
 }
-
 char	*dollar_variable(char *str)
 {
 	char	*array;
 	int		l;
 	int		x;
-
 	l = len(str);
 	array = (char *)calloc((l + 1), sizeof(char));
 	ft_memset(array, 'a', l);
@@ -57,11 +54,9 @@ char	*dollar_variable(char *str)
 	 
 	return (array);
 }
-
 int	find_pos(char *str, int x)
 {
 	int	i;
-
 	i = x + 1;
 	while (str[i])
 	{
@@ -71,14 +66,12 @@ int	find_pos(char *str, int x)
 	}
 	return (-1);
 }
-
 int	expansor_variable(char **str, int x)
 {
 	char	*var;
 	char	*first_part;
 	char	*second_part;
 	char	*aux;
-
 	var = dollar_variable((*str + x));
 	first_part = ft_substr(*str, 0, x);
 	if (ft_getenv2(var))
@@ -96,12 +89,10 @@ int	expansor_variable(char **str, int x)
 	free(var);
 	return (-1);
 }
-
 char	*expansor(char *str)
 {
 	int	x;
 	int	i;
-
 	i = -1;
 	x = 0;
 	while (str[x])

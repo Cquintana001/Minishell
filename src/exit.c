@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 07:51:39 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/25 11:10:37 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/26 10:43:25 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@ int ft_exit(char *str)
 
     return(0);   
 }
-/* char *ft_status(int status)   //<=== AQUÍ IRIA COMO PARAMETRO TU FUNCIÓN.
-{
-    char *s;
-    printf("entra\n");
-    s=ft_itoa(status);
-    return(s);    
-} */
-
 
 char  *ft_getenv2(char *s)
 {

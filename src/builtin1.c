@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 11:35:02 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/24 09:53:08 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/24 10:38:12 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,6 @@ void	ft_chdir(char *dir, char ***env)
 	free (pwd);
 	chdir(dir);
 	pwd = getcwd(NULL, 0);
-	ft_export_job("OLDPWD=", pwd, env);
+	ft_export_job("PWD=", pwd, env);
 	free (pwd);
 }

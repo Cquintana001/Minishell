@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/25 12:07:45 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:45:40 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	check_redirection1(char **red)
 	
 	while(red != NULL && red[x])
 	{
-		if((red[x][0] == '<' ||red[x][0] == '>') && red[x+2] && (red[x+2][0] == '<' ||red[x+2][0] == '>'))
+				if((red[x][0] == '<' ||red[x][0] == '>') && red[x+2] && (red[x+2][0] == '<' ||red[x+2][0] == '>'))
 		{	
 			x+=2;
 			while(red[x] && (red[x][0] == '<' ||red[x][0] == '>'))
@@ -77,8 +77,6 @@ int	check_redirection1(char **red)
 	}
 	return(0);	
 }
-
- 
 
 int	general_function(char *str, t_data **data, char **env2)
 {

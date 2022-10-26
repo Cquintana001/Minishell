@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/23 08:16:14 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:53:30 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,29 @@
 #include <signal.h>
 
 //Makes required redirections before executing the command
-static void	ft_dup_work(t_fd *fd)
+static int	ft_dup_work(t_fd *fd, int mode)
 {
-	if (fd->fdin != -1)
+	if (fd->fdin == -1)
+	{
+		close(fd->fdin);
+		ft_putstr_fd("minishell: No such file or directory\n", 2);
+		if (mode == 0)
+			exit (1);
+		return (0);
+	}
+	if (mode == 1)
+		fd->fdin = -2;
+	if (fd->fdin >= 0)
 	{
 		dup2(fd->fdin, STDIN_FILENO);
 		close (fd->fdin);
 	}
-	if (fd->fdout != -1)
+	if (fd->fdout >= 0)
 	{
 		dup2(fd->fdout, STDOUT_FILENO);
 		close (fd->fdout);
 	}
+	return (1);
 }
 
 //Calls ft_get_fd for every redirection
@@ -60,27 +71,29 @@ static void	ft_dups(char **redir, t_fd *fd)
 }
 
 //Makes the required dups and executes the command
-static void	ft_child(t_data *node, char **envp, t_fd *fd)
+static void	ft_child(t_data *node, char **envp, t_fd *fd, int ret)
 {
-	ft_dup_work(fd);
+	ft_dup_work(fd, 0);
 	if (node->cmd)
 	{
 		if (ft_is_builtin(node->cmd))
 			ft_call_builtin(node->cmd, &envp);
 		else if (execve(node->path, node->cmd, envp) == -1)
 		{
-			ft_putstr_fd("minibash: ", 2);
+			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(node->cmd[0], 2);
-			ft_putendl_fd(" bash: command not found", 2);
+			ft_putendl_fd(" command not found", 2);
+			ft_putendl_fd("ft_exit con frees etc", 2);
+			ret = 127;
 		}
 	}
-	exit(0); //FT_EXIT WORK IN PROGRESS
+	exit(ret);
 }
 
 //Creates a pipe and makes a fork.
 //Calls ft_child in the child process
 //Parent process closes fdin and fdout and waits for the child to end
-static void	ft_pipex(t_data *node, char **envp, t_fd *fd)
+static void	ft_pipex(t_data *node, char **envp, t_fd *fd, int ret)
 {
 	pid_t	pid;
 
@@ -94,18 +107,16 @@ static void	ft_pipex(t_data *node, char **envp, t_fd *fd)
 		close(fd->pipe[0]);
 		dup2(fd->pipe[1], STDOUT_FILENO);
 		close (fd->pipe[1]);
-		ft_child(node, envp, fd);
+		ft_child(node, envp, fd, ret);
 	}
 	else
 	{
 		close(fd->pipe[1]);
 		dup2(fd->pipe[0], STDIN_FILENO);
 		close (fd->pipe[0]);
-		ft_close(fd->fdin);
-		fd->fdin = -1;
-		ft_close(fd->fdout);
-		fd->fdout = -1;
-		wait(NULL);
+		ft_close(&fd->fdin, 1);
+		ft_close(&fd->fdout, 1);
+		waitpid(pid, &ret, 0);
 	}
 }
 
@@ -114,6 +125,7 @@ void	ft_exec(t_data *node, char ***envp)
 	int		node_nb;
 	int		pid;
 	t_fd	fd;
+	int		ret;
 
 	ft_init_fd(&fd);
 	node_nb = ft_count_nodes(node);
@@ -121,10 +133,9 @@ void	ft_exec(t_data *node, char ***envp)
 	if (node_nb == 1 && ft_is_builtin(node->cmd) == 2)
 	{
 		ft_dups(node->redirection, &fd);
-		ft_close(fd.fdin);
-		fd.fdin = -1;
-		ft_dup_work(&fd);
-		ft_call_builtin(node->cmd, envp);
+		ft_close(&fd.fdin, 0);
+		if (ft_dup_work(&fd, 1))
+			ft_call_builtin(node->cmd, envp);
 	}
 	else
 	{
@@ -135,14 +146,17 @@ void	ft_exec(t_data *node, char ***envp)
 		{
 			while (--node_nb)
 			{
-				ft_pipex(node, *envp, &fd);
+				ft_pipex(node, *envp, &fd, ret);
 				node = node->next;
 			}
 			ft_dups(node->redirection, &fd);
-			ft_child(node, *envp, &fd);
+			ft_child(node, *envp, &fd, ret);
 		}
 		else
-			wait(NULL);
+		{
+			waitpid(pid, &ret, 0);
+			printf("STATUS exec = %d\n", ret);
+		}
 	}
 	ft_close_all(&fd);
 	ft_reset_fd(&fd);

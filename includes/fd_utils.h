@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:15:34 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/23 09:30:15 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:45:41 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 typedef struct s_fd
 {
-	int	in;
-	int	out;
-	int	fdin;
-	int	fdout;
-	int	pipe[2];
-	int here_doc;
-	char *key;
+	int		in;
+	int		out;
+	int		fdin;
+	int		fdout;
+	int		pipe[2];
+	int		here_doc;
+	char	*key;
 }			t_fd;
 
 //Closes an fd only if it is used
-void	ft_close(int fd);
+void	ft_close(int *fd, int mode);
 
 //Closes all the fds of a t_fd structure
 void	ft_close_all(t_fd *fd);

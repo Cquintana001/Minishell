@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/25 10:30:04 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:13:19 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 #include "signals.h"
 #include "exit.h"
 
-int global;
+int g_status;
 
 int	count_char_index(char *str, char a)
 {
@@ -116,7 +116,7 @@ char	*get_str(char **env)
 
 	aux = ft_strjoin(ft_getenv(env, "USER"), "@minishell $ ");
 	str = readline(aux);
-	if(*str==0)
+		if(*str==0)
 	{
 		free(aux);
 		return(NULL);
@@ -129,36 +129,38 @@ char	*get_str(char **env)
 
 int	main(int argc, char *argv[], char **envp)
 {
-	char	*str;
-	char	**tokens;
-	char	**env2;
-	t_data	*data;
-	
-	data =NULL;
+	extern int	g_status;
+	char		*str;
+	char		**tokens;
+	char		**env2;
+	t_data		*data;
+
+	g_status = 0;
+	(void)argc;
+	(void)argv;
 	tokens = NULL;
-	if (!argc || !argv)
-		exit(0);
-	argc = 0;
-	argv = NULL;
 	env2 = env_copy(envp);
 	while (1)
 	{
 		ft_signals();
 		str = get_str(envp);
-		 
 		if (str && *str != '\0'&& ft_check_rl(str, &data)!=-1)
 		{
-			ft_exit(str);
+		//ft_check_rl(str, &data);
+		ft_exit(str);
+		if (str && *str != '\0')
+		{
 			add_history(str);
-			global = general_function(str, &data, env2);
+			g_status = general_function(str, &data, env2);
 			if (tokens)
 				free_d_array(tokens);
-			if(!global)
+			if(!g_status)
 				ft_exec(data, &env2);
-			if(data)
-				ft_lstclear1(&data);
+		 	if (data)
+			ft_lstclear1(&data);
 		}
-		else if(str)
+		}
+		else if (str)
 			free(str);
 	}
 	free_d_array(env2);

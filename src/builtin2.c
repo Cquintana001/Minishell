@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:34:32 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/23 14:19:22 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/25 11:19:01 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,10 @@ void	ft_export(char **cmd, char ***env)
 	var = NULL;
 	i = 1;
 	if (!cmd[i])
+	{
+		printf("<<<<<<<<<<<<<<<<<<<<<<<<HOLA>>>>>>>>>>>>>>>>>>>>>>\n");
 		ft_env(*env, 1);
+	}
 	while (cmd[i])
 	{
 		var = ft_subst_var(cmd[i]);
