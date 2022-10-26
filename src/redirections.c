@@ -6,16 +6,16 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:26:16 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 10:32:58 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:23:51 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include "general_function.h"
 #include "redirections.h"
 #include "redirections_utils.h"
 #include "utils.h"
 #include <stdlib.h>
-#include "general_function.h"
 
 int	malloc_redirection(char **tokens, t_data **node)
 {
@@ -28,14 +28,14 @@ int	malloc_redirection(char **tokens, t_data **node)
 	index = 0;
 	while (tokens[x])
 	{
-		if (tokens[x] && tokens[x][0] == '|' && tokens[x +1][0] == '0')
-			break;
+		if (tokens[x] && tokens[x][0] == '|' && tokens[x + 1][0] == '0')
+			break ;
 		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x
 			+ 1][0] == '0')
 			len++;
 		x += 2;
 	}
-	if (tokens[x] && tokens[x][0] == '|'&& tokens[x +1][0] == '0')
+	if (tokens[x] && tokens[x][0] == '|' && tokens[x + 1][0] == '0')
 		index = x;
 	if (len > 0)
 	{
@@ -56,9 +56,9 @@ int	fill_redirection(char **tokens, t_data *node)
 	x = 0;
 	i = 0;
 	while (tokens[x])
-	{	
-		if (tokens[x] && tokens[x][0] == '|' && tokens[x +1][0] == '0')
-			break;
+	{
+		if (tokens[x] && tokens[x][0] == '|' && tokens[x + 1][0] == '0')
+			break ;
 		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x
 			+ 1][0] == '0')
 		{

@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 09:45:40 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:26:16 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@
 void	ft_lstclear1(t_data **lst)
 {
 	t_data	*aux;
-	int check;
+	int		check;
 
 	check = 0;
 	while (*lst)
 	{
 		aux = (*lst)->next;
 		if ((*lst)->cmd != NULL)
-		{	
-			 if(&(*lst)->cmd[0] !=&(*lst)->path  )
-			 	check =1;
+		{
+			if (&(*lst)->cmd[0] != &(*lst)->path)
+				check = 1;
 			free_d_array((*lst)->cmd);
 		}
-		if ((*lst)->path != NULL && check == 0 )
-		{	
+		if ((*lst)->path != NULL && check == 0)
+		{
 			free((*lst)->path);
 		}
 		if ((*lst)->redirection != NULL)
@@ -55,27 +55,30 @@ void	ft_lstclear1(t_data **lst)
 
 int	check_redirection1(char **red)
 {
-	int x;
+	int	x;
 
-	x=0;
-	
-	while(red != NULL && red[x])
+	x = 0;
+	while (red != NULL && red[x])
 	{
-				if((red[x][0] == '<' ||red[x][0] == '>') && red[x+2] && (red[x+2][0] == '<' ||red[x+2][0] == '>'))
-		{	
-			x+=2;
-			while(red[x] && (red[x][0] == '<' ||red[x][0] == '>'))
-				x+=2;
-			printf("bash: syntax error near unexpected token1 `%s'\n", red[x-2]);
-			return(1);
+		if ((red[x][0] == '<' || red[x][0] == '>') && red[x + 2] && (red[x
+				+ 2][0] == '<' || red[x + 2][0] == '>'))
+		{
+			x += 2;
+			while (red[x] && (red[x][0] == '<' || red[x][0] == '>'))
+				x += 2;
+			printf("bash: syntax error near unexpected token1 `%s'\n", red[x
+				- 2]);
+			return (1);
 		}
-		else if((red[x][0] == '<' ||red[x][0] == '>') && red[x+2]== NULL)
-		{	printf("bash: syntax error near unexpected token2 `%s'\n", red[x+2]);
-			return(1);
+		else if ((red[x][0] == '<' || red[x][0] == '>') && red[x + 2] == NULL)
+		{
+			printf("bash: syntax error near unexpected token2 `%s'\n", red[x
+				+ 2]);
+			return (1);
 		}
-		x+=2;
+		x += 2;
 	}
-	return(0);	
+	return (0);
 }
 
 int	general_function(char *str, t_data **data, char **env2)
@@ -85,17 +88,17 @@ int	general_function(char *str, t_data **data, char **env2)
 
 	aux = expansor(str);
 	tokens = fill_tokens(aux, ft_strlen(aux));
-	if(check_pipe(tokens))
-		return(1);
+	if (check_pipe(tokens))
+		return (1);
 	free(aux);
 	*data = redirection(tokens);
 	*data = commands(tokens, *data);
-	if(check_redirection1((*data)->redirection))
-		{
-			free_d_array(tokens);
-			return(1);
-		}
+	if (check_redirection1((*data)->redirection))
+	{
+		free_d_array(tokens);
+		return (1);
+	}
 	free_d_array(tokens);
 	fill_cmd_path(*data, env2);
-	return(0);
+	return (0);
 }

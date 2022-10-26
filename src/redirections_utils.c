@@ -6,14 +6,14 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:43:44 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 09:48:38 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:23:34 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "redirections.h" 
 #include "../libft/libft.h"
-#include <stdlib.h>
+#include "redirections.h"
 #include "utils.h"
+#include <stdlib.h>
 
 t_data	*ft_lstnew2(void)
 {
@@ -73,17 +73,15 @@ int	check_pipe(char **tokens)
 	x = 0;
 	while (tokens && tokens[x])
 		x++;
- 
-	if (x > 0 && (tokens[0][0] == '|' ))
+	if (x > 0 && (tokens[0][0] == '|'))
 	{
-		printf("syntax error near unexpected token `%s'\n",(tokens[0]));
-		return(1);
+		printf("syntax error near unexpected token `%s'\n", (tokens[0]));
+		return (1);
 	}
-	else if(x > 0 && tokens[x - 2][0] == '|' )
+	else if (x > 0 && tokens[x - 2][0] == '|')
 	{
-		printf("syntax error near unexpected token `%s'\n",(tokens[x-2]));
-		return(1);
-		
+		printf("syntax error near unexpected token `%s'\n", (tokens[x - 2]));
+		return (1);
 	}
-	return(0);
+	return (0);
 }

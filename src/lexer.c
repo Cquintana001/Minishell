@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 11:13:19 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:25:26 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "double_red.h"
 #include "environment.h"
 #include "executor.h"
+#include "exit.h"
 #include "expansor.h"
 #include "fd_utils.h"
 #include "fill_data.h"
@@ -21,6 +22,7 @@
 #include "general_function.h"
 #include "get_cmd_path.h"
 #include "redirections.h"
+#include "signals.h"
 #include "utils.h"
 #include "utils2.h"
 #include <fcntl.h>
@@ -28,10 +30,8 @@
 #include <readline/readline.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "signals.h"
-#include "exit.h"
 
-int g_status;
+int		g_status;
 
 int	count_char_index(char *str, char a)
 {
@@ -116,10 +116,10 @@ char	*get_str(char **env)
 
 	aux = ft_strjoin(ft_getenv(env, "USER"), "@minishell $ ");
 	str = readline(aux);
-		if(*str==0)
+	if (*str == 0)
 	{
 		free(aux);
-		return(NULL);
+		return (NULL);
 	}
 	free(aux);
 	aux = ft_strtrim(str, " ");
@@ -140,25 +140,26 @@ int	main(int argc, char *argv[], char **envp)
 	(void)argv;
 	tokens = NULL;
 	env2 = env_copy(envp);
+	data = NULL;
 	while (1)
 	{
 		ft_signals();
 		str = get_str(envp);
-		if (str && *str != '\0'&& ft_check_rl(str, &data)!=-1)
+		if (str && *str != '\0' && ft_check_rl(str, &data) != -1)
 		{
-		//ft_check_rl(str, &data);
-		ft_exit(str);
-		if (str && *str != '\0')
-		{
-			add_history(str);
-			g_status = general_function(str, &data, env2);
-			if (tokens)
-				free_d_array(tokens);
-			if(!g_status)
-				ft_exec(data, &env2);
-		 	if (data)
-			ft_lstclear1(&data);
-		}
+			//ft_check_rl(str, &data);
+			ft_exit(str);
+			if (str && *str != '\0')
+			{
+				add_history(str);
+				g_status = general_function(str, &data, env2);
+				if (tokens)
+					free_d_array(tokens);
+				if (!g_status)
+					ft_exec(data, &env2);
+				if (data)
+					ft_lstclear1(&data);
+			}
 		}
 		else if (str)
 			free(str);

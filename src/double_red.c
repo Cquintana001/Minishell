@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double_red.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:07:06 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/25 11:11:42 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:38:32 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ char	*double_redirection(char *key)
 		str = readline("heredoc> ");
 		if (!str)
 		{
-			printf("bash: warning: here-document delimited by end-of-file (wanted `end')\n");
+			printf("bash: warning: here-document delimited\
+			 by end-of-file (wanted `end')\n");
 			printf("ft_exit con frees etc\n");
 			break ;
 		}

@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:54:12 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 10:25:14 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:41:52 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	malloc_commands(char **tokens, t_data **node)
 	x = 0;
 	while (tokens[x])
 	{
-		if(tokens[x][0] == '|' && tokens[x+1][0] == '0')
-			break;
+		if (tokens[x][0] == '|' && tokens[x + 1][0] == '0')
+			break ;
 		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x + 2]
 			&& tokens[x + 1][0] == '0')
 			x += 4;
@@ -44,7 +44,7 @@ void	malloc_commands(char **tokens, t_data **node)
 			x += 2;
 		}
 	}
-	if(len > 0)
+	if (len > 0)
 	{
 		aux->cmd = (char **)ft_calloc((len + 1), sizeof(char *));
 		aux->cmd[len] = 0;
@@ -61,10 +61,10 @@ int	fill_commands(char **tokens, t_data *node)
 	x = 0;
 	aux = node;
 	malloc_commands(tokens, &node);
-	while (tokens[x] )
+	while (tokens[x])
 	{
-		if(tokens[x][0] == '|' && tokens[x+1][0] == '0')
-			break;
+		if (tokens[x][0] == '|' && tokens[x + 1][0] == '0')
+			break ;
 		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x
 			+ 1][0] == '0')
 		{
@@ -75,12 +75,12 @@ int	fill_commands(char **tokens, t_data *node)
 		}
 		else if (tokens[x])
 		{
-			aux->cmd[i] = ft_strdup(tokens[x]);;
+			aux->cmd[i] = ft_strdup(tokens[x]);
 			i++;
 			x += 2;
 		}
 	}
-	if (tokens[x] && tokens[x][0] == '|' && tokens[x +1][0] == '0')
+	if (tokens[x] && tokens[x][0] == '|' && tokens[x + 1][0] == '0')
 		return (x);
 	else
 		return (0);
