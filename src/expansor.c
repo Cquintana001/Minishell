@@ -6,34 +6,18 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 08:54:40 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 11:41:03 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/29 11:24:30 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "exit.h"
+#include "expansor_utils.h"
 #include "lexer.h"
 #include "utils.h"
 #include "utils2.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-int	len(char *str)
-{
-	int	x;
-
-	x = 0;
-	str++;
-	if (*str == '?' || *str == '_')
-		return (1);
-	while (*str && ((*str >= '0' && *str <= '9') || (*str >= 'A' && *str <= 'Z')
-			|| (*str >= 'a' && *str <= 'z') || *str == '_'))
-	{
-		str++;
-		x++;
-	}
-	return (x);
-}
 
 char	*dollar_variable(char *str)
 {
@@ -109,7 +93,8 @@ char	*expansor(char *str)
 		else if (str[x] == '\'' && second_char_exists(str + x, str[x])
 			&& x >= i)
 			x += count_char_index(str + x, str[x]);
-		if (str[x] == '$' && (str[x + 1] && str[x + 1] != '"'))
+		if (str[x] == '$' && (str[x + 1] && str[x + 1] != '"')
+			&& !check_next_char(str[x + 1]))
 		{
 			x = expansor_variable(&str, x);
 			i = -1;

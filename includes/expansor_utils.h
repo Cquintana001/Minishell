@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   expansor_utils.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 15:35:45 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 10:21:29 by caquinta         ###   ########.fr       */
+/*   Created: 2022/10/29 11:19:10 by caquinta          #+#    #+#             */
+/*   Updated: 2022/10/29 11:21:32 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef EXPANSOR_UTILS_H
+# define EXPANSOR_UTILS_H
+ 
 
-#ifndef UTILS_H
-# define UTILS_H
+int	check_next_char(char c);
+int	len(char *str);
 
-typedef struct s_data
-{
-	char	**cmd;
-	char	**redirection;
-	char	*path;
-	int		input;
-	int		output;
-	char 	**tokens;
-	struct s_data	*next;
-
-}			t_data;
-
-void		free_d_array(char **array);
-char		*find_path(char **envp);
-char		*check_if_command(char **envp, char *str);
-//int			file_exists(char *str);
-int			second_char_exists(char *str, char a);
 #endif

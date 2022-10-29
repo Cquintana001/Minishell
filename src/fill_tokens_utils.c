@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd_path.c                                     :+:      :+:    :+:   */
+/*   fill_tokens_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/08 10:27:09 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 10:25:55 by caquinta         ###   ########.fr       */
+/*   Created: 2022/10/29 11:12:27 by caquinta          #+#    #+#             */
+/*   Updated: 2022/10/29 11:17:26 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
-#include "stdlib.h"
-#include "utils.h"
-#include <stdio.h>
-
-void	fill_cmd_path(t_data *list, char **envp)
+int	check_assign(int check, char a, char **quote, char *c)
 {
-	char	*path1;
-
-	path1 = NULL;
-	while (1)
+	if (a != **quote && check == 0)
 	{
-		if (list->cmd)
-		{
-			if (list->cmd && !ft_is_builtin(list->cmd))
-				path1 = check_if_command(envp, list->cmd[0]);
-		}
-		if (path1 != 0)
-			list->path = path1;
-		if (list->next == NULL)
-			break ;
-		list = list->next;
+		check = 1;
+		*c = **quote;
+		(*quote)++;
 	}
+	else if (a != **quote && check == 1)
+	{
+		check = 0;
+		(*quote)++;
+	}
+	return (check);
+}
+
+void	count_assign(char **aux, char **quote, int *x, char a)
+{
+	**aux = a;
+	(*quote)++;
+	(*aux)++;
+	(*x)++;
+}
+
+int	check_char(char *str)
+{
+	if (*str == *(str + 1))
+		return (2);
+	return (1);
 }

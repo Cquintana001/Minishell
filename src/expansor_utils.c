@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd_path.c                                     :+:      :+:    :+:   */
+/*   expansor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/08 10:27:09 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 10:25:55 by caquinta         ###   ########.fr       */
+/*   Created: 2022/10/29 11:18:39 by caquinta          #+#    #+#             */
+/*   Updated: 2022/10/29 11:24:44 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
-#include "stdlib.h"
-#include "utils.h"
-#include <stdio.h>
-
-void	fill_cmd_path(t_data *list, char **envp)
+int	check_next_char(char c)
 {
-	char	*path1;
+	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a'
+			&& c <= 'z') || c == '_')
+		return (0);
+	return (1);
+}
 
-	path1 = NULL;
-	while (1)
+int	len(char *str)
+{
+	int	x;
+
+	x = 0;
+	str++;
+	if (*str == '?' || *str == '_')
+		return (1);
+	while (*str && ((*str >= '0' && *str <= '9') || (*str >= 'A' && *str <= 'Z')
+			|| (*str >= 'a' && *str <= 'z') || *str == '_'))
 	{
-		if (list->cmd)
-		{
-			if (list->cmd && !ft_is_builtin(list->cmd))
-				path1 = check_if_command(envp, list->cmd[0]);
-		}
-		if (path1 != 0)
-			list->path = path1;
-		if (list->next == NULL)
-			break ;
-		list = list->next;
+		str++;
+		x++;
 	}
+	return (x);
 }

@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 12:25:26 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/29 12:09:39 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include "get_cmd_path.h"
 #include "redirections.h"
 #include "signals.h"
+#include "status.h"
 #include "utils.h"
 #include "utils2.h"
 #include <fcntl.h>
@@ -116,18 +117,19 @@ char	*get_str(char **env)
 
 	aux = ft_strjoin(ft_getenv(env, "USER"), "@minishell $ ");
 	str = readline(aux);
-	if (*str == 0)
+	free(aux);
+	if (str == NULL || *str == 0)
 	{
-		free(aux);
+		if (*str == 0)
+			free(str);
 		return (NULL);
 	}
-	free(aux);
 	aux = ft_strtrim(str, " ");
 	free(str);
 	return (aux);
 }
 
-int	main(int argc, char *argv[], char **envp)
+/* int	main(int argc, char *argv[], char **envp)
 {
 	extern int	g_status;
 	char		*str;
@@ -139,24 +141,23 @@ int	main(int argc, char *argv[], char **envp)
 	(void)argc;
 	(void)argv;
 	tokens = NULL;
-	env2 = env_copy(envp);
 	data = NULL;
+	env2 = env_copy(envp);
 	while (1)
 	{
 		ft_signals();
 		str = get_str(envp);
 		if (str && *str != '\0' && ft_check_rl(str, &data) != -1)
 		{
-			//ft_check_rl(str, &data);
 			ft_exit(str);
-			if (str && *str != '\0')
+			if (str && *str != '\0' && ft_status(str))
 			{
 				add_history(str);
 				g_status = general_function(str, &data, env2);
 				if (tokens)
 					free_d_array(tokens);
 				if (!g_status)
-					ft_exec(data, &env2);
+					g_status = ft_exec(data, &env2);
 				if (data)
 					ft_lstclear1(&data);
 			}
@@ -166,4 +167,4 @@ int	main(int argc, char *argv[], char **envp)
 	}
 	free_d_array(env2);
 	return (0);
-}
+} */

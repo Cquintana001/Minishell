@@ -6,5 +6,6 @@
 int count_word_index(char *str);
 int count_char_index(char *str, char a);
 int	count_tokens(char *str);
+char	*get_str(char **env);
 
 #endif

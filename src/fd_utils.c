@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:13:27 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/25 10:47:50 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:11:38 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include "signals.h"
+
+extern int	g_status;
 
 void	ft_get_fd(char *file, int mode, t_fd *fd)
 {
@@ -37,12 +39,7 @@ void	ft_get_fd(char *file, int mode, t_fd *fd)
 		fd->fdout = open(file, O_CREAT | O_RDWR | O_APPEND, 0644);
 	}
 	else if (mode == 3)
-	{
-		if (!file)
-			ft_putstr_fd("syntax error near unexpected token `newline'\n", 2);
-		else
-			here_doc(file, fd);
-	}
+		here_doc(file, fd);
 }
 
 void	ft_close(int *fd, int mode)

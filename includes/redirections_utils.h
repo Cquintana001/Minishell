@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections_utils.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:48:10 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 09:47:43 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:46:24 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ t_data	*ft_lstnew2(void);
 t_data	*ft_lstlast2(t_data *lst);
 void	ft_lstadd_back2(t_data **lst, t_data *new);
 t_data	*put_last_node(t_data *nodes);
-int	check_pipe(char **tokens);
+int		check_pipe(char **tokens);
 
 #endif

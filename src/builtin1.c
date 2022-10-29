@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 11:35:02 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/24 10:38:12 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/28 10:12:41 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	ft_echo(char **cmd, char **env)
 		i = flag;
 		while (cmd[i])
 		{
-			if (ft_strncmp(cmd[i], "~", ft_strlen(cmd[i])) == 0)
+			if (cmd[i][0] == '~' && \
+			ft_strncmp(cmd[i], "~", ft_strlen(cmd[i])) == 0)
 				ft_putstr_fd(ft_getenv(env, "HOME"), 1);
 			else
 				ft_putstr_fd(cmd[i], 1);

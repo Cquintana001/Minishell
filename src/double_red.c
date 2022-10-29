@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double_red.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:07:06 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 11:38:32 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/27 09:29:21 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ char	*double_redirection(char *key)
 		str = readline("heredoc> ");
 		if (!str)
 		{
-			printf("bash: warning: here-document delimited\
-			 by end-of-file (wanted `end')\n");
-			printf("ft_exit con frees etc\n");
+			ft_putstr_fd("bash: warning: here-document delimited by\
+			 end-of-file (wanted `end')\n", 2);
+			ft_putstr_fd("ft_exit pero la global vale 0\n", 2);
 			break ;
 		}
 		if (!ft_strncmp(str, key, __INT_MAX__))
@@ -75,7 +75,7 @@ void	here_doc(char *key, t_fd *fd)
 		if (str)
 			ft_putendl_fd(str, 1);
 		close(fd1[1]);
-		exit(0); //ft_exit
+		exit(0);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:36:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 10:35:37 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/29 10:21:21 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,24 @@ char	*find_path(char **envp)
 	return (0);
 }
 
+char	*check_str(char *f, char *str, char *cmd, char ***p)
+{
+	if (access(f, F_OK) == 0)
+	{
+		free(cmd);
+		free_d_array(*p);
+		return (f);
+	}
+	else if (access(str, F_OK) == 0)
+	{
+		free(cmd);
+		free(f);
+		free_d_array(*p);
+		return (str);
+	}
+	return (NULL);
+}
+
 char	*check_if_command(char **envp, char *str)
 {
 	char	**path_list;
@@ -69,19 +87,9 @@ char	*check_if_command(char **envp, char *str)
 	while (path_list[x])
 	{
 		full_cmd_path = ft_strjoin(path_list[x], cmd);
-		if (access(full_cmd_path, F_OK) == 0)
-		{
-			free(cmd);
-			free_d_array(path_list);
+		full_cmd_path = check_str(full_cmd_path, str, cmd, &path_list);
+		if (full_cmd_path != NULL)
 			return (full_cmd_path);
-		}
-		else if (access(str, F_OK) == 0)
-		{
-			free(cmd);
-			free(full_cmd_path);
-			free_d_array(path_list);
-			return (str);
-		}
 		free(full_cmd_path);
 		x++;
 	}
@@ -90,10 +98,10 @@ char	*check_if_command(char **envp, char *str)
 	return (0);
 }
 
-int	file_exists(char *str)
+/* int	file_exists(char *str)
 {
 	char	*file;
 
 	file = ft_strjoin("./", str);
 	return (access(file, F_OK));
-}
+} */

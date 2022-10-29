@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 09:45:14 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/26 12:24:12 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/28 11:03:48 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "general_function.h"
-#include <readline/history.h>
 #include <readline/readline.h>
+#include <readline/history.h>
 #include <signal.h>
 #include <signals.h>
-#include <stdbool.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
 #include <unistd.h>
+#include "general_function.h"
 
 void	rl_replace_line(const char *text, int clear_undo);
 
@@ -43,14 +43,14 @@ void	signal_handler_in_cat(int num)
 	if (num == SIGINT)
 	{
 		printf("\n");
-		printf("ft_exit con frees etc\n");
-		exit(0);
+		printf ("ft_exit con frees etc\n");
+		exit (0);
 	}
 	if (num == SIGQUIT)
 	{
 		printf("^\\Quit: 3\n");
-		printf("ft_exit con frees etc\n");
-		exit(0);
+		printf ("ft_exit con frees etc\n");
+		exit (0);
 	}
 }
 
@@ -65,9 +65,7 @@ int	ft_check_rl(char *str, t_data **data)
 	if (str == NULL)
 	{
 		printf("\n");
-		//printf ("/////------>ft_exit <------\n");
 		ft_lstclear1(data);
-		//(void) data;
 		return (-1);
 	}
 	return (0);
