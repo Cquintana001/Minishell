@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/11/03 17:07:46 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/03 17:59:33 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ void	ft_lstclear1(t_data **lst)
 			free_d_array((*lst)->cmd);
 		}
 		if ((*lst)->path != NULL)
-		{		
+		{	
 			free((*lst)->path);
-	
 		}
 		if ((*lst)->redirection != NULL)
 			free_d_array((*lst)->redirection);

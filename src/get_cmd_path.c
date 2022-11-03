@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:27:09 by caquinta          #+#    #+#             */
-/*   Updated: 2022/11/03 16:56:36 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:03:02 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	fill_cmd_path(t_data *list, char **envp)
 		{
 			if (list->cmd && !ft_is_builtin(list->cmd))
 				path1 = check_if_command(envp, list->cmd[0]);		 
-		}
 		if (path1 != 0)
 			list->path = path1;
+		}
 		if(ft_is_builtin(list->cmd)>0)
 			list->path = NULL;
 		if (list->next == NULL)
