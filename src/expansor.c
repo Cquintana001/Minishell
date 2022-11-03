@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 08:54:40 by caquinta          #+#    #+#             */
-/*   Updated: 2022/11/03 09:54:04 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/03 10:11:57 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,19 @@ int	find_pos(char *str, int x)
 
 char *check_var(char *var, char *first, char *second)
 {
-	if (ft_getenv2(var) || ft_strncmp("?", var, INT64_MAX) == 0)
+	char *var1;
+	
+	var1 = NULL;
+	if (ft_getenv2(var))
 	{
 		second = ft_strjoin(first, ft_getenv2(var));
 		free(first);
 	}
 	else if (ft_strncmp("?", var, INT64_MAX) == 0)
 	{
-		second = ft_strjoin(first, ft_itoa(g_status));
+		var = ft_itoa(g_status);
+		second = ft_strjoin(first, var);
+		free(var);
 		free(first);
 	}
 	return(second);

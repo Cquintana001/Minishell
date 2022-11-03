@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/31 13:23:52 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:16:39 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <signal.h>
+#include "signals.h"
 
 extern int	g_status;
 
@@ -42,6 +43,7 @@ static int	ft_exec_loop(int node_nb, t_fd *fd, char ***envp, t_data *node)
 	int		pid;
 
 	ret = 0;
+	ft_signals_in_cat();
 	pid = fork();
 	if (pid == 0)
 	{
@@ -60,7 +62,9 @@ static int	ft_exec_loop(int node_nb, t_fd *fd, char ***envp, t_data *node)
 			exit(127);
 	}
 	else
+	{
 		waitpid(pid, &ret, 0);
+	}
 	return (ret);
 }
 
@@ -71,7 +75,8 @@ void	ft_exec(t_data *node, char ***envp)
 
 	ft_init_fd(&fd);
 	node_nb = ft_count_nodes(node);
-	signal(SIGINT, SIG_IGN);
+	//signal(SIGINT, SIG_IGN);
+	signal(SIGINT, 0);
 	if (ft_single_builtin(node, fd, envp, node_nb))
 		g_status = ft_exec_loop(node_nb, &fd, envp, node);
 	ft_close_all(&fd);

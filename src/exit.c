@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 07:51:39 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/31 09:14:40 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/03 10:10:14 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ char	*ft_getenv2(char *s)
 {
 	if (getenv(s))
 		return (getenv(s));
-	else if (ft_strncmp(s, "?", ft_strlen(s)) == 0)
-		return (ft_itoa(g_status));
 	else
 		return (NULL);
 }

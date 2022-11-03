@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 12:07:30 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/31 13:25:11 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:09:58 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include <signal.h>
+#include "signals.h"
 
 int	ft_dup_work(t_fd *fd, int mode)
 {
@@ -70,6 +70,7 @@ void	ft_dups(char **redir, t_fd *fd)
 
 void	ft_child(t_data *node, char **envp, t_fd *fd, int ret)
 {
+	//ft_signals_in_cat();
 	ft_dup_work(fd, 0);
 	if (node->cmd)
 	{
@@ -79,7 +80,9 @@ void	ft_child(t_data *node, char **envp, t_fd *fd, int ret)
 			ret = 0;
 		}
 		else
+		{	
 			execve(node->path, node->cmd, envp);
+		}
 	}
 	free(node->path);
 	exit(ret);

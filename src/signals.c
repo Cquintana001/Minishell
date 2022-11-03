@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 09:45:14 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/30 12:49:02 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:20:39 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,14 @@ void	ft_signals(void)
 void	signal_handler_in_cat(int num)
 {
 	if (num == SIGINT)
-	{
-		printf("\n");
-		exit (0);
-	}
+		write(2, "\n", 1);
 	if (num == SIGQUIT)
-	{
-		printf("^\\Quit: 3\n");
-		exit (0);
-	}
+		write(2, "^\\Quit: 3\n", 10);
 }
 
 void	ft_signals_in_cat(void)
 {
+ 
 	signal(SIGINT, signal_handler_in_cat);
 	signal(SIGQUIT, signal_handler_in_cat);
 }
