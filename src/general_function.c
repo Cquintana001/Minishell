@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 12:04:49 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:09:36 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,16 @@
 void	ft_lstclear1(t_data **lst)
 {
 	t_data	*aux;
-	int		check;
 
-	check = 0;
 	while (*lst)
 	{
 		aux = (*lst)->next;
 		if ((*lst)->cmd != NULL)
 		{
-			if (&(*lst)->cmd[0] != &(*lst)->path)
-				check = 1;
+			if (&(*lst)->cmd[0] != &(*lst)->path) 			 
 			free_d_array((*lst)->cmd);
 		}
-		if ((*lst)->path != NULL && check == 0)
+		if ((*lst)->path != NULL  )
 		{
 			free((*lst)->path);
 		}

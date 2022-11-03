@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:36:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 10:21:21 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/03 10:00:47 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,20 @@ char	*find_path(char **envp)
 
 char	*check_str(char *f, char *str, char *cmd, char ***p)
 {
-	if (access(f, F_OK) == 0)
+	if (access(str, F_OK) == 0)
+	{
+		free(cmd);
+		free(f);
+		free_d_array(*p);
+		return (ft_strdup(str));
+	}
+	else if (access(f, F_OK) == 0)
 	{
 		free(cmd);
 		free_d_array(*p);
 		return (f);
 	}
-	else if (access(str, F_OK) == 0)
-	{
-		free(cmd);
-		free(f);
-		free_d_array(*p);
-		return (str);
-	}
+	free(f);
 	return (NULL);
 }
 
@@ -82,9 +83,11 @@ char	*check_if_command(char **envp, char *str)
 	x = 0;
 	if (!str)
 		return (0);
+	if (!access(str, F_OK))
+		return (ft_strdup(str));
 	cmd = ft_strjoin("/", str);
 	path_list = ft_split(find_path(envp), ':');
-	while (path_list[x])
+	while (path_list && path_list[x])
 	{
 		full_cmd_path = ft_strjoin(path_list[x], cmd);
 		full_cmd_path = check_str(full_cmd_path, str, cmd, &path_list);
@@ -94,14 +97,7 @@ char	*check_if_command(char **envp, char *str)
 		x++;
 	}
 	free(cmd);
-	free_d_array(path_list);
+	if (path_list)
+		free_d_array(path_list);
 	return (0);
 }
-
-/* int	file_exists(char *str)
-{
-	char	*file;
-
-	file = ft_strjoin("./", str);
-	return (access(file, F_OK));
-} */

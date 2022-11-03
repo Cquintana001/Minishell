@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:07:06 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/27 09:29:21 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/31 13:07:17 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <readline/readline.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+
+extern int g_status;
 
 char	*add_line_break(char *aux, char *str)
 {
@@ -42,9 +44,8 @@ char	*double_redirection(char *key)
 		str = readline("heredoc> ");
 		if (!str)
 		{
-			ft_putstr_fd("bash: warning: here-document delimited by\
-			 end-of-file (wanted `end')\n", 2);
-			ft_putstr_fd("ft_exit pero la global vale 0\n", 2);
+			if (aux)
+				free(aux);
 			break ;
 		}
 		if (!ft_strncmp(str, key, __INT_MAX__))
@@ -73,7 +74,10 @@ void	here_doc(char *key, t_fd *fd)
 		close(fd1[0]);
 		str = double_redirection(key);
 		if (str)
-			ft_putendl_fd(str, 1);
+		{
+			ft_putendl_fd(str, fd1[1]);
+			free (str);
+		}
 		close(fd1[1]);
 		exit(0);
 	}

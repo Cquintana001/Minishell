@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expansor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:19:15 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 11:19:57 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/29 12:44:41 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPANSOR_H
 # define EXPANSOR_H
- 
 
-char *expansor(char *str);
- 
+char	*expansor(char *str);
 
 #endif

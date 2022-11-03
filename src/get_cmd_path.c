@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:27:09 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 10:25:55 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/24 09:52:34 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
 #include "stdlib.h"
 #include "utils.h"
 #include <stdio.h>
+#include "executor.h"
 
 void	fill_cmd_path(t_data *list, char **envp)
 {

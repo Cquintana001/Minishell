@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/29 08:09:07 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/10/31 13:23:52 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include <unistd.h>
 #include <signal.h>
 
+extern int	g_status;
+
 static int	ft_single_builtin(t_data *node, t_fd fd, char ***envp, int node_nb)
 {
 	if (node_nb == 1 && ft_is_builtin(node->cmd) == 2)
@@ -34,42 +36,44 @@ static int	ft_single_builtin(t_data *node, t_fd fd, char ***envp, int node_nb)
 	return (1);
 }
 
-int	ft_exec(t_data *node, char ***envp)
+static int	ft_exec_loop(int node_nb, t_fd *fd, char ***envp, t_data *node)
 {
-	int		node_nb;
-	int		pid;
-	t_fd	fd;
 	int		ret;
+	int		pid;
 
 	ret = 0;
+	pid = fork();
+	if (pid == 0)
+	{
+		while (--node_nb)
+		{
+			if (ft_check_cmd(node, fd, &ret, 1))
+				ft_pipex(node, *envp, fd, ret);
+			node = node->next;
+		}
+		if (ft_check_cmd(node, fd, &ret, 0))
+		{
+			ft_dups(node->redirection, fd);
+			ft_child(node, *envp, fd, ret);
+		}
+		else
+			exit(127);
+	}
+	else
+		waitpid(pid, &ret, 0);
+	return (ret);
+}
+
+void	ft_exec(t_data *node, char ***envp)
+{
+	int		node_nb;
+	t_fd	fd;
+
 	ft_init_fd(&fd);
 	node_nb = ft_count_nodes(node);
 	signal(SIGINT, SIG_IGN);
 	if (ft_single_builtin(node, fd, envp, node_nb))
-	{
-		pid = fork();
-		if (pid < 0)
-			perror("Error");
-		if (pid == 0)
-		{
-			while (--node_nb)
-			{
-				if (ft_check_cmd(node, &fd, &ret, 1))
-					ft_pipex(node, *envp, &fd, ret);
-				node = node->next;
-			}
-			if (ft_check_cmd(node, &fd, &ret, 0))
-			{
-				ft_dups(node->redirection, &fd);
-				ft_child(node, *envp, &fd, ret);
-			}
-			else
-				exit(127);
-		}
-		else
-			waitpid(pid, &ret, 0);
-	}
+		g_status = ft_exec_loop(node_nb, &fd, envp, node);
 	ft_close_all(&fd);
 	ft_reset_fd(&fd);
-	return (ret);
 }

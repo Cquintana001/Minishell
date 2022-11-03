@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 08:54:40 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 11:24:30 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/03 09:54:04 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "utils2.h"
 #include <stdio.h>
 #include <stdlib.h>
+extern int	g_status;
 
 char	*dollar_variable(char *str)
 {
@@ -54,6 +55,21 @@ int	find_pos(char *str, int x)
 	return (-1);
 }
 
+char *check_var(char *var, char *first, char *second)
+{
+	if (ft_getenv2(var) || ft_strncmp("?", var, INT64_MAX) == 0)
+	{
+		second = ft_strjoin(first, ft_getenv2(var));
+		free(first);
+	}
+	else if (ft_strncmp("?", var, INT64_MAX) == 0)
+	{
+		second = ft_strjoin(first, ft_itoa(g_status));
+		free(first);
+	}
+	return(second);
+	
+}
 int	expansor_variable(char **str, int x)
 {
 	char	*var;
@@ -63,13 +79,20 @@ int	expansor_variable(char **str, int x)
 
 	var = dollar_variable((*str + x));
 	first_part = ft_substr(*str, 0, x);
-	if (ft_getenv2(var))
+	second_part = NULL;
+	/* if (ft_getenv2(var) || ft_strncmp("?", var, INT64_MAX) == 0)
 	{
 		second_part = ft_strjoin(first_part, ft_getenv2(var));
 		free(first_part);
 	}
-	else
-		second_part = first_part;
+	else if (ft_strncmp("?", var, INT64_MAX) == 0)
+	{
+		second_part = ft_strjoin(first_part, ft_itoa(g_status));
+		free(first_part);
+	} */
+	second_part = check_var(var, first_part, second_part);
+	/* else
+		second_part = first_part; */
 	aux = *str + x + 1 + ft_strlen(var);
 	first_part = ft_strjoin(second_part, aux);
 	free(second_part);

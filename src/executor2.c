@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 11:40:18 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 11:40:21 by caquinta         ###   ########.fr       */
+/*   Created: 2022/10/30 12:07:30 by amarzana          #+#    #+#             */
+/*   Updated: 2022/10/31 13:25:11 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	ft_child(t_data *node, char **envp, t_fd *fd, int ret)
 			ft_call_builtin(node->cmd, &envp);
 			ret = 0;
 		}
-		else if (execve(node->path, node->cmd, envp) == -1)
-			ft_putendl_fd("Un comando malo ha llegado a ft_child", 2);
+		else
+			execve(node->path, node->cmd, envp);
 	}
 	free(node->path);
 	exit(ret);
@@ -116,16 +116,21 @@ int	ft_check_cmd(t_data *node, t_fd *fd, int *ret, int mode)
 {
 	if (node->path || ft_is_builtin(node->cmd))
 		return (1);
-	*ret = 32512;
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(node->cmd[0], 2);
-	ft_putendl_fd(" command not found", 2);
-	ft_close(&fd->fdin, 1);
-	ft_close(&fd->fdout, 1);
-	if (mode == 1)
+	if (node->cmd)
 	{
-		close(STDIN_FILENO);
+		if (ft_strncmp(node->cmd[0], "exit", ft_strlen(node->cmd[0])) == 0 && \
+		ft_strlen(node->cmd[0]) == 4)
+			return (0);
+		*ret = 32512;
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(node->cmd[0], 2);
+		ft_putendl_fd(" command not found", 2);
+		ft_close(&fd->fdin, 1);
+		ft_close(&fd->fdout, 1);
 	}
+	ft_dups(node->redirection, fd);
+	if (mode == 1)
+		close(STDIN_FILENO);
 	ft_reset_fd(fd);
 	return (0);
 }

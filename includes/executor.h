@@ -6,7 +6,7 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:18:45 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/28 11:45:05 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:25:49 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 //Creates a t_fd structure and calls ft_pipex for every command
 // except for the last or if there is only one.
 //Closes all used fd and restores original STDIN and STDOUT
-int		ft_exec(t_data *node, char ***envp);
+void	ft_exec(t_data *node, char ***envp);
 
 //executor2.c
 
@@ -45,13 +45,15 @@ int		ft_dup_work(t_fd *fd, int mode);
 
 void	ft_call_builtin(char **cmd, char ***envp);
 
-//Checks if the given variable is full alphanumeric
-int		ft_check_var(char *var, char *cmd);
-
 //Checks if given command is ft_builtin
 //Returns	1 if cmd is "pwd", "echo" or "env"
 //and		2 if cmd is "export", "unset" or "chdir"
 int		ft_is_builtin(char **cmd);
+
+//exec_utils2.c
+//Checks if the given variable is full alphanumeric
+int		ft_check_var(char *var, char *cmd);
+
 
 //Returns the number of nodes of a linked list
 int		ft_count_nodes(t_data *node);
