@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/11/03 16:16:39 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:25:56 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ void	ft_exec(t_data *node, char ***envp)
 
 	ft_init_fd(&fd);
 	node_nb = ft_count_nodes(node);
-	//signal(SIGINT, SIG_IGN);
-	signal(SIGINT, 0);
 	if (ft_single_builtin(node, fd, envp, node_nb))
 		g_status = ft_exec_loop(node_nb, &fd, envp, node);
 	ft_close_all(&fd);
