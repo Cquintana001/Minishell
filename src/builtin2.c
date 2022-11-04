@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtin2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:34:32 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/28 11:31:00 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/04 08:27:57 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/builtins.h"
-#include "../libft/libft.h"
-#include "../includes/utils.h"
 #include "../includes/executor.h"
+#include "../includes/utils.h"
+#include "../libft/libft.h"
 
 static char	**ft_add_var(char *var, char *value, char **env)
 {
@@ -44,12 +44,12 @@ static int	ft_edit_var2(char *var, char *value, char ***env, int i)
 	char	**env2;
 
 	env2 = *env;
-	if (var && (ft_strlen(var) - 1) == ft_strlen(env2[i]) && \
-		var[ft_strlen(var) - 1] == '=')
+	if (var && (ft_strlen(var) - 1) == ft_strlen(env2[i])
+		&& var[ft_strlen(var) - 1] == '=')
 	{
 		if (ft_strnstr(var, env2[i], ft_strlen(env2[i])))
 		{
-			free (env2[i]);
+			free(env2[i]);
 			env2[i] = ft_strjoin(var, value);
 			return (1);
 		}
@@ -66,13 +66,13 @@ static int	ft_edit_var(char *var, char *value, char ***env, int i)
 	{
 		if (value)
 		{
-			free (env2[i]);
+			free(env2[i]);
 			env2[i] = ft_strjoin(var, value);
 			return (1);
 		}
 		else if (!env2[i][ft_strlen(var)] || env2[i][ft_strlen(var)] == '=')
 		{
-			free (env2[i]);
+			free(env2[i]);
 			env2[i] = ft_substr(var, 0, ft_strlen(var));
 			return (1);
 		}
@@ -96,7 +96,7 @@ void	ft_export_job(char *var, char *value, char ***env)
 		coin += ft_edit_var2(var, value, env, i);
 	}
 	if (var && coin == 0)
-	{	
+	{
 		aux = ft_add_var(var, value, env2);
 		free_d_array(env2);
 		*env = aux;

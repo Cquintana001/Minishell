@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:49:33 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/04 12:41:40 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/04 13:12:05 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+ 
 char	**env_copy(char **env)
 {
 	int		len;
@@ -37,15 +38,23 @@ char	**env_copy(char **env)
 char	*ft_getenv(char **env2, char *var)
 {
 	char	*var1;
+	char	*var2;
+	int		x;
 
-	while (*env2)
+	x = 0;
+	var2 = ft_strjoin(var, "=");
+	var1 = NULL;
+	while (env2[x])
 	{
-		if (ft_strnstr(*env2, var, ft_strlen(var)))
+		 
+		if (ft_strnstr(env2[x], var2, ft_strlen(var2)))
 		{
-			var1 = ft_strchr(*env2, '=');
-			return (++var1);
+				var1 = ft_strchr(env2[x], '=');
+				free(var2);
+				return (++var1);
 		}
-		env2++;
+		x++;
 	}
-	return (NULL);
+	free(var2);
+	return ("");
 }

@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 09:36:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/11/03 17:52:58 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/04 08:02:01 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*check_if_command(char **envp, char *str)
 	int		x;
 
 	x = 0;
-	if (!str)	
+	if (!str)
 		return (0);
 	if (!access(str, F_OK))
 		return (ft_strdup(str));

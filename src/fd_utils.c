@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   fd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:13:27 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/27 12:11:38 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/04 08:03:38 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "double_red.h"
 #include "fd_utils.h"
+#include "signals.h"
 #include <fcntl.h>
+#include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <signal.h>
-#include "signals.h"
 
 extern int	g_status;
 

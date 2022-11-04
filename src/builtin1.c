@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 11:35:02 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/31 10:50:17 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/04 11:19:16 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/builtins.h"
-#include "../libft/libft.h"
 #include "../includes/environment.h"
+#include "../libft/libft.h"
 #include <stdio.h>
 
 extern int	g_status;
@@ -52,13 +52,13 @@ static void	ft_echo_job(char **cmd, char **env, int i)
 	{
 		if (cmd[i][0] == '~' && ft_strlen(cmd[i]) == 1)
 			ft_putstr_fd(ft_getenv(env, "HOME"), 1);
-		else if (ft_strncmp(cmd[i], "~/", ft_strlen(cmd[i])) == 0 \
+		else if (ft_strncmp(cmd[i], "~/", ft_strlen(cmd[i])) == 0
 			&& ft_strlen(cmd[i]) == 2)
 		{
 			ft_putstr_fd(ft_getenv(env, "HOME"), 1);
 			write(1, "/", 1);
 		}
-		else if (ft_strncmp(cmd[i], "$?", ft_strlen(cmd[i])) == 0 \
+		else if (ft_strncmp(cmd[i], "$?", ft_strlen(cmd[i])) == 0
 			&& ft_strlen(cmd[i]) == 2)
 			ft_putnbr_fd(g_status, 1);
 		else
@@ -67,9 +67,10 @@ static void	ft_echo_job(char **cmd, char **env, int i)
 			write(1, " ", 1);
 	}
 }
+
 void	ft_echo(char **cmd, char **env)
 {
-	int		flag;
+	int	flag;
 
 	flag = ft_count_flags(cmd);
 	ft_echo_job(cmd, env, flag);
@@ -90,7 +91,7 @@ void	ft_env(char **env, int mode)
 			if (var)
 			{
 				ft_putendl_fd(*env, 1);
-				free (var);
+				free(var);
 			}
 			env++;
 		}
@@ -112,5 +113,5 @@ void	ft_pwd(void)
 
 	pwd = getcwd(NULL, 0);
 	printf("%s\n", pwd);
-	free (pwd);
+	free(pwd);
 }

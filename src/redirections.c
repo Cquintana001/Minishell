@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:26:16 by caquinta          #+#    #+#             */
-/*   Updated: 2022/11/03 18:32:12 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/04 08:17:39 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 #include "redirections_utils.h"
 #include "utils.h"
 #include <stdlib.h>
+
+int	count_len(char **tokens, int x)
+{
+	if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x + 1][0] == '0')
+	{
+		if (tokens[x + 2] && tokens[x + 2][0] != '|')
+			return (2);
+		else
+			return (1);
+	}
+	return (0);
+}
 
 int	malloc_redirection(char **tokens, t_data **node)
 {
@@ -30,23 +42,15 @@ int	malloc_redirection(char **tokens, t_data **node)
 	{
 		if (tokens[x] && tokens[x][0] == '|' && tokens[x + 1][0] == '0')
 			break ;
-		if ((tokens[x][0] == '<' || tokens[x][0] == '>') && tokens[x
-			+ 1][0] == '0')
-		{
-			if (tokens[x + 2] && tokens[x + 2][0] != '|' )
-				len+=2;
-			else 
-				len+=1;
-		}		
+		len += count_len(tokens, x);
 		x += 2;
 	}
 	if (tokens[x] && tokens[x][0] == '|' && tokens[x + 1][0] == '0')
 		index = x;
 	if (len > 0)
 	{
-		(*node)->redirection = (char **)malloc((len  + 1)
-				* sizeof(char *));
-		(*node)->redirection[len ] = 0;
+		(*node)->redirection = (char **)malloc((len + 1) * sizeof(char *));
+		(*node)->redirection[len] = 0;
 	}
 	return (index);
 }
@@ -68,7 +72,7 @@ int	fill_redirection(char **tokens, t_data *node)
 			+ 1][0] == '0')
 		{
 			node->redirection[i] = ft_strdup(tokens[x]);
-			if(tokens[x+2] && tokens[x+2][0] !='|')
+			if (tokens[x + 2] && tokens[x + 2][0] != '|')
 				node->redirection[++i] = ft_strdup(tokens[x + 2]);
 			i++;
 		}

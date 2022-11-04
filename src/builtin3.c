@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   builtin3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 11:57:01 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/31 11:13:42 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/04 08:04:09 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/builtins.h"
-#include "../libft/libft.h"
-#include "../includes/utils.h"
-#include "../includes/executor.h"
 #include "../includes/environment.h"
+#include "../includes/executor.h"
+#include "../includes/utils.h"
+#include "../libft/libft.h"
 
 extern int	g_status;
 
@@ -33,10 +33,10 @@ static char	**ft_rm_var(char *var, char **env)
 	j = 0;
 	while (i < (len - 1))
 	{
-		if ((ft_strnstr(env[j], var, ft_strlen(var)) \
-			&& env[j][ft_strlen(var)] == '=' ) || \
-			(ft_strnstr(env[j], var, ft_strlen(var)) \
-			&& !env[j][ft_strlen(var)]))
+		if ((ft_strnstr(env[j], var, ft_strlen(var))
+				&& env[j][ft_strlen(var)] == '=') ||
+			(ft_strnstr(env[j], var, ft_strlen(var))
+					&& !env[j][ft_strlen(var)]))
 			j++;
 		new_env[i] = ft_strdup(env[j]);
 		i++;
@@ -86,9 +86,9 @@ void	ft_chdir(char *dir, char ***env)
 	}
 	pwd = getcwd(NULL, 0);
 	ft_export_job("OLDPWD=", pwd, env);
-	free (pwd);
+	free(pwd);
 	chdir(dir);
 	pwd = getcwd(NULL, 0);
 	ft_export_job("PWD=", pwd, env);
-	free (pwd);
+	free(pwd);
 }

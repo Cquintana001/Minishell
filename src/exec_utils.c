@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:20:53 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/31 12:26:06 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/04 08:33:30 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
 #include "../libft/libft.h"
-#include "utils.h"
 #include "builtins.h"
-#include "status.h"
 #include "executor.h"
+#include "status.h"
+#include "utils.h"
+#include <stdlib.h>
+#include <unistd.h>
 
 extern int	g_status;
 
@@ -69,19 +69,17 @@ static int	ft_is_builtin2(char **cmd)
 {
 	if (cmd)
 	{
-		if ((ft_strncmp(cmd[0], "PWD", ft_strlen(cmd[0])) == 0 && \
-			ft_strlen(cmd[0]) == 3) || \
-			(ft_strncmp(cmd[0], "ECHO", ft_strlen(cmd[0])) == 0 && \
-			ft_strlen(cmd[0]) == 4) || \
-			(ft_strncmp(cmd[0], "ENV", ft_strlen(cmd[0])) == 0 && \
-			ft_strlen(cmd[0]) == 3))
+		if ((ft_strncmp(cmd[0], "PWD", ft_strlen(cmd[0])) == 0
+				&& ft_strlen(cmd[0]) == 3) || (ft_strncmp(cmd[0], "ECHO",
+					ft_strlen(cmd[0])) == 0 && ft_strlen(cmd[0]) == 4)
+			|| (ft_strncmp(cmd[0], "ENV", ft_strlen(cmd[0])) == 0
+				&& ft_strlen(cmd[0]) == 3))
 			return (1);
-		if ((ft_strncmp(cmd[0], "EXPORT", ft_strlen(cmd[0])) == 0 && \
-			ft_strlen(cmd[0]) == 6) || \
-			(ft_strncmp(cmd[0], "UNSET", ft_strlen(cmd[0])) == 0 && \
-			ft_strlen(cmd[0]) == 5) || \
-			(ft_strncmp(cmd[0], "CD", ft_strlen(cmd[0])) == 0 && \
-			ft_strlen(cmd[0]) == 2))
+		if ((ft_strncmp(cmd[0], "EXPORT", ft_strlen(cmd[0])) == 0
+				&& ft_strlen(cmd[0]) == 6) || (ft_strncmp(cmd[0], "UNSET",
+					ft_strlen(cmd[0])) == 0 && ft_strlen(cmd[0]) == 5)
+			|| (ft_strncmp(cmd[0], "CD", ft_strlen(cmd[0])) == 0
+				&& ft_strlen(cmd[0]) == 2))
 			return (2);
 	}
 	return (0);
@@ -91,21 +89,18 @@ int	ft_is_builtin(char **cmd)
 {
 	if (cmd)
 	{
-		if ((ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0 && \
-			ft_strlen(cmd[0]) == 3) || \
-			(ft_strncmp(cmd[0], "echo", ft_strlen(cmd[0])) == 0 && \
-			ft_strlen(cmd[0]) == 4) || \
-			(ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])) == 0 && \
-			ft_strlen(cmd[0]) == 3) || \
-			(ft_strncmp(cmd[0], "$?", ft_strlen(cmd[0])) == 0 && \
-			ft_strlen(cmd[0]) == 2))
+		if ((ft_strncmp(cmd[0], "pwd", ft_strlen(cmd[0])) == 0
+				&& ft_strlen(cmd[0]) == 3) || (ft_strncmp(cmd[0], "echo",
+					ft_strlen(cmd[0])) == 0 && ft_strlen(cmd[0]) == 4)
+			|| (ft_strncmp(cmd[0], "env", ft_strlen(cmd[0])) == 0
+				&& ft_strlen(cmd[0]) == 3) || (ft_strncmp(cmd[0], "$?",
+					ft_strlen(cmd[0])) == 0 && ft_strlen(cmd[0]) == 2))
 			return (1);
-		if ((ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0 && \
-			ft_strlen(cmd[0]) == 6) || \
-			(ft_strncmp(cmd[0], "unset", ft_strlen(cmd[0])) == 0 && \
-			ft_strlen(cmd[0]) == 5) || \
-			(ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])) == 0 && \
-			ft_strlen(cmd[0]) == 2))
+		if ((ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])) == 0
+				&& ft_strlen(cmd[0]) == 6) || (ft_strncmp(cmd[0], "unset",
+					ft_strlen(cmd[0])) == 0 && ft_strlen(cmd[0]) == 5)
+			|| (ft_strncmp(cmd[0], "cd", ft_strlen(cmd[0])) == 0
+				&& ft_strlen(cmd[0]) == 2))
 			return (2);
 	}
 	return (ft_is_builtin2(cmd));

@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/11/03 17:59:33 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/04 11:33:20 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	ft_lstclear1(t_data **lst)
 		aux = (*lst)->next;
 		if ((*lst)->cmd != NULL)
 		{
-			if (&(*lst)->cmd[0] != &(*lst)->path) 			 
-			free_d_array((*lst)->cmd);
+			if (&(*lst)->cmd[0] != &(*lst)->path)
+				free_d_array((*lst)->cmd);
 		}
 		if ((*lst)->path != NULL)
-		{	
+		{
 			free((*lst)->path);
 		}
 		if ((*lst)->redirection != NULL)
@@ -86,7 +86,7 @@ int	general_function(char *str, t_data **data, char **env2)
 	int		status;
 
 	status = 0;
-	aux = expansor(str);
+	aux = expansor(str, env2);
 	tokens = fill_tokens(aux, ft_strlen(aux));
 	status = check_pipe(tokens);
 	if (status)

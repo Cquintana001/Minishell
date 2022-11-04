@@ -6,18 +6,18 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:07:06 by caquinta          #+#    #+#             */
-/*   Updated: 2022/11/03 16:52:03 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/04 08:04:06 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "signals.h"
 #include "fd_utils.h"
+#include "signals.h"
 #include <readline/readline.h>
 #include <stdlib.h>
 #include <sys/wait.h>
 
-extern int g_status;
+extern int	g_status;
 
 char	*add_line_break(char *aux, char *str)
 {
@@ -76,7 +76,7 @@ void	here_doc(char *key, t_fd *fd)
 		if (str)
 		{
 			ft_putendl_fd(str, fd1[1]);
-			free (str);
+			free(str);
 		}
 		close(fd1[1]);
 		exit(0);

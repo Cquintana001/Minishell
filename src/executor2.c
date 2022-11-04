@@ -6,20 +6,20 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 12:07:30 by amarzana          #+#    #+#             */
-/*   Updated: 2022/11/03 16:09:58 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/04 08:25:28 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "double_red.h"
-#include "fd_utils.h"
-#include "utils.h"
-#include "executor.h"
 #include "builtins.h"
+#include "double_red.h"
+#include "executor.h"
+#include "fd_utils.h"
+#include "signals.h"
+#include "utils.h"
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include "signals.h"
 
 int	ft_dup_work(t_fd *fd, int mode)
 {
@@ -28,7 +28,7 @@ int	ft_dup_work(t_fd *fd, int mode)
 		close(fd->fdin);
 		ft_putstr_fd("minishell: No such file or directory\n", 2);
 		if (mode == 0)
-			exit (1);
+			exit(1);
 		return (0);
 	}
 	if (mode == 1)
@@ -36,12 +36,12 @@ int	ft_dup_work(t_fd *fd, int mode)
 	if (fd->fdin >= 0)
 	{
 		dup2(fd->fdin, STDIN_FILENO);
-		close (fd->fdin);
+		close(fd->fdin);
 	}
 	if (fd->fdout >= 0)
 	{
 		dup2(fd->fdout, STDOUT_FILENO);
-		close (fd->fdout);
+		close(fd->fdout);
 	}
 	return (1);
 }
@@ -70,7 +70,6 @@ void	ft_dups(char **redir, t_fd *fd)
 
 void	ft_child(t_data *node, char **envp, t_fd *fd, int ret)
 {
-	//ft_signals_in_cat();
 	ft_dup_work(fd, 0);
 	if (node->cmd)
 	{
@@ -80,7 +79,7 @@ void	ft_child(t_data *node, char **envp, t_fd *fd, int ret)
 			ret = 0;
 		}
 		else
-		{	
+		{
 			execve(node->path, node->cmd, envp);
 		}
 	}
@@ -101,14 +100,14 @@ void	ft_pipex(t_data *node, char **envp, t_fd *fd, int ret)
 	{
 		close(fd->pipe[0]);
 		dup2(fd->pipe[1], STDOUT_FILENO);
-		close (fd->pipe[1]);
+		close(fd->pipe[1]);
 		ft_child(node, envp, fd, ret);
 	}
 	else
 	{
 		close(fd->pipe[1]);
 		dup2(fd->pipe[0], STDIN_FILENO);
-		close (fd->pipe[0]);
+		close(fd->pipe[0]);
 		ft_close(&fd->fdin, 1);
 		ft_close(&fd->fdout, 1);
 		waitpid(pid, &ret, 0);
@@ -121,8 +120,8 @@ int	ft_check_cmd(t_data *node, t_fd *fd, int *ret, int mode)
 		return (1);
 	if (node->cmd)
 	{
-		if (ft_strncmp(node->cmd[0], "exit", ft_strlen(node->cmd[0])) == 0 && \
-		ft_strlen(node->cmd[0]) == 4)
+		if (ft_strncmp(node->cmd[0], "exit", ft_strlen(node->cmd[0])) == 0
+			&& ft_strlen(node->cmd[0]) == 4)
 			return (0);
 		*ret = 32512;
 		ft_putstr_fd("minishell: ", 2);

@@ -6,21 +6,21 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/11/03 16:25:56 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/04 08:26:03 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "double_red.h"
-#include "fd_utils.h"
-#include "utils.h"
-#include "executor.h"
 #include "builtins.h"
+#include "double_red.h"
+#include "executor.h"
+#include "fd_utils.h"
+#include "signals.h"
+#include "utils.h"
+#include <signal.h>
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include <signal.h>
-#include "signals.h"
 
 extern int	g_status;
 
@@ -39,8 +39,8 @@ static int	ft_single_builtin(t_data *node, t_fd fd, char ***envp, int node_nb)
 
 static int	ft_exec_loop(int node_nb, t_fd *fd, char ***envp, t_data *node)
 {
-	int		ret;
-	int		pid;
+	int	ret;
+	int	pid;
 
 	ret = 0;
 	ft_signals_in_cat();
@@ -62,9 +62,7 @@ static int	ft_exec_loop(int node_nb, t_fd *fd, char ***envp, t_data *node)
 			exit(127);
 	}
 	else
-	{
 		waitpid(pid, &ret, 0);
-	}
 	return (ret);
 }
 
