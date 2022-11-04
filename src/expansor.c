@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 08:54:40 by caquinta          #+#    #+#             */
-/*   Updated: 2022/11/04 11:38:26 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:16:26 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*check_var(char *var, char *first, char *second, char**env2)
 	char	*var1;
 
 	var1 = NULL;
-	if (ft_getenv(env2, var))
+	if (ft_strncmp("?", var, INT64_MAX) !=0 && ft_getenv(env2, var))
 	{
 		second = ft_strjoin(first, ft_getenv(env2, var));
 		free(first);
