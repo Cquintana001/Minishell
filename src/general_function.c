@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:05:35 by caquinta          #+#    #+#             */
-/*   Updated: 2022/11/04 11:33:20 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/05 09:49:28 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	general_function(char *str, t_data **data, char **env2)
 	status = 0;
 	aux = expansor(str, env2);
 	tokens = fill_tokens(aux, ft_strlen(aux));
+	if(tokens == 0)
+		return(-1);
 	status = check_pipe(tokens);
 	if (status)
 		return (status);
