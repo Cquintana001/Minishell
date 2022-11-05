@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:13:35 by amarzana          #+#    #+#             */
-/*   Updated: 2022/11/04 08:26:03 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/05 10:38:42 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static int	ft_exec_loop(int node_nb, t_fd *fd, char ***envp, t_data *node)
 	int	pid;
 
 	ret = 0;
-	ft_signals_in_cat();
 	pid = fork();
+	ft_signals_in_cat();
 	if (pid == 0)
 	{
 		while (--node_nb)

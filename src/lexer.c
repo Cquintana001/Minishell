@@ -6,7 +6,7 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/11/05 10:01:14 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/05 12:11:45 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	count_index2(char *str)
 {
 	if (!second_char_exists(str, *str))
 	{
-		return(-1);
+		return (-1);
 	}
 	return (count_char_index(str, *str));
 }
@@ -71,8 +71,8 @@ int	count_word_index(char *str)
 		if ((*str == '"' || *str == '\''))
 		{
 			i = count_index2(str);
-			if(i==-1)
-				return(-1);
+			if (i == -1)
+				return (-1);
 			x += i + 1;
 			str += i + 1;
 		}

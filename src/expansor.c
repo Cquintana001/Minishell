@@ -6,11 +6,12 @@
 /*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 08:54:40 by caquinta          #+#    #+#             */
-/*   Updated: 2022/11/04 14:16:26 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/05 12:12:05 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include "environment.h"
 #include "exit.h"
 #include "expansor_utils.h"
 #include "lexer.h"
@@ -18,7 +19,6 @@
 #include "utils2.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "environment.h"
 
 extern int	g_status;
 
@@ -57,16 +57,16 @@ int	find_pos(char *str, int x)
 	return (-1);
 }
 
-char	*check_var(char *var, char *first, char *second, char**env2)
+char	*check_var(char *var, char *first, char *second, char **env2)
 {
 	char	*var1;
 
 	var1 = NULL;
-	if (ft_strncmp("?", var, INT64_MAX) !=0 && ft_getenv(env2, var))
+	if (ft_strncmp("?", var, INT64_MAX) != 0 && ft_getenv(env2, var))
 	{
 		second = ft_strjoin(first, ft_getenv(env2, var));
 		free(first);
-		return(second);
+		return (second);
 	}
 	else if (ft_strncmp("?", var, INT64_MAX) == 0)
 	{
@@ -74,7 +74,7 @@ char	*check_var(char *var, char *first, char *second, char**env2)
 		second = ft_strjoin(first, var);
 		free(var);
 		free(first);
-		return(second);
+		return (second);
 	}
 	free(first);
 	return (second);
@@ -100,7 +100,7 @@ int	expansor_variable(char **str, int x, char **env2)
 	return (-1);
 }
 
-char	*expansor(char *str, char**env2)
+char	*expansor(char *str, char **env2)
 {
 	int	x;
 	int	i;
