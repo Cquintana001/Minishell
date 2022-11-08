@@ -5,27 +5,34 @@ INC_DIR				= 	./includes/
 						 
 							 
 CC 					= 	gcc
-CFLAGS 				= 	-Wall -Werror -Wextra -g3   -fsanitize=address
+CFLAGS 				= 	-Wall -Werror -Wextra -g3 # -fsanitize=address
 SRC_DIR				=	src
-SOURCES				=	 $(SRC_DIR)/lexer.c \
-						$(SRC_DIR)/fill_tokens.c \
-						$(SRC_DIR)/expansor.c \
-						$(SRC_DIR)/utils.c \
-						$(SRC_DIR)/utils2.c \
-						$(SRC_DIR)/environment.c \
-						$(SRC_DIR)/fill_data.c \
-						$(SRC_DIR)/redirections.c \
-						$(SRC_DIR)/redirections_utils.c \
-						$(SRC_DIR)/get_cmd_path.c \
-						$(SRC_DIR)/double_red.c \
-						$(SRC_DIR)/general_function.c \
-						$(SRC_DIR)/fd_utils.c \
-						$(SRC_DIR)/executor.c \
-						$(SRC_DIR)/exec_utils.c \
-						$(SRC_DIR)/builtin1.c		\
-						$(SRC_DIR)/builtin2.c		\
-						$(SRC_DIR)/signals.c\
-						$(SRC_DIR)/exit.c\
+SOURCES				=	$(SRC_DIR)/main.c				\
+						$(SRC_DIR)/lexer.c				\
+						$(SRC_DIR)/fill_tokens.c		\
+						$(SRC_DIR)/fill_tokens_utils.c	\
+						$(SRC_DIR)/expansor.c			\
+						$(SRC_DIR)/expansor_utils.c		\
+						$(SRC_DIR)/utils.c				\
+						$(SRC_DIR)/utils2.c				\
+						$(SRC_DIR)/environment.c		\
+						$(SRC_DIR)/fill_data.c			\
+						$(SRC_DIR)/redirections.c		\
+						$(SRC_DIR)/redirections_utils.c	\
+						$(SRC_DIR)/get_cmd_path.c		\
+						$(SRC_DIR)/double_red.c			\
+						$(SRC_DIR)/general_function.c	\
+						$(SRC_DIR)/fd_utils.c			\
+						$(SRC_DIR)/executor.c			\
+						$(SRC_DIR)/executor2.c			\
+						$(SRC_DIR)/exec_utils.c			\
+						$(SRC_DIR)/exec_utils2.c		\
+						$(SRC_DIR)/builtin1.c			\
+						$(SRC_DIR)/builtin2.c			\
+						$(SRC_DIR)/builtin3.c			\
+						$(SRC_DIR)/signals.c			\
+						$(SRC_DIR)/exit.c				\
+						$(SRC_DIR)/status.c
 
 OBJS				= 	$(SOURCES:.c=.o)
 

@@ -6,20 +6,22 @@
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:13:27 by amarzana          #+#    #+#             */
-/*   Updated: 2022/10/25 10:47:50 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/05 13:45:19 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "double_red.h"
 #include "fd_utils.h"
+#include "signals.h"
 #include <fcntl.h>
+#include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <signal.h>
-#include "signals.h"
 
-void	ft_get_fd(char *file, int mode, t_fd *fd)
+extern int	g_status;
+
+void	ft_get_fd(char *file, int mode, t_fd *fd, t_data *node)
 {
 	if (mode == 0)
 	{
@@ -38,10 +40,9 @@ void	ft_get_fd(char *file, int mode, t_fd *fd)
 	}
 	else if (mode == 3)
 	{
-		if (!file)
-			ft_putstr_fd("syntax error near unexpected token `newline'\n", 2);
-		else
-			here_doc(file, fd);
+		if (fd->fdin != -2 && fd->fdin != node->here_doc)
+			ft_close(&fd->fdin, 0);
+		fd->fdin = node->here_doc;
 	}
 }
 

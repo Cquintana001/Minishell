@@ -1,9 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expansor.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/29 11:19:15 by caquinta          #+#    #+#             */
+/*   Updated: 2022/11/04 11:33:51 by caquinta         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef EXPANSOR2_H
-# define EXPANSOR2_H
- 
+#ifndef EXPANSOR_H
+# define EXPANSOR_H
 
-char *expansor(char *str);
- 
+char	*expansor(char *str, char **env2);
 
 #endif

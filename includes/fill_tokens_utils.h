@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_tokens.h                                      :+:      :+:    :+:   */
+/*   fill_tokens_utils.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 07:59:11 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 12:45:22 by amarzana         ###   ########.fr       */
+/*   Created: 2022/10/29 11:13:48 by caquinta          #+#    #+#             */
+/*   Updated: 2022/10/29 12:45:13 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILL_TOKENS_H
-# define FILL_TOKENS_H
+#ifndef FILL_TOKENS_UTILS_H
+# define FILL_TOKENS_UTILS_H
 
-char	**fill_tokens(char *str, int x);
+int		check_assign(int check, char a, char **quote, char *c);
+void	count_assign(char **aux, char **quote, int *x, char a);
+int		check_char(char *str);
 
 #endif

@@ -3,23 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fill_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 07:53:14 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/18 10:06:39 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/05 14:12:13 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lexer.h"
 #include "../includes/utils2.h"
 #include "../libft/libft.h"
-
-int	check_char(char *str)
-{
-	if (*str == *(str + 1))
-		return (2);
-	return (1);
-}
+#include "fill_tokens_utils.h"
 
 void	fill_array1(char *str, char **tokens)
 {
@@ -44,30 +38,6 @@ void	fill_array1(char *str, char **tokens)
 		}
 		x++;
 	}
-}
-
-int	check_assign(int check, char a, char **quote, char *c)
-{
-	if (a != **quote && check == 0)
-	{
-		check = 1;
-		*c = **quote;
-		(*quote)++;
-	}
-	else if (a != **quote && check == 1)
-	{
-		check = 0;
-		(*quote)++;
-	}
-	return (check);
-}
-
-void	count_assign(char **aux, char **quote, int *x, char a)
-{
-	**aux = a;
-	(*quote)++;
-	(*aux)++;
-	(*x)++;
 }
 
 void	fill_map(char *quote, char *no, char **fill)
@@ -130,7 +100,10 @@ char	**fill_tokens(char *str)
 
 	x = count_tokens(str);
 	if (x == 0)
+	{
+		free (str);
 		return (0);
+	}
 	tokens = (char **)ft_calloc(((x * 2) + 1), sizeof(char *));
 	tokens[x * 2] = 0;
 	if (!tokens)

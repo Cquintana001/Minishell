@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_tokens.h                                      :+:      :+:    :+:   */
+/*   expansor_utils.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 07:59:11 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/29 12:45:22 by amarzana         ###   ########.fr       */
+/*   Created: 2022/10/29 11:19:10 by caquinta          #+#    #+#             */
+/*   Updated: 2022/10/29 12:44:28 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILL_TOKENS_H
-# define FILL_TOKENS_H
+#ifndef EXPANSOR_UTILS_H
+# define EXPANSOR_UTILS_H
 
-char	**fill_tokens(char *str, int x);
+int	check_next_char(char c);
+int	len(char *str);
 
 #endif

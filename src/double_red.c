@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   double_red.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:07:06 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 11:38:32 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/05 13:53:54 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "signals.h"
 #include "fd_utils.h"
+#include "signals.h"
 #include <readline/readline.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+
+extern int	g_status;
 
 char	*add_line_break(char *aux, char *str)
 {
@@ -42,9 +44,8 @@ char	*double_redirection(char *key)
 		str = readline("heredoc> ");
 		if (!str)
 		{
-			printf("bash: warning: here-document delimited\
-			 by end-of-file (wanted `end')\n");
-			printf("ft_exit con frees etc\n");
+			if (aux)
+				free(aux);
 			break ;
 		}
 		if (!ft_strncmp(str, key, __INT_MAX__))
@@ -60,7 +61,13 @@ char	*double_redirection(char *key)
 	return (aux);
 }
 
-void	here_doc(char *key, t_fd *fd)
+void	print_buf(char *str, int fd)
+{
+	ft_putendl_fd(str, fd);
+	free(str);
+}
+
+void	here_doc(char *key, t_data *node)
 {
 	int		fd1[2];
 	pid_t	pid;
@@ -73,15 +80,17 @@ void	here_doc(char *key, t_fd *fd)
 		close(fd1[0]);
 		str = double_redirection(key);
 		if (str)
-			ft_putendl_fd(str, 1);
+			print_buf(str, fd1[1]);
 		close(fd1[1]);
-		exit(0); //ft_exit
+		exit(0);
 	}
 	else
 	{
 		close(fd1[1]);
 		wait(NULL);
-		fd->fdin = dup(fd1[0]);
+		if (node->here_doc > 1)
+			close(node->here_doc);
+		node->here_doc = dup(fd1[0]);
 		close(fd1[0]);
 	}
 }

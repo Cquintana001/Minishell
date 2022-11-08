@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:27:09 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/24 09:52:34 by amarzana         ###   ########.fr       */
+/*   Updated: 2022/11/04 08:03:18 by caquinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "executor.h"
 #include "stdlib.h"
 #include "utils.h"
 #include <stdio.h>
-#include "executor.h"
 
 void	fill_cmd_path(t_data *list, char **envp)
 {
@@ -26,9 +26,11 @@ void	fill_cmd_path(t_data *list, char **envp)
 		{
 			if (list->cmd && !ft_is_builtin(list->cmd))
 				path1 = check_if_command(envp, list->cmd[0]);
+			if (path1 != 0)
+				list->path = path1;
 		}
-		if (path1 != 0)
-			list->path = path1;
+		if (ft_is_builtin(list->cmd) > 0)
+			list->path = NULL;
 		if (list->next == NULL)
 			break ;
 		list = list->next;

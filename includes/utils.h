@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:35:45 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/05 15:37:53 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/05 11:46:40 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef UTILS_H
 # define UTILS_H
 
 typedef struct s_data
 {
-	char	**cmd;
-	char	**redirection;
-	char	*path;
-	int		input;
-	int		output;
-	char 	**tokens;
+	char			**cmd;
+	char			**redirection;
+	char			*path;
+	int				input;
+	int				output;
+	char			**tokens;
+	int				here_doc;
 	struct s_data	*next;
 
 }			t_data;

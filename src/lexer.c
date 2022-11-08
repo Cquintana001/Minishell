@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caquinta <caquinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amarzana <amarzana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 09:09:24 by caquinta          #+#    #+#             */
-/*   Updated: 2022/10/26 12:25:26 by caquinta         ###   ########.fr       */
+/*   Updated: 2022/11/05 14:08:59 by amarzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include "get_cmd_path.h"
 #include "redirections.h"
 #include "signals.h"
+#include "status.h"
 #include "utils.h"
 #include "utils2.h"
 #include <fcntl.h>
@@ -53,8 +54,7 @@ int	count_index2(char *str)
 {
 	if (!second_char_exists(str, *str))
 	{
-		printf("error\n");
-		exit(0);
+		return (-1);
 	}
 	return (count_char_index(str, *str));
 }
@@ -71,6 +71,8 @@ int	count_word_index(char *str)
 		if ((*str == '"' || *str == '\''))
 		{
 			i = count_index2(str);
+			if (i == -1)
+				return (-1);
 			x += i + 1;
 			str += i + 1;
 		}
@@ -92,7 +94,7 @@ int	count_tokens(char *str)
 
 	index = 0;
 	num_token = 0;
-	while (*str)
+	while (str && *str)
 	{
 		if (*str == '|' || *str == '<' || *str == '>')
 			num_token++;
@@ -116,54 +118,21 @@ char	*get_str(char **env)
 
 	aux = ft_strjoin(ft_getenv(env, "USER"), "@minishell $ ");
 	str = readline(aux);
-	if (*str == 0)
+	if (!str)
 	{
-		free(aux);
-		return (NULL);
+		printf("exit\n");
+		if (aux)
+			free(aux);
+		exit(0);
 	}
 	free(aux);
+	if (str == NULL || *str == 0)
+	{
+		if (*str == 0)
+			free(str);
+		return (NULL);
+	}
 	aux = ft_strtrim(str, " ");
 	free(str);
 	return (aux);
-}
-
-int	main(int argc, char *argv[], char **envp)
-{
-	extern int	g_status;
-	char		*str;
-	char		**tokens;
-	char		**env2;
-	t_data		*data;
-
-	g_status = 0;
-	(void)argc;
-	(void)argv;
-	tokens = NULL;
-	env2 = env_copy(envp);
-	data = NULL;
-	while (1)
-	{
-		ft_signals();
-		str = get_str(envp);
-		if (str && *str != '\0' && ft_check_rl(str, &data) != -1)
-		{
-			//ft_check_rl(str, &data);
-			ft_exit(str);
-			if (str && *str != '\0')
-			{
-				add_history(str);
-				g_status = general_function(str, &data, env2);
-				if (tokens)
-					free_d_array(tokens);
-				if (!g_status)
-					ft_exec(data, &env2);
-				if (data)
-					ft_lstclear1(&data);
-			}
-		}
-		else if (str)
-			free(str);
-	}
-	free_d_array(env2);
-	return (0);
 }
